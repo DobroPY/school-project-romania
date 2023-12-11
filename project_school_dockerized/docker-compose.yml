@@ -1,0 +1,70 @@
+version: '3.8'
+
+services:
+  mysqldb:
+    image: mysql:5.7
+    restart: unless-stopped
+    env_file: ./.env
+    environment:
+      - MYSQL_ROOT_PASSWORD=$MYSQLDB_ROOT_PASSWORD
+      - MYSQL_DATABASE=$MYSQLDB_DATABASE
+    ports:
+      - $MYSQLDB_LOCAL_PORT:$MYSQLDB_DOCKER_PORT
+    volumes:
+      - db:/var/lib/mysql
+    networks:
+      - backend
+  
+  api:
+    depends_on:
+      - mysqldb
+    build: ./backend
+    restart: unless-stopped
+    env_file: ./.env
+    ports:
+      - $NODE_LOCAL_PORT:$NODE_DOCKER_PORT
+    environment:
+      - DB_HOST=mysqldb
+      - DB_USER=$MYSQLDB_USER
+      - DB_PASSWORD=$MYSQLDB_ROOT_PASSWORD
+      - DB_NAME=$MYSQLDB_DATABASE
+      - DB_PORT=$MYSQLDB_DOCKER_PORT
+      - CLIENT_ORIGIN=$CLIENT_ORIGIN
+    networks:
+      - backend
+      - frontend
+
+  app:
+    depends_on:
+      - api
+    build: ./app
+    ports:
+      - 19000:19000
+      - 19001:19001
+      - 19002:19002
+    volumes: 
+      - ./app:/usr/src/app
+      - /usr/src/app/node_modules
+    environment:
+      - EXPO_DEVTOOLS_LISTEN_ADDRESS=0.0.0.0
+      - REACT_NATIVE_PACKAGER_HOSTNAME=192.168.1.109 #change it according to your Local IP Address
+    networks:
+      - frontend  
+
+  webapp:
+    build: ./webapp
+    container_name: webapp_c
+    ports: 
+      - '3000:3000'
+    volumes: 
+      - ./webapp:/app
+      - /app/node_modules
+    stdin_open: true
+    tty: true
+
+volumes: 
+  db:
+
+networks:
+  backend:
+  frontend:

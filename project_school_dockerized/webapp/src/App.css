@@ -1,0 +1,75 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Roboto", sans-serif;
+}
+
+.root-main {
+  background: rgba(2, 111, 154, 0.2) url("./assets/svg/HomeBackgroundImage-II.jpg") no-repeat top;
+  height: 100%;
+  background-size: cover;
+}
+
+.card-gradient-bg {
+  background: linear-gradient(
+    162.66deg,
+    rgba(0, 0, 0, 0) 1.12%,
+    rgba(0, 73, 132, 0.87) 69.04%
+  );
+  filter: drop-shadow(0px 0px 24px rgba(0, 0, 0, 0.25));
+  border-radius: 10px;
+}
+
+.bg-footer {
+  background: linear-gradient(
+    180deg,
+    rgba(5, 35, 63, 0) -27.43%,
+    #05243e 22.64%,
+    rgba(7, 39, 64, 0.45) 100%
+  );
+}
+
+.blue-bullet {
+  position: relative;
+}
+
+.blue-bullet::before {
+  content: "";
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: #1e7dc9;
+  margin-right: 10px;
+  margin-bottom: 2px;
+}
+
+.white-bullet {
+  position: relative;
+}
+
+.white-bullet::before {
+  content: "";
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: #fff;
+  margin-right: 10px;
+  margin-bottom: 2px;
+}
+
+
+/* sizing of the map container */
+.leaflet-container{
+  height: 600px !important;
+  background: #000;
+}
+
+.stroke-text{
+	-webkit-text-stroke-width: 4px;
+    -webkit-text-stroke-color: white;
+}
