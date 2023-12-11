@@ -1,94 +1,96 @@
-# W/ POSTMAN 
+# W/ POSTMAN
 
-### Create Director: 
 
-## POST
+
+# Create Director: 
+
+### POST
 http://localhost:6868/api/directors?email=calinjovrea@gmail.com&rank=1&status=1
 
-## GET
+### GET
 # Read (Director Where Id == 1 ):
 http://localhost:6868/api/directors/1
 
-## PUT
+### PUT
 # Update ( Director Where Id == 2 ):
 http://localhost:6868/api/directors/2?status=0
 
-## DELETE
+### DELETE
 # Delete ( Director Where Id == 4 ):
 http://localhost:6868/api/directors/4
 
 
 
-### Create Teacher 
+# Create Teacher 
 
-## POST
+### POST
 http://localhost:6868/api/teachers?email=calinjovrea@gmail.com&rank=1&status=1
 
-## GET
+### GET
 # Read (Teacher Where Id == 1 ):
 http://localhost:6868/api/teachers/1
 
-## PUT
+### PUT
 # Update ( Teacher Where Id == 2 ):
 http://localhost:6868/api/teachers/2?status=0
 
-## DELETE
+### DELETE
 # Delete ( Teacher Where Id == 4 ):
 
 http://localhost:6868/api/teachers/4
 
 
-### Create Student 
+# Create Student 
 
-## POST
+### POST
 http://localhost:6868/api/students?email=calinjovrea@gmail.com&class=1&rank=1&status=1
 
-## GET
+### GET
 # Read (Student Where Id == 1 ):
 http://localhost:6868/api/students/1
 
-## PUT
+### PUT
 # Update ( Student Where Id == 2 ):
 http://localhost:6868/api/students/2?status=0
 
-## DELETE
+### DELETE
 # Delete ( Student Where Id == 4 ):
 
 http://localhost:6868/api/students/4
 
-### Create Classroom 
+# Create Classroom 
 
-## POST
+### POST
 http://localhost:6868/api/classrooms?teacher=calinjovrea&name=biology&seats=30&status=1
 
-## GET
+### GET
 # Read (Classroom Where Id == 1 ):
 http://localhost:6868/api/classrooms/1
 
-## PUT
+### PUT
 # Update ( Classroom Where Id == 2 ):
 http://localhost:6868/api/classrooms/2?status=0
 
-## DELETE
+### DELETE
 # Delete ( Classroom Where Id == 4 ):
 
 http://localhost:6868/api/classrooms/4
 
 
-### Create User
+# Create User
 
-## POST
+### POST
 http://localhost:6868/api/users?email=calinjovrea@gmail.com&password=password_1&status=1
 
-## GET
+### GET
 # Read (User Where Id == 1 ):
 http://localhost:6868/api/users/1
 
-## PUT
+### PUT
 # Update ( User Where Id == 2 ):
 http://localhost:6868/api/users/2?status=0
 
-## DELETE
+### DELETE
 # Delete ( User Where Id == 4 ):
 
 http://localhost:6868/api/users/4
