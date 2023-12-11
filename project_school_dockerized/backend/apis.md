@@ -81,15 +81,15 @@ http://localhost:6868/api/classrooms/4
 http://localhost:6868/api/users?email=calinjovrea@gmail.com&password=password_1&status=1
 
 ## GET
-# Read (Classroom Where Id == 1 ):
+# Read (User Where Id == 1 ):
 http://localhost:6868/api/users/1
 
 ## PUT
-# Update ( Classroom Where Id == 2 ):
+# Update ( User Where Id == 2 ):
 http://localhost:6868/api/users/2?status=0
 
 ## DELETE
-# Delete ( Classroom Where Id == 4 ):
+# Delete ( User Where Id == 4 ):
 
 http://localhost:6868/api/users/4
 
