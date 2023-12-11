@@ -1,6 +1,5 @@
 # W/ POSTMAN
-
-
+<br/><br/>
 
 # Create Director: 
 
@@ -19,7 +18,7 @@ http://localhost:6868/api/directors/2?status=0
 # Delete ( Director Where Id == 4 ):
 http://localhost:6868/api/directors/4
 
-
+<br/><br/>
 
 # Create Teacher 
 
@@ -40,6 +39,8 @@ http://localhost:6868/api/teachers/2?status=0
 http://localhost:6868/api/teachers/4
 
 
+<br/><br/>
+
 # Create Student 
 
 ### POST
@@ -57,6 +58,8 @@ http://localhost:6868/api/students/2?status=0
 # Delete ( Student Where Id == 4 ):
 
 http://localhost:6868/api/students/4
+
+<br/><br/>
 
 # Create Classroom 
 
@@ -76,6 +79,8 @@ http://localhost:6868/api/classrooms/2?status=0
 
 http://localhost:6868/api/classrooms/4
 
+
+<br/><br/>
 
 # Create User
 
