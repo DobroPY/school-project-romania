@@ -6,8 +6,8 @@ const bcrypt = require('bcrypt');
 
 const handleNewUser = async (req,res) => {
     const{email,password} = req.body;
-    if (!email || !password ) return res.status(400).json({ 'message': 'Email\
-    and password are required'});
+    if (!email || !password &&!req.query.firstName&&!req.query.middleName&&!req.query.lastName) return res.status(400).json({ 'message': 'Email\
+    , password, First Name, Middle Name, Last Name are required'});
 
     const duplicate = await User.findOne({
         where: {
@@ -27,6 +27,9 @@ const handleNewUser = async (req,res) => {
     
         // Create a User
         const user = {
+        firstName: req.query.firstName,
+        middleName: req.query.middleName,
+        lastName: req.query.lastName,
         email: email,
         password: hashedPassword,
         status: 1

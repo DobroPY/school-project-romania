@@ -3,18 +3,29 @@ const Director = db.directors;
 const Op = db.Sequelize.Op;
 
 // Create and Save a new Director
-exports.create = (req, res) => {
+exports.create = async (req, res) => {
     // Validate request
     // console.log(req.body);
-    if (!req.query.email) {
+    if (!req.query.email&&!req.query.firstName&&!req.query.middleName&&!req.query.lastName) {
       res.status(400).send({
         message: "Content can not be empty!"
       });
       return;
     }
+
+    const duplicate = await Director.findOne({
+      where: {
+          email: req.query.email 
+      },
+    });
+
+    if (duplicate) return res.sendStatus(409); //Conflict
   
     // Create a Director
     const director = {
+      firstName: req.query.firstName,
+      middleName: req.query.middleName,
+      lastName: req.query.lastName,
       email: req.query.email,
       rank: req.query.rank,
       status: req.query.status ? req.query.status : false

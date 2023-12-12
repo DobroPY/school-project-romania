@@ -1,7 +1,7 @@
 module.exports = (sequelize, Sequelize) => {
     const Classroom = sequelize.define("classroom", {
       teacher: {
-        type: Sequelize.STRING
+        type: Sequelize.INTEGER
       },
       name: {
         type: Sequelize.STRING

@@ -3,18 +3,29 @@ const Student = db.students;
 const Op = db.Sequelize.Op;
 
 // Create and Save a new Student
-exports.create = (req, res) => {
+exports.create = async (req, res) => {
     // Validate request
     // console.log(req.body);
-    if (!req.query.email) {
+    if (!req.query.email&&!req.query.firstName&&!req.query.middleName&&!req.query.lastName) {
       res.status(400).send({
         message: "Content can not be empty!"
       });
       return;
     }
-  
+    
+    const duplicate = await Student.findOne({
+      where: {
+          email: req.query.email 
+      },
+    });
+
+    if (duplicate) return res.sendStatus(409); //Conflict
+
     // Create a Student
     const student = {
+      firstName: req.query.firstName,
+      middleName: req.query.middleName,
+      lastName: req.query.lastName,
       email: req.query.email,
       class: req.query.class,
       rank: req.query.rank,

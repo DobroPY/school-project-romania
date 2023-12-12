@@ -4,7 +4,7 @@
 # Create Director: 
 
 ### POST
-http://localhost:6868/api/directors?email=calinjovrea@gmail.com&rank=1&status=1
+http://localhost:6868/api/directors?firstName=Calin&middleName=Ioan&lastName=Popescu&email=calinjovrea@gmail.com&rank=1&status=1
 
 ### GET
 # Read (Director Where Id == 1 ):
@@ -23,7 +23,7 @@ http://localhost:6868/api/directors/4
 # Create Teacher 
 
 ### POST
-http://localhost:6868/api/teachers?email=calinjovrea@gmail.com&rank=1&status=1
+http://localhost:6868/api/teachers?firstName=Calinescu&middleName=Ionescu&lastName=Popescu&email=calinpopescu@gmail.com&rank=1&status=1
 
 ### GET
 # Read (Teacher Where Id == 1 ):
@@ -44,7 +44,7 @@ http://localhost:6868/api/teachers/4
 # Create Student 
 
 ### POST
-http://localhost:6868/api/students?email=calinjovrea@gmail.com&class=1&rank=1&status=1
+http://localhost:6868/api/students?firstName=Calin&middleName=Ionescu&lastName=Popescu&email=calinjovrea@gmail.com&class=1&rank=1&status=1
 
 ### GET
 # Read (Student Where Id == 1 ):
@@ -64,7 +64,7 @@ http://localhost:6868/api/students/4
 # Create Classroom 
 
 ### POST
-http://localhost:6868/api/classrooms?teacher=calinjovrea&name=biology&seats=30&status=1
+http://localhost:6868/api/classrooms?teacher=1&name=biology&seats=30&status=1
 
 ### GET
 # Read (Classroom Where Id == 1 ):
@@ -82,10 +82,11 @@ http://localhost:6868/api/classrooms/4
 
 <br/><br/>
 
+
 # Create User
 
 ### POST
-http://localhost:6868/api/users?email=calinjovrea@gmail.com&password=password_1&status=1
+http://localhost:6868/api/users?firstName=Calin&middleName=Ioan&lastName=Jovrea&email=calinjovrea@gmail.com&password=password_1&status=1
 
 ### GET
 # Read (User Where Id == 1 ):
@@ -100,3 +101,67 @@ http://localhost:6868/api/users/2?status=0
 
 http://localhost:6868/api/users/4
 
+
+<br/><br/>
+
+
+# Create Calendar
+
+### POST
+http://localhost:6868/api/calendars?month=12&year=2023&classrooms="{'classrooms': '1,2,3,4,5,6,7,8'}"
+
+### GET
+# Read (Calendar Where Id == 1 ):
+http://localhost:6868/api/calendars/1
+
+### PUT
+# Update ( Calendar Where Id == 2 ):
+http://localhost:6868/api/calendars/2?year=2024
+
+### DELETE
+# Delete ( Calendar Where Id == 4 ):
+
+http://localhost:6868/api/calendars/4
+
+
+<br/><br/>
+
+
+# Create Modules
+
+### POST
+http://localhost:6868/api/modules?teacher=1&name='Biology'
+
+### GET
+# Read (Module Where Id == 1 ):
+http://localhost:6868/api/modules/1
+
+### PUT
+# Update ( Module Where Id == 2 ):
+http://localhost:6868/api/modules/2?name='Maths'
+
+### DELETE
+# Delete ( Module Where Id == 4 ):
+
+http://localhost:6868/api/modules/4
+
+
+<br/><br/>
+
+# Create Absences
+
+### POST
+http://localhost:6868/api/absences?day=1&month=12&year=2023&email=calinjovrea@gmail.com&classrooms="{'classrooms': '1,2,3,4,5,6,7,8'}"&modules="1,2,3,4,5,6,7"
+
+### GET
+# Read (Module Where Id == 1 ):
+http://localhost:6868/api/absences/1
+
+### PUT
+# Update ( Module Where Id == 2 ):
+http://localhost:6868/api/absences/2?email='calinpopescu@gmail.com'
+
+### DELETE
+# Delete ( Module Where Id == 4 ):
+
+http://localhost:6868/api/absences/4

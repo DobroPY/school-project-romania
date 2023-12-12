@@ -25,6 +25,9 @@ db.teachers = require("./teacher.model")(sequelize,Sequelize);
 db.students = require("./student.model")(sequelize,Sequelize);
 db.classrooms = require("./classroom.model")(sequelize,Sequelize);
 db.users = require("./user.model")(sequelize,Sequelize);
+db.modules = require("./module.model")(sequelize,Sequelize);
+db.calendars = require("./calendar.model")(sequelize,Sequelize);
+db.absences = require("./absence.model")(sequelize,Sequelize);
 db.dummys = require("./dummy.model")(sequelize, Sequelize);
 
 module.exports = db;
