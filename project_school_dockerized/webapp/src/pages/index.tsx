@@ -1,3 +1,4 @@
 export { default as LandingPage } from "./LandingPage";
-export { default as OurProducts } from "./OurProductsPage";
+export { default as OurStaff } from "./OurStaffPage";
 export { default as LoginPage } from "./LoginPage";
+export { default as RegisterPage } from "./RegisterPage";

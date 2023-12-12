@@ -23,6 +23,9 @@ services:
     env_file: ./.env
     ports:
       - $NODE_LOCAL_PORT:$NODE_DOCKER_PORT
+    volumes:
+      - ./api:/usr/src/api
+      - /usr/src/api/node_modules
     environment:
       - DB_HOST=mysqldb
       - DB_USER=$MYSQLDB_USER

@@ -1,4 +1,4 @@
-const OurProducts = () => {
+const OurStaff = () => {
   return (
     <div className="p-8per">
       <p>TEXT</p>
@@ -6,4 +6,4 @@ const OurProducts = () => {
   );
 };
 
-export default OurProducts;
+export default OurStaff;

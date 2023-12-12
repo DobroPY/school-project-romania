@@ -24,6 +24,8 @@ require("./routes/director.routes")(app);
 require("./routes/student.routes")(app);
 require("./routes/classroom.routes")(app);
 require("./routes/user.routes")(app);
+require("./routes/register.routes")(app);
+require("./routes/auth.routes")(app);
 require("./routes/dummy.routes")(app);
 
 

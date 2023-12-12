@@ -22,7 +22,8 @@ export default function Navbar() {
   const navigation = [
     { name: "Home", href: "/", current: true },
     { name: "Login", href: "login", current: false },
-    { name: "Students", href: "our-products", current: false },
+    { name: "Register", href: "register", current: false },
+    { name: "Staff", href: "our-staff", current: false },
   ];
 
   return (

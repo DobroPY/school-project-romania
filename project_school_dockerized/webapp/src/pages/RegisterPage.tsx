@@ -3,9 +3,9 @@ import { useState } from "react";
 
 
 
-const LoginPage = () => {
+const RegisterPage = () => {
     return (
-    
+        
         <section className="vh-100">
             <div className="container py-5 h-100">
                 <div className="row d-flex align-items-center justify-content-center h-100">
@@ -26,16 +26,7 @@ const LoginPage = () => {
                         <label className="form-label" htmlFor="form1Example23">Password</label>
                     </div>
 
-                    <div className="d-flex justify-content-around align-items-center mb-4">
-                       
-                        <div className="form-check">
-                        <input className="form-check-input" type="checkbox" value="" id="form1Example3" checked />
-                        <label className="form-check-label" htmlFor="form1Example3"> Remember me </label>
-                        </div>
-                        <a href="#!">Forgot password?</a>
-                    </div>
-
-                    <button type="submit" className="btn btn-primary btn-lg btn-block">Sign in</button>
+                    <button type="submit" className="btn btn-primary btn-lg btn-block">Sign Up</button>
 
                     </form>
                 </div>
@@ -45,4 +36,4 @@ const LoginPage = () => {
     );
 };
 
-export default LoginPage;
+export default RegisterPage;
