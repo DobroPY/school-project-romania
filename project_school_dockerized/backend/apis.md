@@ -165,3 +165,44 @@ http://localhost:6868/api/absences/2?email='calinpopescu@gmail.com'
 # Delete ( Module Where Id == 4 ):
 
 http://localhost:6868/api/absences/4
+
+
+<br/><br/>
+
+# Create Grades
+
+### POST
+http://localhost:6868/api/grades?day=1&month=12&year=2023&email=calinjovrea@gmail.com&classrooms="{'classrooms': '1,2,3,4,5,6,7,8'}"&modules="1,2,3,4,5,6,7"&grades='{"grades": "10,2,8,7,5"}'&rewards='{"rewards": "-1,+2,+3,-4,+1"}'
+
+### GET
+# Read (Module Where Id == 1 ):
+http://localhost:6868/api/grades/1
+
+### PUT
+# Update ( Module Where Id == 2 ):
+http://localhost:6868/api/grades/2?email='calinpopescu@gmail.com'
+
+### DELETE
+# Delete ( Module Where Id == 4 ):
+
+http://localhost:6868/api/grades/4
+
+<br/><br/>
+
+# Create Review
+
+### POST
+http://localhost:6868/api/reviews?day=1&month=12&year=2023&email=calinjovrea@gmail.com&classrooms="{'classrooms': '1,2,3,4,5,6,7,8'}"&modules="1,2,3,4,5,6,7"&teacher_email=calinpopescu@gmail.com&review='Great Teacher !'
+
+### GET
+# Read (Module Where Id == 1 ):
+http://localhost:6868/api/reviews/1
+
+### PUT
+# Update ( Module Where Id == 2 ):
+http://localhost:6868/api/reviews/2?email='calinpopescu@gmail.com'
+
+### DELETE
+# Delete ( Module Where Id == 4 ):
+
+http://localhost:6868/api/reviews/4
