@@ -1,13 +1,17 @@
 const express = require('express');
 const dotenv= require('dotenv');
-// const cors=require('cors');
+const verifyJWT = require('./middleware/verifyJWT.js');
+const cookieParser = require('cookie-parser')
+const cors=require('cors');
 dotenv.config()  
 const app = express();
-// const corsOptions={
-//     origin: process.env.CLIENT_ORIGIN
-// }
+app.use(express.json());
+app.use(cookieParser());
+const corsOptions={
+    origin: process.env.CLIENT_ORIGIN
+}
 const PORT = process.env.NODE_DOCKER_PORT || 8080;
-// app.use(cors(corsOptions))
+app.use(cors(corsOptions))
 
 app.get('/', (req, res)=>{
     res.status(200);
@@ -17,15 +21,21 @@ app.get('/', (req, res)=>{
 
 const db = require("./models");
 
-db.sequelize.sync({force:true,alter:true});
+db.sequelize.sync({force: false,alter: false});
 
+require("./routes/register.routes")(app);
+require("./routes/auth.routes")(app);
+require("./routes/refresh.routes.js")(app);
+require("./routes/logout.routes.js")(app);
+
+
+//Frontend Integration
+app.use(verifyJWT);
 require("./routes/teacher.routes")(app);
 require("./routes/director.routes")(app);
 require("./routes/student.routes")(app);
 require("./routes/classroom.routes")(app);
 require("./routes/user.routes")(app);
-require("./routes/register.routes")(app);
-require("./routes/auth.routes")(app);
 require("./routes/module.routes")(app);
 require("./routes/calendar.routes")(app);
 require("./routes/absence.routes")(app);

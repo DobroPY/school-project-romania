@@ -86,7 +86,7 @@ http://localhost:6868/api/classrooms/4
 # Create User
 
 ### POST
-http://localhost:6868/api/users?firstName=Calin&middleName=Ioan&lastName=Jovrea&email=calinjovrea@gmail.com&password=password_1&status=1
+http://localhost:6868/api/users?firstName=Calin&middleName=Ioan&lastName=Jovrea&email=calinjovrea@gmail.com&password=password1&status=1
 
 ### GET
 # Read (User Where Id == 1 ):
@@ -189,7 +189,7 @@ http://localhost:6868/api/grades/4
 
 <br/><br/>
 
-# Create Review
+# Create Reviews
 
 ### POST
 http://localhost:6868/api/reviews?day=1&month=12&year=2023&email=calinjovrea@gmail.com&classrooms="{'classrooms': '1,2,3,4,5,6,7,8'}"&modules="1,2,3,4,5,6,7"&teacher_email=calinpopescu@gmail.com&review='Great Teacher !'
@@ -206,3 +206,5 @@ http://localhost:6868/api/reviews/2?email='calinpopescu@gmail.com'
 # Delete ( Module Where Id == 4 ):
 
 http://localhost:6868/api/reviews/4
+
+
