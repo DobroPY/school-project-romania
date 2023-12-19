@@ -21,7 +21,7 @@ const LoginPage = () => {
             "email": email,
             "password":password
         };
-        
+
         await axios.post('http://localhost:6868/auth',user,
         {
             headers:{

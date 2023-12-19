@@ -15,7 +15,8 @@ const allowedOrigins = [process.env.CLIENT_ORIGIN,
     'http://localhost:8080/auth',
     'http://localhost:3000/auth',
     'http://localhost:6868/auth',
-    'http://127.0.0.1:3000'
+    'http://127.0.0.1:3000',
+    'http://127.0.0.1:8888'
     ]
 
 const corsOptions={
@@ -29,6 +30,7 @@ const corsOptions={
     optionsSuccessStatus:200
 
 }
+
 const PORT = process.env.NODE_DOCKER_PORT || 8080;
 app.use(function(req, res, next) {
     res.header("Access-Control-Allow-Credentials", true);
