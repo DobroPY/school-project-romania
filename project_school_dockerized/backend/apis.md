@@ -88,6 +88,8 @@ http://localhost:6868/api/classrooms/4
 ### POST
 http://localhost:6868/api/users?firstName=Calin&middleName=Ioan&lastName=Jovrea&email=calinjovrea@gmail.com&password=password1&status=1
 
+http://localhost:6868/api/users?firstName=Calinescu&middleName=Ionescu&lastName=Jovrescu&email=calinjovrea12354@gmail.com&password=password1&status=1
+
 ### GET
 # Read (User Where Id == 1 ):
 http://localhost:6868/api/users/1
@@ -109,6 +111,8 @@ http://localhost:6868/api/users/4
 
 ### POST
 http://localhost:6868/api/calendars?month=12&year=2023&classrooms="{'classrooms': '1,2,3,4,5,6,7,8'}"
+
+
 
 ### GET
 # Read (Calendar Where Id == 1 ):
