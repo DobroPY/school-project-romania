@@ -11,16 +11,19 @@ app.use(express.json());
 app.use(cookieParser());
 
 const allowedOrigins = [process.env.CLIENT_ORIGIN,
-    'http://localhost:8081/auth',
-    'http://localhost:8080/auth',
-    'http://localhost:3000/auth',
-    'http://localhost:6868/auth',
+    'http://localhost:8081',
+    'http://localhost:8080',
+    'http://localhost:3000',
+    'http://localhost:6868',
     'http://127.0.0.1:3000',
     'http://127.0.0.1:8888'
     ]
 
 const corsOptions={
     origin: (origin,callback)=> {
+        console.log('======');
+        console.log(origin);
+        console.log('======'); 
         if (allowedOrigins.indexOf(origin) !== -1 || !origin){
             callback(null,true)
         }else{
