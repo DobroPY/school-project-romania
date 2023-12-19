@@ -2,18 +2,17 @@ import { useState } from "react";
 import axios from "axios";
 
 const LoginPage = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-
-    const onChangeEmail = (event)=>{
-        setEmail(event.target.value)
-        console.log(email)
-    }
-    const onChangePassword = (event) =>{
-        setPassword(event.target.value);
-        console.log(password);
-    }
+  const onChangeEmail = (event) => {
+    setEmail(event.target.value);
+    console.log(email);
+  };
+  const onChangePassword = (event) => {
+    setPassword(event.target.value);
+    console.log(password);
+  };
 
    async function submit(){
 
@@ -22,7 +21,7 @@ const LoginPage = () => {
             "password":password
         };
 
-        await axios.post('http://localhost:6868/auth',user,
+        await axios.post('http://localhost:6868/auth',JSON.stringify(user),
         {
             headers:{
                 withCredential: true,
@@ -32,19 +31,21 @@ const LoginPage = () => {
                 'Access-Control-Allow-Methods':'GET,PUT,POST,DELETE,PATCH,OPTIONS',   
          }
         }).then((res)=>{
-            console.log(res)
+              const token = res.data.accessToken;
+              console.log(token);
+              
         })
         
     }
 
   return (
     <section className="flex justify-center items-center">
-      <div className="w-4/12 h-600 border-2 rounded-md p-8">
+      <div className="w-4/12 min-h-max border-2 rounded-md p-8">
         <p className="">Welcome !</p>
         <p className="text-xl mt-10 font-bold">Sign in to </p>
         <p className="mt-4 font-normal">SCHOOL MANAGEMENT SYSTEM</p>
 
-        <section className="mt-10">
+        <form onSubmit={submit} className="mt-10">
           <p className="font-medium">Email</p>
           <input
             onChange={onChangeEmail}
@@ -68,10 +69,13 @@ const LoginPage = () => {
               Forgot your password ?
             </a>
           </section>
-          <button onClick={submit} className="w-full mt-10 bg-black text-white p-3 rounded-md">
+          <button
+            type="submit"
+            className="w-full mt-10 bg-black text-white p-3 rounded-md"
+          >
             Login
           </button>
-        </section>
+        </form>
       </div>
     </section>
   );

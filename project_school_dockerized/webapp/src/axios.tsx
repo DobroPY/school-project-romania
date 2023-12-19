@@ -2,7 +2,7 @@ import axios from "axios";
 const instance = axios.create(
     {
             baseURL: "http://localhost:6868",
-            withCredentials: false,
+            withCredentials: true,
             headers: {
               'Access-Control-Allow-Origin' : '*',
               'Access-Control-Allow-Methods':'GET,PUT,POST,DELETE,PATCH,OPTIONS',   
@@ -10,3 +10,6 @@ const instance = axios.create(
       })
 
       export default instance;
+
+      // vezi ca nu am folosit fisierul asta
+      

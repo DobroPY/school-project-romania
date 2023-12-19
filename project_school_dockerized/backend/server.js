@@ -21,6 +21,9 @@ const allowedOrigins = [process.env.CLIENT_ORIGIN,
 
 const corsOptions={
     origin: (origin,callback)=> {
+        console.log('======');
+        console.log(origin);
+        console.log('======'); 
         if (allowedOrigins.indexOf(origin) !== -1 || !origin){
             callback(null,true)
         }else{
