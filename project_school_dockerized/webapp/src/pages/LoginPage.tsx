@@ -14,15 +14,6 @@ const LoginPage = () => {
     console.log(password);
   };
 
-    const onChangeEmail = (event)=>{
-        setEmail(event.target.value)
-        console.log(email)
-    }
-    const onChangePassword = (event) =>{
-        setPassword(event.target.value);
-        console.log(password);
-    }
-
    async function submit(){
 
         const user = {
@@ -30,7 +21,7 @@ const LoginPage = () => {
             "password":password
         };
 
-        await axios.post('http://localhost:6868/auth',user,
+        await axios.post('http://localhost:6868/auth',JSON.stringify(user),
         {
             headers:{
                 withCredential: true,
@@ -40,7 +31,9 @@ const LoginPage = () => {
                 'Access-Control-Allow-Methods':'GET,PUT,POST,DELETE,PATCH,OPTIONS',   
          }
         }).then((res)=>{
-            console.log(res)
+              const token = res.data.accessToken;
+              console.log(token);
+              
         })
         
     }
