@@ -112,8 +112,6 @@ http://localhost:6868/api/users/4
 ### POST
 http://localhost:6868/api/calendars?month=12&year=2023&classrooms="{'classrooms': '1,2,3,4,5,6,7,8'}"
 
-
-
 ### GET
 # Read (Calendar Where Id == 1 ):
 http://localhost:6868/api/calendars/1

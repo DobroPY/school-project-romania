@@ -18,18 +18,16 @@ const LoginPage = () => {
    async function submit(){
 
         const user = {
-            email: email,
-            password:password
+            "email": email,
+            "password":password
         };
-        // Change your await to a promise
-        /*headers: {
-          'Access-Control-Allow-Origin' : '*',
-          'Access-Control-Allow-Methods':'GET,PUT,POST,DELETE,PATCH,OPTIONS',   
-      } adauga si acest header
-      bine*/
+        
         await axios.post('http://localhost:6868/auth',user,
         {
             headers:{
+                withCredential: true,
+                'Content-Type' : 'application/json',
+                'Access-Control-Allow-Credentials': true,
                 'Access-Control-Allow-Origin' : '*',
                 'Access-Control-Allow-Methods':'GET,PUT,POST,DELETE,PATCH,OPTIONS',   
          }

@@ -2,7 +2,7 @@ const express = require('express');
 const dotenv= require('dotenv');
 const verifyJWT = require('./middleware/verifyJWT.js');
 const cookieParser = require('cookie-parser')
-//const cors=require('cors');
+const cors=require('cors');
 
 dotenv.config()  
 const app = express();
@@ -10,11 +10,35 @@ const app = express();
 app.use(express.json());
 app.use(cookieParser());
 
-// const corsOptions={
-//     origin: process.env.CLIENT_ORIGIN
-// }
+const allowedOrigins = [process.env.CLIENT_ORIGIN,
+    'http://localhost:8081/auth',
+    'http://localhost:8080/auth',
+    'http://localhost:3000/auth',
+    'http://localhost:6868/auth',
+    'http://127.0.0.1:3000'
+    ]
+
+const corsOptions={
+    origin: (origin,callback)=> {
+        if (allowedOrigins.indexOf(origin) !== -1 || !origin){
+            callback(null,true)
+        }else{
+            callback(new Error('Not Allowed By CORS'));
+        }
+    },
+    optionsSuccessStatus:200
+
+}
 const PORT = process.env.NODE_DOCKER_PORT || 8080;
-// app.use(cors(corsOptions))
+app.use(function(req, res, next) {
+    res.header("Access-Control-Allow-Credentials", true);
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header('Access-Control-Allow-Methods', 'DELETE, PUT, GET, POST');
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
+ });
+
+app.use(cors(corsOptions));
 
 app.get('/', (req, res)=>{
     res.status(200);

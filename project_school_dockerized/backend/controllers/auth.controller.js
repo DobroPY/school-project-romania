@@ -45,7 +45,7 @@ const handleLogin = async (req, res) =>{
             console.log('refresh token updated successfully!');
         })
 
-        res.cookie('jwt', refreshToken, {httpOnly: true, maxAge:24 * 60 * 60 * 1000})
+        res.cookie('jwt', refreshToken, {httpOnly: true, sameSite:'None',secure:true, maxAge:24 * 60 * 60 * 1000})
         console.log('-----------------4');
         res.json({ accessToken });
     }else{
