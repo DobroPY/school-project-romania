@@ -2,16 +2,19 @@ const express = require('express');
 const dotenv= require('dotenv');
 const verifyJWT = require('./middleware/verifyJWT.js');
 const cookieParser = require('cookie-parser')
-const cors=require('cors');
+//const cors=require('cors');
+
 dotenv.config()  
 const app = express();
+
 app.use(express.json());
 app.use(cookieParser());
-const corsOptions={
-    origin: process.env.CLIENT_ORIGIN
-}
+
+// const corsOptions={
+//     origin: process.env.CLIENT_ORIGIN
+// }
 const PORT = process.env.NODE_DOCKER_PORT || 8080;
-app.use(cors(corsOptions))
+// app.use(cors(corsOptions))
 
 app.get('/', (req, res)=>{
     res.status(200);
