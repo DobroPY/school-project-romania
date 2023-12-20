@@ -1,20 +1,23 @@
 import { useState } from "react";
 import axios from "axios";
+import { useNavigate } from 'react-router-dom';
+
 
 const LoginPage = () => {
+  const navigate = useNavigate();
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const onChangeEmail = (event) => {
     setEmail(event.target.value);
-    console.log(email);
   };
   const onChangePassword = (event) => {
     setPassword(event.target.value);
-    console.log(password);
   };
 
-   async function submit(){
+   async function submit(event){
+    event.preventDefault();
 
         const user = {
             "email": email,
@@ -33,7 +36,13 @@ const LoginPage = () => {
         }).then((res)=>{
               const token = res.data.accessToken;
               console.log(token);
+              document.cookie = `token=${token}`;
+              navigate("/dashboard");
+
               
+        }).catch((error)=>{
+          console.log(error);
+          alert("An error occured!")
         })
         
     }
