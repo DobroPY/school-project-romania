@@ -35,7 +35,6 @@ const LoginPage = () => {
          }
         }).then((res)=>{
               const token = res.data.accessToken;
-              console.log(token);
               document.cookie = `token=${token}`;
               navigate("/dashboard");
 

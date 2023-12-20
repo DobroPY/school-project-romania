@@ -9,12 +9,20 @@ const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 
+type iAuthContext = {
+  auth: boolean ;
+  setAuth: (newState : boolean) => void,
+}
 
+const initialValue = {
+  auth: false,
+  setAuth: () =>{}
+}
+
+const AuthContext = React.createContext<iAuthContext>(initialValue);
 
 
 const AuthProvider = ()=>{
-  const AuthContext = React.createContext<Boolean | null>(false);
-  const [auth, setAuth] = useState<Boolean>(false);
 
   function getCookie(cname) {
       let name = cname + "=";
@@ -31,18 +39,12 @@ const AuthProvider = ()=>{
       }
       return "";
     }
-
-  useEffect(()=>{
       const token = getCookie('token');
-      if(token != ""){
-          setAuth(true);
-      } 
-
-      console.log(auth)
-  });
+      const authValue = token ? true: false;
+      const [auth, setAuth] = useState(authValue);
 
   return(
-    <AuthContext.Provider value={auth}>
+    <AuthContext.Provider value={{auth, setAuth}}>
         <App/>
     </AuthContext.Provider>
   );
@@ -58,3 +60,5 @@ root.render(
 // to log results (for example: reportWebVitals(console.log))
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 reportWebVitals();
+
+export default AuthContext;

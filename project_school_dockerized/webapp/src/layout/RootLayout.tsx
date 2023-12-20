@@ -1,8 +1,10 @@
 import { useContext } from "react";
-import { Outlet } from "react-router-dom";
+import { Outlet ,Navigate } from "react-router-dom";
+import AuthContext from "../index";
 const RootLayout = () => {
-    // const auth = useContext(authContext);
-  return(
+     const {auth} = useContext(AuthContext);
+    if (!auth) return <Navigate to="/login" replace />
+     return(
 
   <main className="root-main">
     <Outlet />
