@@ -38,10 +38,10 @@ const RegisterPage = () => {
       middleName: middleName,
       email: email,
       password: password,
-      status:true,
+      status:1,
     };
 
-    axios.post("http://localhost:6868/register", user,
+    axios.post("http://localhost:6868/register", JSON.stringify(user),
     {
       headers:{
           withCredential: true,

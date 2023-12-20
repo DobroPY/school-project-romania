@@ -16,7 +16,8 @@ const allowedOrigins = [process.env.CLIENT_ORIGIN,
     'http://localhost:3000',
     'http://localhost:6868',
     'http://127.0.0.1:3000',
-    'http://127.0.0.1:8888'
+    'http://127.0.0.1:8888',
+    'http://127.0.0.1:8081'
     ]
 
 const corsOptions={
