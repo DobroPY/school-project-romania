@@ -1,7 +1,10 @@
 import { useState } from "react";
 import axios from "axios";
+import { useNavigate } from 'react-router-dom';
 
 const RegisterPage = () => {
+  const navigate = useNavigate();
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [firstName, setFirstName] = useState("");
@@ -10,23 +13,18 @@ const RegisterPage = () => {
 
   const onChangeEmail = (event) => {
     setEmail(event.target.value);
-    console.log(email);
   };
   const onChangeFirstName = (event) => {
     setFirstName(event.target.value);
-    console.log(firstName);
   };
   const onChangeMiddleName = (event) => {
     setMiddleName(event.target.value);
-    console.log(middleName);
   };
   const onChangeLastName = (event) => {
     setLastName(event.target.value);
-    console.log(lastName);
   };
   const onChangePassword = (event) => {
     setPassword(event.target.value);
-    console.log(password);
   };
 
   const submit = (event) => {
@@ -52,10 +50,9 @@ const RegisterPage = () => {
    }
   }
     ).then((res)=>{
-      console.log(res);
+      navigate("/login");
       
     })
-    console.log(user);
     
   };
   return (

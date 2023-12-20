@@ -10,6 +10,7 @@ import {
   RegisterPage,
   LandingPage,
   OurStaff,
+  Dashboard
 } from "../pages";
 
 const router = createBrowserRouter(
@@ -18,6 +19,7 @@ const router = createBrowserRouter(
       <Route index element={<LandingPage />} />
       <Route path="login" element={<LoginPage />} />
       <Route path="register" element={<RegisterPage />} />
+      <Route path="dashboard" element={<Dashboard />} />
     </Route>
   )
 );
