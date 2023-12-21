@@ -10,7 +10,8 @@ import {
   RegisterPage,
   LandingPage,
   OurStaff,
-  Dashboard
+  Dashboard,
+  Students
 } from "../pages";
 
 const router = createBrowserRouter(
@@ -20,6 +21,7 @@ const router = createBrowserRouter(
       <Route path="login" element={<LoginPage />} />
       <Route path="register" element={<RegisterPage />} />
       <Route path="dashboard" element={<Dashboard />} />
+      <Route path="students" element={<Students />} />
     </Route>
   )
 );
