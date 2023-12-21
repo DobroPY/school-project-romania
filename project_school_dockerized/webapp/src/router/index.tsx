@@ -13,6 +13,10 @@ import {
   Dashboard,
   Students
 } from "../pages";
+import AuthContext from "../index";
+
+//const {auth} = useContext(AuthContext);
+  //  console.log(auth)
 
 const router = createBrowserRouter(
   createRoutesFromElements(

@@ -70,8 +70,11 @@ const Students = () => {
           <p className="font-semibold bg-slate-100 cursor-pointer ">
             Classroom 1
           </p>
-          <p className="font-semibold bg-slate-100 cursor-pointer ">
+          <p className="font-semibold bg-white cursor-pointer ">
             Classroom 2
+          </p>
+          <p className="font-semibold bg-slate-100 cursor-pointer ">
+            Classroom 1
           </p>
         </div>
         <div className=" w-4/5 border-2 mt-4 h-[calc(100vh_-_100px)]  border-gray-200 shadow-2xl rounded-xl mr-4">
