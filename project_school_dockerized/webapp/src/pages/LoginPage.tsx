@@ -35,7 +35,7 @@ const LoginPage = () => {
          }
         }).then((res)=>{
               const token = res.data.accessToken;
-              document.cookie = `jwt=${token}`;
+               document.cookie = `jwt=${token}`;
               navigate("/dashboard");
 
               
