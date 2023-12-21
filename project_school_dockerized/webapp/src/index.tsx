@@ -39,7 +39,7 @@ const AuthProvider = ()=>{
       }
       return "";
     }
-      const token = getCookie('token');
+      const token = getCookie('jwt');
       const authValue = token ? true: false;
       const [auth, setAuth] = useState(authValue);
 

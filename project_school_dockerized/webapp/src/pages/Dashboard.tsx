@@ -1,9 +1,17 @@
+import axios from "axios";
 import React from "react";
 import { useEffect} from "react";
 import { useNavigate } from "react-router-dom";
 
 const DashBoard = ()=>{
     const navigate = useNavigate();
+
+     const logout = async (event)=>{
+        event.preventDefault();
+        await axios.get("http://localhost:6868/logout").then((res)=>{
+            console.log(res);
+        })
+    }
     return(
         <section>
             <div className="flex items-center justify-between p-4 w-full min-h-[50px] border-l border-r border-b border-gray-300  rounded-b-xl shadow-xl">
@@ -28,6 +36,7 @@ const DashBoard = ()=>{
                     <p onClick={()=>navigate("/grades")} className="mb-6 font-semibold bg-slate-100 cursor-pointer ">Grades</p>
                     <p onClick={()=>navigate("/rewards")} className="mb-6 font-semibold bg-slate-100 cursor-pointer ">Rewards</p>
                     <p onClick={()=>navigate("/student-gaps")} className="mb-6 font-semibold bg-slate-100 cursor-pointer ">Student Gaps</p>
+                    <button className="border border-black rounded-md text-white w-4/5 bg-black h-8 mt-10" onClick={logout}>Logout</button>
             </div>
             <div className="text-center w-4/5 border-2 mt-4 h-[calc(100vh_-_100px)]  border-gray-200 shadow-2xl rounded-xl mr-4">
                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor"  className="w-6 h-6 m-4 cursor-pointer float-right">
@@ -36,6 +45,7 @@ const DashBoard = ()=>{
                     </svg>
                     <p className="mt-4">Main Dashboard</p>
             </div>
+
             </section>
         </section>
     );
