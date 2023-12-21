@@ -28,6 +28,8 @@ const RegisterPage = () => {
   };
 
   const submit = (event) => {
+
+    console.log('---------------G');
     event.preventDefault();
 
     const user = {
@@ -38,11 +40,11 @@ const RegisterPage = () => {
       password: password,
       status:1,
     };
-
+    console.log('---------------H');
     axios.post("http://localhost:6868/register", JSON.stringify(user),
     {
       headers:{
-          withCredential: true,
+          withCredential: false,
           'Content-Type' : 'application/json',
           'Access-Control-Allow-Credentials': true,
           'Access-Control-Allow-Origin' : '*',
@@ -50,6 +52,7 @@ const RegisterPage = () => {
    }
   }
     ).then((res)=>{
+      console.log('---------------I');
       navigate("/login");
       
     })

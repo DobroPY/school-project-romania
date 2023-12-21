@@ -31,7 +31,8 @@ exports.create = async (req, res) => {
       year: req.query.year,
       classrooms: req.query.classrooms,
       modules: req.query.modules,
-      grades: req.query.grades
+      grades: req.query.grades,
+      reward: req.query.reward
     };
   
     // Save Grade in the database

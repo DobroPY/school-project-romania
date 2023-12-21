@@ -174,7 +174,7 @@ http://localhost:6868/api/absences/4
 # Create Grades
 
 ### POST
-http://localhost:6868/api/grades?day=1&month=12&year=2023&email=calinjovrea@gmail.com&classrooms="{'classrooms': '1,2,3,4,5,6,7,8'}"&modules="1,2,3,4,5,6,7"&grades='{"grades": "10,2,8,7,5"}'&rewards='{"rewards": "-1,+2,+3,-4,+1"}'
+http://localhost:6868/api/grades?day=1&month=12&year=2023&email=calinjovrea@gmail.com&classrooms="{'classrooms': '1,2,3,4,5,6,7,8'}"&modules="1,2,3,4,5,6,7"&grades='{"grades": "10,2,8,7,5"}'&reward='{"rewards": "-1,+2,+3,-4,+1"}'
 
 ### GET
 # Read (Module Where Id == 1 ):

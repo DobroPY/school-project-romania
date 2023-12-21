@@ -33,6 +33,7 @@ services:
       - DB_NAME=$MYSQLDB_DATABASE
       - DB_PORT=$MYSQLDB_DOCKER_PORT
       - CLIENT_ORIGIN=$CLIENT_ORIGIN
+      - ES_HOST=elasticsearch
     networks:
       - backend
       - frontend
@@ -65,10 +66,11 @@ services:
     stdin_open: true
     tty: true
 
-  elasticsearch:
+  es01:
     image: docker.elastic.co/elasticsearch/elasticsearch:7.4.0
-    container_name: elasticsearch
     restart: always
+    container_name: elasticsearch
+    # ES_HOST : es-master
     environment:
       - xpack.security.enabled=false
       - discovery.type=single-node
@@ -85,6 +87,11 @@ services:
       - ./elasticsearch-data:/usr/share/elasticsearch/data
     ports:
       - 9200:9200
+      - 9300:9300
+    depends_on:
+      - api
+    networks:
+      - backend
   kibana:
     container_name: kibana
     image: docker.elastic.co/kibana/kibana:7.4.0
@@ -94,7 +101,9 @@ services:
     ports:
       - 5601:5601
     depends_on:
-      - elasticsearch
+      - es01
+    networks:
+      - backend
 
 volumes: 
   db:
