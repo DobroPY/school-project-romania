@@ -7,7 +7,7 @@ const Op = db.Sequelize.Op;
 exports.create = async (req, res) => {
     // Validate request
 
-    if (!req.query.day && !req.query.month && !req.query.year && !req.query.email && !req.query.classrooms && !req.query.modules && !req.query.grades) {
+    if (!req.query.day && !req.query.month && !req.query.year && !req.query.email && !req.query.classroom && !req.query.module && !req.query.grade) {
       res.status(400).send({
         message: "Content can not be empty!"
       });
@@ -29,10 +29,10 @@ exports.create = async (req, res) => {
       day: req.query.day,
       month: req.query.month,
       year: req.query.year,
-      classrooms: req.query.classrooms,
-      modules: req.query.modules,
-      grades: req.query.grades,
-      reward: req.query.reward
+      classrooms: req.query.classroom,
+      modules: req.query.module,
+      grades: req.query.grade,
+      reward: req.query.rewar
     };
   
     // Save Grade in the database

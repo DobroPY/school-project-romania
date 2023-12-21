@@ -12,17 +12,17 @@ module.exports = (sequelize, Sequelize) => {
         year:{
             type:Sequelize.INTEGER
         },
-        classrooms:{
-            type: Sequelize.STRING
+        classroom:{
+            type: Sequelize.INTEGER
         },
-        modules:{
-            type: Sequelize.STRING
+        module:{
+            type: Sequelize.INTEGER
         },
-        grades:{
-            type: Sequelize.STRING
+        grade:{
+            type: Sequelize.INTEGER
         },
         reward:{
-            type:Sequelize.STRING
+            type:Sequelize.INTEGER
         }
     });
 

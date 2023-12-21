@@ -40,8 +40,8 @@ exports.create = async (req, res) => {
         day: req.query.day,
         month: req.query.month,
         year: req.query.year,
-        classrooms: req.query.classrooms,
-        modules: req.query.modules,
+        classrooms: req.query.classroom,
+        modules: req.query.module,
         review: req.query.review
     };
   

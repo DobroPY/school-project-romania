@@ -47,7 +47,6 @@ const DashBoard = ()=>{
 
                     <iframe className="w-full h-full " src="http://localhost:5601/app/kibana#/dashboard?embed=true&_g=(refreshInterval:(pause:!t,value:0),time:(from:'2023-12-01T15:40:47.831Z',to:'2023-12-28T15:55:58.999Z'))&_a=(description:'',filters:!(),fullScreenMode:!f,options:(hidePanelTitles:!f,useMargins:!t),panels:!((embeddableConfig:(),gridData:(h:15,i:c82e23fc-5128-48d8-afb6-6aaf0ff1b4a5,w:24,x:0,y:0),id:'807ef970-a010-11ee-acef-2f08fdadff7a',panelIndex:c82e23fc-5128-48d8-afb6-6aaf0ff1b4a5,type:visualization,version:'7.4.0'),(embeddableConfig:(),gridData:(h:15,i:d56b1e0f-c890-4953-8eb6-ec467e087c96,w:24,x:24,y:0),id:'9673cc00-a016-11ee-acef-2f08fdadff7a',panelIndex:d56b1e0f-c890-4953-8eb6-ec467e087c96,type:visualization,version:'7.4.0'),(embeddableConfig:(),gridData:(h:15,i:'35f3a1e1-9e0d-4594-bee8-80c77dc11528',w:24,x:0,y:15),id:'7b3464e0-a016-11ee-acef-2f08fdadff7a',panelIndex:'35f3a1e1-9e0d-4594-bee8-80c77dc11528',type:visualization,version:'7.4.0'),(embeddableConfig:(),gridData:(h:15,i:'1fbe4351-db58-4a64-90d2-4e3007e2e76c',w:24,x:24,y:15),id:dc87b530-a016-11ee-acef-2f08fdadff7a,panelIndex:'1fbe4351-db58-4a64-90d2-4e3007e2e76c',type:visualization,version:'7.4.0')),query:(language:kuery,query:''),timeRestore:!f,title:'New+Dashboard',viewMode:edit)" height="600" width="800"></iframe>
             </div>
-            {/* poti pune dashboard-ul responsive ? adica iframe-ul sau tot dashboardul? doar iframe . pana jos */}
             </section>
         </section>
     );

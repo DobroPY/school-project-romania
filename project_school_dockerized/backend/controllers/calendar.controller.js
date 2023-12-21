@@ -8,8 +8,8 @@ exports.create = (req, res) => {
     
     console.log(req.query.month);
     console.log(req.query.year);
-    console.log(req.queryclassrooms);
-    if (!req.query.month && !req.query.year&&!req.query.classrooms) {
+    console.log(req.queryclassroom);
+    if (!req.query.month && !req.query.year&&!req.query.classroom) {
       res.status(400).send({
         message: "Content can not be empty!"
       });
@@ -21,7 +21,7 @@ exports.create = (req, res) => {
     const calendar = {
       month: req.query.month,
       year: req.query.year,
-      classrooms: req.query.classrooms,
+      classrooms: req.query.classroom,
     };
   
     // Save Calendar in the database
