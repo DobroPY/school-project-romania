@@ -17,7 +17,7 @@ const handleLogout = async (req, res) =>{
     });
 
     if (!findUser){
-        //res.clearCookie('jwt', {httpOnly: true});
+        res.clearCookie('jwt', {httpOnly: true});
         return res.sendStatus(403); //Forbidden
     } 
 
@@ -26,7 +26,7 @@ const handleLogout = async (req, res) =>{
         console.log('refresh token updated successfully!');
     })
 
-    //res.clearCookie('jwt', {httpOnly: true});
+    res.clearCookie('jwt', {httpOnly: true});
     res.sendStatus(204);
 }
 

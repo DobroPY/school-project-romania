@@ -1,13 +1,13 @@
 module.exports = (sequelize, Sequelize) => {
     const Module = sequelize.define("module", {
       teacher: {
-        type: Sequelize.STRING
+        type: Sequelize.INTEGER
       },
       name: {
         type: Sequelize.STRING
       },
       classroom: {
-        type: Sequelize.STRING
+        type: Sequelize.INTEGER
       }
     });
   

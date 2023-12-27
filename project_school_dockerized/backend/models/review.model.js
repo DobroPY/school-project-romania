@@ -15,10 +15,10 @@ module.exports = (sequelize, Sequelize) => {
         year:{
             type:Sequelize.INTEGER
         },
-        classrooms:{
-            type: Sequelize.STRING
+        classroom:{
+            type: Sequelize.INTEGER
         },
-        modules:{
+        module:{
             type: Sequelize.STRING
         },
         review:{

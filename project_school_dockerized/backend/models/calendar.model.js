@@ -9,8 +9,8 @@ module.exports = (sequelize, Sequelize) => {
         year:{
             type:Sequelize.INTEGER
         },
-        classrooms: {
-        type: Sequelize.STRING
+        classroom: {
+        type: Sequelize.INTEGER
         }
     });
 

@@ -43,8 +43,8 @@ const PORT = process.env.NODE_DOCKER_PORT || 8080;
 app.use(function(req, res, next) {
     res.header("Access-Control-Allow-Credentials", true);
     res.header("Access-Control-Allow-Origin", "*");
-    res.header('Access-Control-Allow-Methods', 'DELETE, PUT, GET, POST');
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    res.header('Access-Control-Allow-Methods', 'DELETE, PUT, GET, POST, OPTIONS, HEAD');
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Authorization, Content-Type, Accept");
     next();
  });
 
@@ -59,7 +59,7 @@ app.get('/', (req, res)=>{
 console.log('---------------D');
 const db = require("./models");
 
-db.sequelize.sync({force: true,alter: true});
+db.sequelize.sync({force: false,alter: false});
 
 require("./routes/register.routes")(app);
 require("./routes/auth.routes")(app);

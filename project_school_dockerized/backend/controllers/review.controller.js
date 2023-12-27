@@ -8,7 +8,7 @@ const Op = db.Sequelize.Op;
 exports.create = async (req, res) => {
     
     // Validate request
-    if (!req.query.day && !req.query.month && !req.query.year && !req.query.email && !req.query.classrooms && !req.query.modules && !req.query.teacher_email && !req.query.review) {
+    if (!req.query.day && !req.query.month && !req.query.year && !req.query.email && !req.query.classroom && !req.query.module && !req.query.teacher_email && !req.query.review) {
       res.status(400).send({
         message: "Content can not be empty!"
       });
