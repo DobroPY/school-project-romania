@@ -3,41 +3,41 @@ module.exports = app => {
     const elasticController = require("../controllers/elastic.controller.js");
     var router = require("express").Router();
 
-    router.get('/indexTeacher', elasticController.createIndexTeacher);
+    router.get('/indexTeachers', elasticController.createIndexTeacher);
 
-    router.get('/getTeacher', elasticController.indexDataTeacher);
+    router.get('/getTeachers', elasticController.indexDataTeacher);
 
-    router.delete('/deleteTeacher', elasticController.deleteDataTeacher);
+    router.delete('/deleteTeachers', elasticController.deleteDataTeacher);
 
-    router.get('/indexStudent', elasticController.createIndexStudent);
+    router.get('/indexStudents', elasticController.createIndexStudent);
 
-    router.get('/getStudent', elasticController.indexDataStudent);
+    router.get('/getStudents', elasticController.indexDataStudent);
 
-    router.delete('/deleteStudent', elasticController.deleteDataStudent);
+    router.delete('/deleteStudents', elasticController.deleteDataStudent);
 
-    router.get('/indexReview', elasticController.createIndexReview);
+    router.get('/indexReviews', elasticController.createIndexReview);
 
-    router.get('/getReview', elasticController.indexDataReview);
+    router.get('/getReviews', elasticController.indexDataReview);
 
-    router.delete('/deleteReview', elasticController.deleteDataReview);
+    router.delete('/deleteReviews', elasticController.deleteDataReview);
 
-    router.get('/indexDirector', elasticController.createIndexDirector);
+    router.get('/indexDirectors', elasticController.createIndexDirector);
 
-    router.get('/getDirector', elasticController.indexDataDirector);
+    router.get('/getDirectors', elasticController.indexDataDirector);
 
-    router.delete('/deleteDirector', elasticController.deleteDataDirector);
+    router.delete('/deleteDirectors', elasticController.deleteDataDirector);
 
-    router.get('/indexClassroom', elasticController.createIndexClassroom);
+    router.get('/indexClassrooms', elasticController.createIndexClassroom);
 
-    router.get('/getClassroom', elasticController.indexDataClassroom);
+    router.get('/getClassrooms', elasticController.indexDataClassroom);
 
-    router.delete('/deleteClassroom', elasticController.deleteDataClassroom);
+    router.delete('/deleteClassrooms', elasticController.deleteDataClassroom);
 
-    router.get('/indexCalendar', elasticController.createIndexCalendar);
+    router.get('/indexCalendars', elasticController.createIndexCalendar);
 
-    router.get('/getCalendar', elasticController.indexDataCalendar);
+    router.get('/getCalendars', elasticController.indexDataCalendar);
 
-    router.delete('/deleteCalendar', elasticController.deleteDataCalendar);
+    router.delete('/deleteCalendars', elasticController.deleteDataCalendar);
 
     router.get('/indexModules', elasticController.createIndexModules);
 
