@@ -81,6 +81,7 @@ require("./routes/absence.routes")(app);
 require("./routes/grade.routes")(app);
 require("./routes/review.routes")(app);
 require("./routes/dummy.routes")(app);
+require("./routes/message.routes")(app);
 
 
 app.listen(PORT, (error) =>{

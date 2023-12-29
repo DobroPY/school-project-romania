@@ -28,6 +28,7 @@ db.users = require("./user.model")(sequelize,Sequelize);
 db.modules = require("./module.model")(sequelize,Sequelize);
 db.calendars = require("./calendar.model")(sequelize,Sequelize);
 db.absences = require("./absence.model")(sequelize,Sequelize);
+db.messages = require("./message.model")(sequelize,Sequelize);
 db.grades = require("./grade.model")(sequelize,Sequelize);
 db.reviews = require("./review.model")(sequelize,Sequelize);
 db.dummys = require("./dummy.model")(sequelize, Sequelize);
