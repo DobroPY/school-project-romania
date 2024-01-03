@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
@@ -9,18 +9,8 @@ const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 
-type iAuthContext = {
-  auth: boolean ;
-  setAuth: (newState : boolean) => void,
-}
 
-const initialValue = {
-  auth: false,
-  setAuth: () =>{}
-}
-
-const AuthContext = React.createContext<iAuthContext>(initialValue);
-
+const AuthContext = React.createContext(false);
 
 const AuthProvider = ()=>{
 
@@ -42,13 +32,18 @@ const AuthProvider = ()=>{
       const token = getCookie('jwt');
       const authValue = token ? true: false;
       const [auth, setAuth] = useState(authValue);
+      
 
   return(
-    <AuthContext.Provider value={{auth, setAuth}}>
+    <AuthContext.Provider value={auth}>
         <App/>
     </AuthContext.Provider>
   );
 }
+
+export  const useAuth = () => {
+  return useContext(AuthContext);
+};
 
 root.render(
   <React.StrictMode>

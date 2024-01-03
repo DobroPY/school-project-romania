@@ -1,20 +1,29 @@
 import axios from "axios";
-import React from "react";
+import React, { useContext } from "react";
 import { useEffect} from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate,   } from "react-router-dom";
+import AuthContext from "..";
 
 const DashBoard = ()=>{
     const navigate = useNavigate();
+    const auth = useContext(AuthContext);
+        if( auth == false){
+            window.location.replace("/login");
+        }
+    
 
      const logout = async (event)=>{
         event.preventDefault();
-        await axios.get("http://localhost:6868/logout").then((res)=>{
-            console.log(res);
+        axios.get("http://localhost:6868/logout").then((res)=>{
+            document.cookie = "jwt=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+            console.log('----1')
+        }).catch((error)=>{
+            console.log(error);
         })
     }
     return(
         <section>
-            <div className="flex items-center justify-between p-4 w-full min-h-[50px] border-l border-r border-b border-gray-300  rounded-b-xl shadow-xl">
+            <div className="flex items-center justify-between text-center p-4 w-full min-h-[50px] border-l border-r border-b border-gray-300  rounded-b-xl shadow-xl">
                 <a className="border-r border-gray-400 px-8 font-semibold" href="/dashboard">Dashboard</a>
                 <a className="border-r border-gray-400 px-8 font-semibold" href="/teachers">Teachers</a>
                 <a className="border-r border-gray-400 px-8 font-semibold" href="/students">Students</a>
@@ -29,14 +38,14 @@ const DashBoard = ()=>{
             <section className="flex justify-between">
             <div className="text-center w-1/6 border-2 mt-4 h-[calc(100vh_-_100px)]  border-gray-200 shadow-2xl rounded-xl  mb-10 ml-2">
                 <h1 className="font-semibold mb-10 mt-10 text-lg">Main Dashboard</h1>
-                    <p onClick={()=>navigate("/teachers")} className="mb-6 font-semibold bg-slate-100 cursor-pointer ">Teachers</p>
-                    <p onClick={()=>navigate("/students")} className="mb-6 font-semibold bg-slate-100 cursor-pointer ">Students</p>
-                    <p onClick={()=>navigate("/classrooms")} className="mb-6 font-semibold bg-slate-100 cursor-pointer ">Classrooms</p>
-                    <p onClick={()=>navigate("/calendars")} className="mb-6 font-semibold bg-slate-100 cursor-pointer ">Calendars</p>
-                    <p onClick={()=>navigate("/grades")} className="mb-6 font-semibold bg-slate-100 cursor-pointer ">Grades</p>
-                    <p onClick={()=>navigate("/rewards")} className="mb-6 font-semibold bg-slate-100 cursor-pointer ">Rewards</p>
-                    <p onClick={()=>navigate("/student-gaps")} className="mb-6 font-semibold bg-slate-100 cursor-pointer ">Student Gaps</p>
-                    <button className="border border-black rounded-md text-white w-4/5 bg-black h-8 mt-10" onClick={logout}>Logout</button>
+                    <p  className="mb-6 font-semibold bg-slate-100 cursor-pointer ">Teachers</p>
+                    <p  className="mb-6 font-semibold bg-slate-100 cursor-pointer ">Students</p>
+                    <p  className="mb-6 font-semibold bg-slate-100 cursor-pointer ">Classrooms</p>
+                    <p  className="mb-6 font-semibold bg-slate-100 cursor-pointer ">Calendars</p>
+                    <p  className="mb-6 font-semibold bg-slate-100 cursor-pointer ">Grades</p>
+                    <p  className="mb-6 font-semibold bg-slate-100 cursor-pointer ">Rewards</p>
+                    <p className="mb-6 font-semibold bg-slate-100 cursor-pointer ">Student Gaps</p>
+                    <button className="border border-black rounded-md text-white w-4/5 bg-black h-8 mt-10" onClick={(event)=>{logout(event);}}>Logout</button>
             </div>
             <div className="text-center w-4/5 border-2 mt-4 h-[calc(100vh_-_100px)]  border-gray-200 shadow-2xl rounded-xl mr-4">
                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor"  className="w-6 h-6 m-4 cursor-pointer float-right">
@@ -48,6 +57,7 @@ const DashBoard = ()=>{
                     {/* <iframe className="w-full h-full " src="http://localhost:5601/app/kibana#/dashboard?embed=true&_g=(refreshInterval:(pause:!t,value:0),time:(from:'2023-12-01T15:40:47.831Z',to:'2023-12-28T15:55:58.999Z'))&_a=(description:'',filters:!(),fullScreenMode:!f,options:(hidePanelTitles:!f,useMargins:!t),panels:!((embeddableConfig:(),gridData:(h:15,i:c82e23fc-5128-48d8-afb6-6aaf0ff1b4a5,w:24,x:0,y:0),id:'807ef970-a010-11ee-acef-2f08fdadff7a',panelIndex:c82e23fc-5128-48d8-afb6-6aaf0ff1b4a5,type:visualization,version:'7.4.0'),(embeddableConfig:(),gridData:(h:15,i:d56b1e0f-c890-4953-8eb6-ec467e087c96,w:24,x:24,y:0),id:'9673cc00-a016-11ee-acef-2f08fdadff7a',panelIndex:d56b1e0f-c890-4953-8eb6-ec467e087c96,type:visualization,version:'7.4.0'),(embeddableConfig:(),gridData:(h:15,i:'35f3a1e1-9e0d-4594-bee8-80c77dc11528',w:24,x:0,y:15),id:'7b3464e0-a016-11ee-acef-2f08fdadff7a',panelIndex:'35f3a1e1-9e0d-4594-bee8-80c77dc11528',type:visualization,version:'7.4.0'),(embeddableConfig:(),gridData:(h:15,i:'1fbe4351-db58-4a64-90d2-4e3007e2e76c',w:24,x:24,y:15),id:dc87b530-a016-11ee-acef-2f08fdadff7a,panelIndex:'1fbe4351-db58-4a64-90d2-4e3007e2e76c',type:visualization,version:'7.4.0')),query:(language:kuery,query:''),timeRestore:!f,title:'New+Dashboard',viewMode:edit)" height="600" width="800"></iframe> */}
                     <iframe className="w-full h-full " src="http://localhost:5601/app/kibana#/dashboard/e7e9c580-a21e-11ee-b6d7-c5f09d60a8ec?embed=true&_g=(refreshInterval:(pause:!t,value:0),time:(from:'2022-01-01T05:09:19.579Z',to:'2024-12-31T05:24:29.522Z'))&_a=(description:'',filters:!(),fullScreenMode:!f,options:(hidePanelTitles:!f,useMargins:!t),panels:!((embeddableConfig:(),gridData:(h:15,i:'508fdeb3-5f2d-4d50-a758-dc54bb4c5445',w:24,x:0,y:0),id:ff8abb10-a21c-11ee-b6d7-c5f09d60a8ec,panelIndex:'508fdeb3-5f2d-4d50-a758-dc54bb4c5445',type:visualization,version:'7.4.0'),(embeddableConfig:(),gridData:(h:15,i:'4fdf972c-f425-4e4d-a434-662fb4b0cb04',w:24,x:24,y:0),id:'7f2761b0-a21e-11ee-b6d7-c5f09d60a8ec',panelIndex:'4fdf972c-f425-4e4d-a434-662fb4b0cb04',type:visualization,version:'7.4.0'),(embeddableConfig:(),gridData:(h:19,i:'333a49a2-6a6c-455a-8074-a6bce0c33963',w:24,x:0,y:15),id:'5ef4b1f0-a21d-11ee-b6d7-c5f09d60a8ec',panelIndex:'333a49a2-6a6c-455a-8074-a6bce0c33963',type:visualization,version:'7.4.0'),(embeddableConfig:(),gridData:(h:19,i:cbdfde50-cbb7-409f-872f-ea0bc3d190dd,w:24,x:24,y:15),id:dc7a3860-a21e-11ee-b6d7-c5f09d60a8ec,panelIndex:cbdfde50-cbb7-409f-872f-ea0bc3d190dd,type:visualization,version:'7.4.0')),query:(language:kuery,query:''),timeRestore:!f,title:'Grades+Visualizations',viewMode:view)" height="600" width="800"></iframe>
             </div>
+            {/* poti pune dashboard-ul responsive ? adica iframe-ul sau tot dashboardul? doar iframe . pana jos */}
             </section>
         </section>
     );

@@ -1,10 +1,17 @@
-import React from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useContext } from "react";
+import { Outlet, useNavigate } from "react-router-dom";
+import AuthContext from "..";
 
 const Students = () => {
   const navigate = useNavigate();
+  const auth = useContext(AuthContext);
+        if( auth == false){
+            window.location.replace("/login");
+        }
   return (
+    
     <section>
+      <Outlet/>
       <div className="flex items-center justify-between p-4 w-full min-h-[50px] border-l border-r border-b border-gray-300  rounded-b-xl shadow-xl">
         <a
           className="border-r border-gray-400 px-8 font-semibold"

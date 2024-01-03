@@ -1,9 +1,15 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import axios from "axios";
 import { useNavigate } from 'react-router-dom';
+import AuthContext from "..";
 
 const RegisterPage = () => {
+  const auth = useContext(AuthContext);
+        if( auth == true){
+            window.location.replace("/login");
+        }
   const navigate = useNavigate();
+  
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -40,7 +46,7 @@ const RegisterPage = () => {
       password: password,
       status:1,
     };
-    console.log('---------------H');
+    console.log(user);
     axios.post("http://localhost:6868/register", JSON.stringify(user),
     {
       headers:{
