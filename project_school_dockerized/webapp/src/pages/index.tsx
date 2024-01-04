@@ -9,3 +9,4 @@ export {default as ClassRooms} from "./Classrooms";
 export {default as Calendars} from "./Calendars";
 export {default as Grades} from "./Grades";
 export {default as Rewards} from "./Rewards";
+export {default as TeacherReview} from "./TeacherReview";
