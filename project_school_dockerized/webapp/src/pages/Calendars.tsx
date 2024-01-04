@@ -75,6 +75,8 @@ const Calendars = ()=>{
             Classroom 1
           </p>
         </div>
+
+
         <div className=" w-4/5 border-2 mt-4 h-[calc(100vh_-_100px)]  border-gray-200 shadow-2xl rounded-xl mr-4">
           <div className="top flex">
           <p className="mt-4 ml-8 text-2xl">
@@ -90,6 +92,10 @@ const Calendars = ()=>{
                 </div>
           </div>
           </div>
+
+          {/* Calendar */}
+          
+          <p>Salut</p>
         
         </div>
         

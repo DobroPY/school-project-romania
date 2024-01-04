@@ -17,7 +17,9 @@ import {
   Students,
   Teachers,
   ClassRooms,
-  Calendars
+  Calendars,
+  Grades,
+  Rewards
 } from "../pages";
 
 
@@ -34,10 +36,10 @@ const router = createBrowserRouter(
       <Route path="teachers" element={<Teachers />} />
       <Route path="classrooms" element={<ClassRooms/>} /> 
       <Route path="calendars" element={<Calendars/>} /> 
-      <Route path="grades" element={<ClassRooms/>} /> 
-      <Route path="rewards" element={<ClassRooms/>} /> 
+      <Route path="grades" element={<Grades/>} /> 
+      <Route path="rewards" element={<Rewards/>} /> 
       <Route path="teacher-review" element={<ClassRooms/>} /> 
-      <Route path="students-gaps" element={<ClassRooms/>} /> 
+      <Route path="student-gaps" element={<ClassRooms/>} /> 
       <Route path="psycological-test" element={<ClassRooms/>} /> 
 
     </Route>
