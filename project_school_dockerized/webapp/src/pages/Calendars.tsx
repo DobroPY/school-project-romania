@@ -1,6 +1,24 @@
-import React from "react";
+import React, { useState } from "react";
+import Calendar from "../components/calendar/Calendar";
 
 const Calendars = ()=>{
+
+  const [calendarType, setCalendarType] = useState("absences");
+  const [abBgToggle, setAbBgToggle] = useState("bg-green-500");
+  const [schBgToggle, setSchBgToggle] = useState("");
+
+  const changeCalendarType = (type) =>{
+    setCalendarType(type);
+    if(type == "absences"){
+      setAbBgToggle("bg-green-500")
+      setSchBgToggle("");
+    }
+    else{
+      setAbBgToggle("")
+      setSchBgToggle("bg-green-500");
+    }
+  }
+
     return(
         <section>
       <div className="flex items-center justify-between p-4 w-full min-h-[50px] border-l border-r border-b border-gray-300  rounded-b-xl shadow-xl">
@@ -77,25 +95,38 @@ const Calendars = ()=>{
         </div>
 
 
-        <div className=" w-4/5 border-2 mt-4 h-[calc(100vh_-_100px)]  border-gray-200 shadow-2xl rounded-xl mr-4">
+        <div className=" w-4/5 border-2 mt-4 h-full  border-gray-200 shadow-2xl rounded-xl mr-4">
           <div className="top flex">
           <p className="mt-4 ml-8 text-2xl">
             <b>December</b> 2023
           </p>
 
           <div className="pages-toggle flex justify-evenly items-center w-[200px] min-h-[40px] max-h-[50px] border rounded-3xl mt-4 ml-11 bg-gray-200">
-                <div className="w-2/4 flex items-center justify-center h-full text-center bg-green-500 rounded-3xl cursor-pointer">
+                <div className={`w-2/4 flex items-center justify-center h-full text-center ${abBgToggle} rounded-3xl cursor-pointer`} onClick={()=>{changeCalendarType("absences")}}>
                     <p>Absences</p>
                 </div>
-                <div className="w-2/4 flex items-center justify-center h-full text-center rounded-3xl cursor-pointer">
+                <div className={`w-2/4 flex items-center justify-center h-full ${schBgToggle} text-center rounded-3xl cursor-pointer`} onClick={()=>{changeCalendarType("schedule")}}>
                     <p>Schedule</p>
                 </div>
           </div>
+
+          <button className="mt-4 border-2 border-gray-300 rounded-xl ml-10 p-2">Add new schedule +</button>
+          
           </div>
 
           {/* Calendar */}
-          
-          <p>Salut</p>
+
+
+           <div className="grid grid-cols-7 text-center mt-10 ">
+              <p className="font-normal text-2xl">Monday</p>
+              <p className="font-normal text-2xl">Tuesday</p>
+              <p className="font-normal text-2xl">Wednesday</p>
+              <p className="font-normal text-2xl">Thursday</p>
+              <p className="font-normal text-2xl">Friday</p>
+              <p className="font-normal text-2xl">Saturday</p>
+              <p className="font-normal text-2xl">Sunday</p>
+          </div>
+          <Calendar/>
         
         </div>
         
