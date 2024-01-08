@@ -1,62 +1,103 @@
 import axios from "axios";
 import React, { useContext } from "react";
-import { useEffect} from "react";
-import { useNavigate,   } from "react-router-dom";
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import AuthContext from "..";
 
-const DashBoard = ()=>{
-    const navigate = useNavigate();
-    const auth = useContext(AuthContext);
-        if( auth == false){
-            window.location.replace("/login");
-        }
-    
+const DashBoard = () => {
+  const navigate = useNavigate();
+  const auth = useContext(AuthContext);
+  if (auth == false) {
+    window.location.replace("/login");
+  }
 
-     const logout = ()=>{
-        console.log("Intra in call");
-        //  document.cookie = "jwt=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-        
-    }
-    return(
-        <section>
-            <div className="flex items-center justify-between text-center p-4 w-full min-h-[50px] border-l border-r border-b border-gray-300  rounded-b-xl shadow-xl">
-                <a className="border-r border-gray-400 px-8 font-semibold" href="/dashboard">Dashboard</a>
-                <a className="border-r border-gray-400 px-8 font-semibold" href="/teachers">Teachers</a>
-                <a className="border-r border-gray-400 px-8 font-semibold" href="/students">Students</a>
-                <a className="border-r border-gray-400 px-8 font-semibold" href="/classrooms">Class rooms</a>
-                <a className="border-r border-gray-400 px-8 font-semibold" href="/calendars">Calendars</a>
-                <a className="border-r border-gray-400 px-8 font-semibold" href="/grades">Grades</a>
-                <a className="border-r border-gray-400 px-8 font-semibold" href="/rewards">Rewards</a>
-                <a className="border-r border-gray-400 px-8 font-semibold" href="/teacher-review">Teacher review</a>
-                <a className="border-r border-gray-400 px-8 font-semibold" href="/student-gaps">Student Gaps</a>
-                <a className="px-8 font-semibold" href="/psycological-test">Psycolgical test</a>
-            </div>
-            <section className="flex justify-between">
-            <div className="text-center w-1/6 border-2 mt-4 h-[calc(100vh_-_100px)]  border-gray-200 shadow-2xl rounded-xl  mb-10 ml-2">
-                <h1 className="font-semibold mb-10 mt-10 text-lg">Main Dashboard</h1>
-                    <p  className="mb-6 font-semibold bg-slate-100 cursor-pointer ">Teachers</p>
-                    <p  className="mb-6 font-semibold bg-slate-100 cursor-pointer ">Students</p>
-                    <p  className="mb-6 font-semibold bg-slate-100 cursor-pointer ">Classrooms</p>
-                    <p  className="mb-6 font-semibold bg-slate-100 cursor-pointer ">Calendars</p>
-                    <p  className="mb-6 font-semibold bg-slate-100 cursor-pointer ">Grades</p>
-                    <p  className="mb-6 font-semibold bg-slate-100 cursor-pointer ">Rewards</p>
-                    <p className="mb-6 font-semibold bg-slate-100 cursor-pointer ">Student Gaps</p>
-                    <button className="border border-black rounded-md text-white w-4/5 bg-black h-8 mt-10" onClick={logout}>Logout</button>
-            </div>
-            <div className="text-center w-4/5 border-2 mt-4 h-[calc(100vh_-_100px)]  border-gray-200 shadow-2xl rounded-xl mr-4">
-                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor"  className="w-6 h-6 m-4 cursor-pointer float-right">
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M9.594 3.94c.09-.542.56-.94 1.11-.94h2.593c.55 0 1.02.398 1.11.94l.213 1.281c.063.374.313.686.645.87.074.04.147.083.22.127.325.196.72.257 1.075.124l1.217-.456a1.125 1.125 0 0 1 1.37.49l1.296 2.247a1.125 1.125 0 0 1-.26 1.431l-1.003.827c-.293.241-.438.613-.43.992a7.723 7.723 0 0 1 0 .255c-.008.378.137.75.43.991l1.004.827c.424.35.534.955.26 1.43l-1.298 2.247a1.125 1.125 0 0 1-1.369.491l-1.217-.456c-.355-.133-.75-.072-1.076.124a6.47 6.47 0 0 1-.22.128c-.331.183-.581.495-.644.869l-.213 1.281c-.09.543-.56.94-1.11.94h-2.594c-.55 0-1.019-.398-1.11-.94l-.213-1.281c-.062-.374-.312-.686-.644-.87a6.52 6.52 0 0 1-.22-.127c-.325-.196-.72-.257-1.076-.124l-1.217.456a1.125 1.125 0 0 1-1.369-.49l-1.297-2.247a1.125 1.125 0 0 1 .26-1.431l1.004-.827c.292-.24.437-.613.43-.991a6.932 6.932 0 0 1 0-.255c.007-.38-.138-.751-.43-.992l-1.004-.827a1.125 1.125 0 0 1-.26-1.43l1.297-2.247a1.125 1.125 0 0 1 1.37-.491l1.216.456c.356.133.751.072 1.076-.124.072-.044.146-.086.22-.128.332-.183.582-.495.644-.869l.214-1.28Z" />
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
-                    </svg>
-                    <p className="mt-4">Main Dashboard</p>
+  return (
+    <section>
+      {/*page title */}
+      <p className="mt-6 ml-4 text-3xl font-semibold">Dashboard</p>
+      {/* Middle Stats */}
+      <div>
 
-                    {/* <iframe className="w-full h-full " src="http://localhost:5601/app/kibana#/dashboard?embed=true&_g=(refreshInterval:(pause:!t,value:0),time:(from:'2023-12-01T15:40:47.831Z',to:'2023-12-28T15:55:58.999Z'))&_a=(description:'',filters:!(),fullScreenMode:!f,options:(hidePanelTitles:!f,useMargins:!t),panels:!((embeddableConfig:(),gridData:(h:15,i:c82e23fc-5128-48d8-afb6-6aaf0ff1b4a5,w:24,x:0,y:0),id:'807ef970-a010-11ee-acef-2f08fdadff7a',panelIndex:c82e23fc-5128-48d8-afb6-6aaf0ff1b4a5,type:visualization,version:'7.4.0'),(embeddableConfig:(),gridData:(h:15,i:d56b1e0f-c890-4953-8eb6-ec467e087c96,w:24,x:24,y:0),id:'9673cc00-a016-11ee-acef-2f08fdadff7a',panelIndex:d56b1e0f-c890-4953-8eb6-ec467e087c96,type:visualization,version:'7.4.0'),(embeddableConfig:(),gridData:(h:15,i:'35f3a1e1-9e0d-4594-bee8-80c77dc11528',w:24,x:0,y:15),id:'7b3464e0-a016-11ee-acef-2f08fdadff7a',panelIndex:'35f3a1e1-9e0d-4594-bee8-80c77dc11528',type:visualization,version:'7.4.0'),(embeddableConfig:(),gridData:(h:15,i:'1fbe4351-db58-4a64-90d2-4e3007e2e76c',w:24,x:24,y:15),id:dc87b530-a016-11ee-acef-2f08fdadff7a,panelIndex:'1fbe4351-db58-4a64-90d2-4e3007e2e76c',type:visualization,version:'7.4.0')),query:(language:kuery,query:''),timeRestore:!f,title:'New+Dashboard',viewMode:edit)" height="600" width="800"></iframe> */}
-                    <iframe className="w-full h-full " src="http://localhost:5601/app/kibana#/dashboard/e7e9c580-a21e-11ee-b6d7-c5f09d60a8ec?embed=true&_g=(refreshInterval:(pause:!t,value:0),time:(from:'2022-01-01T05:09:19.579Z',to:'2024-12-31T05:24:29.522Z'))&_a=(description:'',filters:!(),fullScreenMode:!f,options:(hidePanelTitles:!f,useMargins:!t),panels:!((embeddableConfig:(),gridData:(h:15,i:'508fdeb3-5f2d-4d50-a758-dc54bb4c5445',w:24,x:0,y:0),id:ff8abb10-a21c-11ee-b6d7-c5f09d60a8ec,panelIndex:'508fdeb3-5f2d-4d50-a758-dc54bb4c5445',type:visualization,version:'7.4.0'),(embeddableConfig:(),gridData:(h:15,i:'4fdf972c-f425-4e4d-a434-662fb4b0cb04',w:24,x:24,y:0),id:'7f2761b0-a21e-11ee-b6d7-c5f09d60a8ec',panelIndex:'4fdf972c-f425-4e4d-a434-662fb4b0cb04',type:visualization,version:'7.4.0'),(embeddableConfig:(),gridData:(h:19,i:'333a49a2-6a6c-455a-8074-a6bce0c33963',w:24,x:0,y:15),id:'5ef4b1f0-a21d-11ee-b6d7-c5f09d60a8ec',panelIndex:'333a49a2-6a6c-455a-8074-a6bce0c33963',type:visualization,version:'7.4.0'),(embeddableConfig:(),gridData:(h:19,i:cbdfde50-cbb7-409f-872f-ea0bc3d190dd,w:24,x:24,y:15),id:dc7a3860-a21e-11ee-b6d7-c5f09d60a8ec,panelIndex:cbdfde50-cbb7-409f-872f-ea0bc3d190dd,type:visualization,version:'7.4.0')),query:(language:kuery,query:''),timeRestore:!f,title:'Grades+Visualizations',viewMode:view)" height="600" width="800"></iframe>
-            </div>
-            {/* poti pune dashboard-ul responsive ? adica iframe-ul sau tot dashboardul? doar iframe . pana jos */}
-            </section>
-        </section>
-    );
-}
+      
+       {/* users stats */}
+      <div>
+      <div className="ml-4 mt-6 flex">
+        <div className="flex items-center border bg-violet-600 p-4 bg-opacity-10 min-h-[90px] max-w-[320px] rounded-lg border-solid border-violet-600 border-opacity-20">
+          <div>
+            <svg
+              width="40"
+              height="40"
+              viewBox="0 0 40 40"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <circle cx="20" cy="20" r="20" fill="white" />
+              <path
+                d="M28.4674 13.8478L20.2174 11.0978C20.0763 11.0507 19.9237 11.0507 19.7826 11.0978L11.5326 13.8478C11.3957 13.8934 11.2766 13.981 11.1923 14.098C11.1079 14.2151 11.0625 14.3558 11.0625 14.5001V21.3751C11.0625 21.5574 11.1349 21.7323 11.2639 21.8612C11.3928 21.9901 11.5677 22.0626 11.75 22.0626C11.9323 22.0626 12.1072 21.9901 12.2361 21.8612C12.3651 21.7323 12.4375 21.5574 12.4375 21.3751V15.454L15.3241 16.4156C14.5572 17.6546 14.3133 19.1474 14.646 20.5661C14.9788 21.9848 15.8609 23.2135 17.0987 23.9824C15.5519 24.5891 14.2147 25.6865 13.2367 27.187C13.1859 27.2626 13.1505 27.3475 13.1328 27.4369C13.115 27.5263 13.1152 27.6183 13.1334 27.7076C13.1515 27.7969 13.1872 27.8817 13.2384 27.957C13.2896 28.0324 13.3552 28.0969 13.4315 28.1466C13.5079 28.1964 13.5933 28.2305 13.6829 28.247C13.7725 28.2634 13.8645 28.2619 13.9535 28.2425C14.0426 28.2231 14.1268 28.1862 14.2015 28.134C14.2761 28.0817 14.3396 28.0151 14.3883 27.9381C15.6834 25.9512 17.7287 24.8126 20 24.8126C22.2713 24.8126 24.3166 25.9512 25.6117 27.9381C25.7126 28.088 25.8683 28.1921 26.0453 28.2281C26.2224 28.264 26.4064 28.2288 26.5577 28.1302C26.709 28.0315 26.8154 27.8772 26.8539 27.7007C26.8923 27.5242 26.8598 27.3397 26.7633 27.187C25.7853 25.6865 24.443 24.5891 22.9012 23.9824C24.1379 23.2136 25.0192 21.9857 25.3519 20.568C25.6846 19.1503 25.4414 17.6586 24.6759 16.4199L28.4674 15.1566C28.6043 15.111 28.7234 15.0235 28.8078 14.9064C28.8922 14.7893 28.9377 14.6487 28.9377 14.5043C28.9377 14.36 28.8922 14.2194 28.8078 14.1023C28.7234 13.9852 28.6043 13.8977 28.4674 13.8521V13.8478ZM24.125 19.3126C24.1252 19.9647 23.9707 20.6076 23.6744 21.1885C23.378 21.7694 22.9481 22.2717 22.4199 22.6543C21.8918 23.0369 21.2805 23.2888 20.6362 23.3894C19.9918 23.4899 19.3328 23.4363 18.7132 23.2329C18.0936 23.0294 17.5311 22.682 17.0718 22.2191C16.6124 21.7561 16.2694 21.1909 16.0709 20.5697C15.8723 19.9485 15.8238 19.2891 15.9295 18.6456C16.0351 18.0021 16.2918 17.3927 16.6785 16.8676L19.7826 17.8989C19.9237 17.9459 20.0763 17.9459 20.2174 17.8989L23.3215 16.8676C23.8438 17.5758 24.1254 18.4326 24.125 19.3126Z"
+                fill="#7E3EE5"
+              />
+            </svg>
+          </div>
+
+          <div className="ml-4">
+            <p>Total Students</p>
+            <p className="mt-2 text-lg font-semibold text-purple-600">3350</p>
+          </div>
+        </div>
+        <div className="flex  items-center ml-10 border bg-violet-600 p-4 bg-opacity-10 min-h-[90px] max-w-[320px] rounded-lg border-solid border-violet-600 border-opacity-20">
+          <div>
+            <svg
+              width="40"
+              height="40"
+              viewBox="0 0 40 40"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <circle cx="20" cy="20" r="20" fill="white" />
+              <path
+                d="M27.5625 12.4375H12.4375C12.0728 12.4375 11.7231 12.5824 11.4652 12.8402C11.2074 13.0981 11.0625 13.4478 11.0625 13.8125V26.1875C11.0625 26.5522 11.2074 26.9019 11.4652 27.1598C11.7231 27.4176 12.0728 27.5625 12.4375 27.5625H13.5882C13.7183 27.5625 13.8458 27.5257 13.9558 27.4561C14.0657 27.3866 14.1537 27.2873 14.2095 27.1698C14.5438 26.4639 15.0717 25.8675 15.7316 25.4499C16.3916 25.0322 17.1565 24.8105 17.9375 24.8105C18.7185 24.8105 19.4834 25.0322 20.1434 25.4499C20.8033 25.8675 21.3312 26.4639 21.6655 27.1698C21.7213 27.2873 21.8093 27.3866 21.9192 27.4561C22.0292 27.5257 22.1567 27.5625 22.2868 27.5625H27.5625C27.9272 27.5625 28.2769 27.4176 28.5348 27.1598C28.7926 26.9019 28.9375 26.5522 28.9375 26.1875V13.8125C28.9375 13.4478 28.7926 13.0981 28.5348 12.8402C28.2769 12.5824 27.9272 12.4375 27.5625 12.4375ZM17.9375 23.4375C17.3936 23.4375 16.8619 23.2762 16.4097 22.974C15.9574 22.6719 15.605 22.2424 15.3968 21.7399C15.1887 21.2374 15.1342 20.6844 15.2403 20.151C15.3464 19.6176 15.6084 19.1276 15.993 18.743C16.3776 18.3584 16.8676 18.0964 17.401 17.9903C17.9344 17.8842 18.4874 17.9387 18.9899 18.1468C19.4924 18.355 19.9219 18.7074 20.224 19.1597C20.5262 19.6119 20.6875 20.1436 20.6875 20.6875C20.6875 21.4168 20.3978 22.1163 19.882 22.632C19.3663 23.1478 18.6668 23.4375 17.9375 23.4375ZM27.5625 26.1875H22.701C22.4013 25.6707 22.0193 25.2063 21.5701 24.8125H25.5C25.6823 24.8125 25.8572 24.7401 25.9861 24.6111C26.1151 24.4822 26.1875 24.3073 26.1875 24.125V15.875C26.1875 15.6927 26.1151 15.5178 25.9861 15.3889C25.8572 15.2599 25.6823 15.1875 25.5 15.1875H14.5C14.3177 15.1875 14.1428 15.2599 14.0139 15.3889C13.8849 15.5178 13.8125 15.6927 13.8125 15.875V24.125C13.8124 24.2775 13.863 24.4256 13.9564 24.5462C14.0497 24.6668 14.1805 24.7529 14.3281 24.791C13.8685 25.1892 13.4785 25.6612 13.174 26.1875H12.4375V13.8125H27.5625V26.1875Z"
+                fill="#7E3EE5"
+              />
+            </svg>
+          </div>
+
+          <div className="ml-4">
+            <p>Total Teachers</p>
+            <p className="mt-2 text-lg font-semibold text-purple-600">250</p>
+          </div>
+        </div>
+        <div className="flex  items-center border ml-10 bg-violet-600 p-4 bg-opacity-10 min-h-[90px] max-w-[320px] rounded-lg border-solid border-violet-600 border-opacity-20">
+          <div>
+            <svg
+              width="40"
+              height="40"
+              viewBox="0 0 40 40"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <circle cx="20" cy="20" r="20" fill="white" />
+              <path
+                d="M20.3656 19.2306L21.4279 19.272L20.4733 21.3012L20.8884 24.4709C20.8884 24.4709 24.0246 19.7201 23.9764 19.6818C25.3335 20.3097 27.5546 24.6251 27.555 26.7651V29.979C27.555 30.6948 27.3756 30.6555 26.6244 30.6555L12.9306 30.6553C12.1795 30.6555 12 30.6948 12 29.979V26.7705C12 24.5265 14.3754 20.2426 15.5781 19.6818C15.5299 19.7201 18.666 24.4709 18.666 24.4709L19.0812 21.3012L18.1498 19.2834C19.4812 19.2166 18.7428 19.2406 20.3656 19.2306ZM19.7775 10C17.4583 10 15.5781 11.8802 15.5781 14.1995C15.5781 16.5187 17.4583 18.3989 19.7775 18.3989C22.0968 18.3989 23.9769 16.5187 23.9769 14.1995C23.9769 11.8802 22.0968 10.0001 19.7775 10Z"
+                fill="#7E3EE5"
+              />
+            </svg>
+          </div>
+
+          <div className="ml-4">
+            <p>Total Parents</p>
+            <p className="mt-2 text-lg font-semibold text-purple-600">1450</p>
+          </div>
+        </div>
+      </div>
+      {/* rigth middle stats */}
+      </div>
+
+
+      </div>
+
+      {/* Footer Stats */}
+    </section>
+  );
+};
 
 export default DashBoard;
