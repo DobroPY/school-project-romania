@@ -6,6 +6,7 @@ import AuthContext from "..";
 import UserNum from "../components/UserNum";
 import TeacherCell from "../components/users-cells/TeacherCell";
 import StudentCell from "../components/users-cells/StudentCell";
+import StudentTopTable from "../components/users-cells/StudentTopTable";
 
 const DashBoard = () => {
   const navigate = useNavigate();
@@ -51,13 +52,17 @@ const DashBoard = () => {
       {/* Footer Stats */}
       <div className="footer-stats w-full my-10 flex justify-between">
         <div className="border-2 border-slate-400 rounded-lg w-[48%] ml-[1%] h-fit min-h-[350px]">
-            <p className="font-semibold text-lg p-2">Top 5 Students</p>
+            <p className="font-semibold text-lg pl-6 pt-6">Top 5 Students</p>
+            <div className="content m-6 border-2 border-gray-300 rounded-md">
+            <StudentTopTable/>
             {students.map((teacher,index)=>{
                 return(
                     <StudentCell />
                 );
             })}
+            </div>
         </div>
+
         <div className="border-2 border-slate-400 rounded-lg w-[48%] mr-[1%] min-h-[350px] h-fit">
 
         </div>
