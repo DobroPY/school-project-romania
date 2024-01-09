@@ -1,13 +1,18 @@
 import { useContext, useEffect } from "react";
 import { Outlet } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
+import { useNavigate ,useLocation } from "react-router-dom";
 
 const RootLayout = () => {
 
   const navigate = useNavigate();
 
+  const location = useLocation();
+
+  const route =  location.pathname;
+  console.log(location)
+
   return (
-    <main className="root-main flex">
+     <main className="root-main flex">
       <div className="flex flex-col items-stretch w-1/5 max-md:w-full max-md:ml-0">
         <div className="bg-white flex w-full grow flex-col mx-auto px-5 py-6 border-r-gray-200 border-r border-solid max-md:mt-8">
           {/*LOGO */}
@@ -273,7 +278,7 @@ const RootLayout = () => {
       </div>
 
       <Outlet />
-    </main>
+    </main>  
   );
 };
 export default RootLayout;
