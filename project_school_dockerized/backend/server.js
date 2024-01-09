@@ -12,6 +12,10 @@ app.use(express.json());
 app.use(cookieParser());
 
 const allowedOrigins = [process.env.CLIENT_ORIGIN,
+    'http://www.school-management.makesoftwares.ro',
+    'http://school-management.makesoftwares.ro',
+    '64.226.106.47',
+    '64.226.106.47:3000',
     'http://localhost:8081',
     'http://localhost:8080',
     'http://localhost:3000',
