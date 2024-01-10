@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-const DeleteStudent = (props) => {
+const Delete = (props) => {
   const navigate = useNavigate();
   console.log(props.succes);
 
@@ -56,7 +56,7 @@ const DeleteStudent = (props) => {
             </svg>
           </div>
           <div className="content text-center">
-            <p className="font-bold text-xl mt-4">Delete student profile</p>
+            <p className="font-bold text-xl mt-4">Delete {props.name} profile</p>
             <p className="px-6 pb-10 mt-2 font-normal">
               Are you sure you want to delete this profile? This action cannot
               be undone.
@@ -82,4 +82,4 @@ const DeleteStudent = (props) => {
   );
 };
 
-export default DeleteStudent;
+export default Delete;

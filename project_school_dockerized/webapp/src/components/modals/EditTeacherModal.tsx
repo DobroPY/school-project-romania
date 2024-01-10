@@ -1,15 +1,13 @@
 import React, { useState } from "react";
 
-const EditStudentModal = (props) => {
+const EditTeacherModal = (props) => {
   const [show, setShow] = useState(false);
   const showModal = () => {
     setShow(!show);
   };
   const[firstName, setFirstName] = useState("");
   const[lasttName, setLastName] = useState("");
-  const[parentOneName, setParentOneName] = useState("");
-  const[parentTwoName, setParentTwoName] = useState("");
-  const [classroom, setClassRoom] = useState("Class VI");
+  const[age, setAge] = useState("");
 
   const submit = (event)=>{
     event.preventDefault();
@@ -17,9 +15,7 @@ const EditStudentModal = (props) => {
     const user = {
         firstName: firstName,
         lasttName:lasttName,
-        parentOneName:parentOneName,
-        parentTwoName:parentTwoName,
-        classroom:classroom
+        age:age
     }
 
     console.log(user);
@@ -98,18 +94,9 @@ const EditStudentModal = (props) => {
                     <p className="mx-[5%] text-sm text-gray-700 mt-4">First Name</p>
                     <input className="w-[90%] mx-[5%] border border-gray-400 rounded-lg p-2 mt-2 outline-none" onChange={(event)=>{ setFirstName(event.target.value)}} placeholder="Natali"></input>
                     <p className="mx-[5%] text-sm text-gray-700 mt-4">Last Name</p>
-                    <input className="w-[90%] mx-[5%] border border-gray-400 rounded-lg p-2 mt-2 outline-none" onChange={(event)=>{ setLastName(event.target.value)}} placeholder="Natali"></input>
-                    <p className="mx-[5%] text-sm text-gray-700 mt-4">Parent 1 Name</p>
-                    <input className="w-[90%] mx-[5%] border border-gray-400 rounded-lg p-2 mt-2 outline-none" onChange={(event)=>{ setParentOneName(event.target.value)}} placeholder="Natali"></input>
-                    <p className="mx-[5%] text-sm text-gray-700 mt-4">Parent 2 Name</p>
-                    <input className="w-[90%] mx-[5%] border border-gray-400 rounded-lg p-2 mt-2 outline-none" onChange={(event)=>{ setParentTwoName(event.target.value)}} placeholder="Natali"></input>
-                    <p className="mx-[5%] text-sm text-gray-700 mt-4">Select Class</p>
-                    <select className="w-[90%] mx-[5%] border border-gray-400 rounded-lg p-2 mt-2 outline-none" onChange={(event)=>{ setClassRoom(event.target.value)}}>
-                        <option value="Class VI">Class VI</option>
-                        <option value="Class VI">Class VI</option>
-                        <option value="Class VI">Class VI</option>
-                        <option value="Class VI">Class VI</option>
-                    </select>    
+                    <input className="w-[90%] mx-[5%] border border-gray-400 rounded-lg p-2 mt-2 outline-none" onChange={(event)=>{ setLastName(event.target.value)}} placeholder="Craig"></input>
+                    <p className="mx-[5%] text-sm text-gray-700 mt-4">Age</p>
+                    <input className="w-[90%] mx-[5%] border border-gray-400 rounded-lg p-2 mt-2 outline-none" onChange={(event)=>{ setAge(event.target.value)}} placeholder="33"></input>
                 </form>
           </div>
 
@@ -123,4 +110,4 @@ const EditStudentModal = (props) => {
   );
 };
 
-export default EditStudentModal;
+export default EditTeacherModal;

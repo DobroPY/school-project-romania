@@ -3,6 +3,7 @@ import { Outlet, useNavigate } from "react-router-dom";
 import AuthContext from "..";
 import CreateStudentModal from "../components/modals/CreateStudent";
 import SuccesStudent from "../components/modals/SuccesStudent";
+import EditStudentModal from "../components/modals/EditStudentModal";
 
 const Students = () => {
   const navigate = useNavigate();
@@ -66,20 +67,7 @@ const Students = () => {
             <td className="p-2 font-semibold text-sm">12</td>
             <td className="p-2 flex justify-center">
               <button className=" rounded-lg px-4 py-1 h-[100%] bg-blue-200 text-blue-600 flex items-center outline-none">
-                <svg
-                  width="20"
-                  height="15"
-                  className="mr-2"
-                  viewBox="0 0 15 15"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M13.9834 4.15878L10.8412 1.01722C10.7367 0.912725 10.6127 0.829835 10.4762 0.773282C10.3397 0.71673 10.1934 0.687622 10.0456 0.687622C9.89783 0.687622 9.75152 0.71673 9.61501 0.773282C9.47851 0.829835 9.35447 0.912725 9.25001 1.01722L0.579771 9.68745C0.474851 9.79154 0.391667 9.91544 0.335055 10.052C0.278443 10.1885 0.249534 10.3349 0.250006 10.4827V13.625C0.250006 13.9233 0.368532 14.2095 0.579511 14.4204C0.790489 14.6314 1.07664 14.75 1.37501 14.75H13.1875C13.3367 14.75 13.4798 14.6907 13.5853 14.5852C13.6907 14.4797 13.75 14.3366 13.75 14.1875C13.75 14.0383 13.6907 13.8952 13.5853 13.7897C13.4798 13.6842 13.3367 13.625 13.1875 13.625H6.10844L13.9834 5.74995C14.0879 5.64548 14.1708 5.52145 14.2274 5.38494C14.2839 5.24844 14.313 5.10212 14.313 4.95437C14.313 4.80661 14.2839 4.6603 14.2274 4.52379C14.1708 4.38728 14.0879 4.26325 13.9834 4.15878ZM4.51727 13.625H1.37501V10.4827L7.56251 4.29519L10.7048 7.43745L4.51727 13.625ZM11.5 6.64222L8.35844 3.49995L10.0459 1.81245L13.1875 4.95472L11.5 6.64222Z"
-                    fill="#446ECB"
-                  />
-                </svg>
-                Edit
+                <EditStudentModal text={"Edit"} />
               </button>
               <button className=" rounded-lg px-4 py-1 h-[100%] ml-4 bg-green-200 text-green-700 flex items-center outline-none" onClick={()=>{ navigate("/students/13")}}>
                 <svg

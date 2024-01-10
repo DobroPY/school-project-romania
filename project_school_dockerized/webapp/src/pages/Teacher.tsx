@@ -7,19 +7,18 @@ import AttendaceStats from "../components/stats-pages/AttendanceStats";
 import EditStudentModal from "../components/modals/EditStudentModal";
 import DeleteStudent from "../components/modals/Delete";
 import Delete from "../components/modals/Delete";
+import EditTeacherModals from "../components/modals/EditTeacherModal";
+import EditTeacherModal from "../components/modals/EditTeacherModal";
 
-const Student = () => {
-  const [currentPage, setCurrentPage] = useState("Grades");
+const Teacher = () => {
+  const [currentPage, setCurrentPage] = useState("ClassAttribute");
 
-  const statsPages = [
+  const pages = [
     {
-      name: "Grades",
+      name: "ClassAttribute",
     },
     {
-      name: "Rewards",
-    },
-    {
-      name: "Attendance",
+      name: "Reviews",
     },
   ];
 
@@ -36,7 +35,7 @@ const Student = () => {
           height="22"
           viewBox="0 0 22 22"
           onClick={() => {
-            window.location.replace("/students");
+            window.location.replace("/teachers");
           }}
           className="mr-1 cursor-pointer"
           fill="none"
@@ -47,10 +46,10 @@ const Student = () => {
             fill="#344054"
           />
         </svg>
-        Student Details
+        Teacher Details
       </p>
 
-      <div className="flex w-[96%] mx-[2%] border-2 border-slate-300 rounded-md min-h-[200px]">
+      <div className="flex w-[96%] mx-[2%] border-2 border-slate-300 rounded-md ">
         <div className="text-center w-[30%] rounded-lg bg-blue-100 ml-4 mt-6 mb-6">
           <div className="flex justify-center">
             <svg
@@ -74,30 +73,16 @@ const Student = () => {
           <p className="mt-6 font-semibold mb-1">Natali Craig</p>
           <p className="font-normal text-sm text-slate-500">ID:123456</p>
 
-          <div className="flex justify-center mt-6 pb-4">
-            <p className="bg-blue-200 px-3 py-1 border border-gray-200 rounded-xl text-blue-600">
-              Class V
-            </p>
+          <div className="flex justify-center mt-6 mb-6">
+          <p className="flex items-center bg-white rounded-lg px-2">  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                 <path d="M14.6565 7.14875L11.8377 9.60875L12.6821 13.2712C12.7268 13.4627 12.714 13.6631 12.6454 13.8474C12.5768 14.0316 12.4555 14.1916 12.2965 14.3072C12.1375 14.4229 11.9479 14.4891 11.7515 14.4976C11.555 14.5061 11.3605 14.4565 11.1921 14.355L7.99771 12.4175L4.81021 14.355C4.64182 14.4565 4.44724 14.5061 4.25082 14.4976C4.05439 14.4891 3.86483 14.4229 3.70583 14.3072C3.54683 14.1916 3.42545 14.0316 3.35686 13.8474C3.28828 13.6631 3.27553 13.4627 3.32021 13.2712L4.16333 9.6125L1.34396 7.14875C1.19484 7.02014 1.08701 6.85036 1.03399 6.66071C0.980978 6.47107 0.985134 6.26999 1.04594 6.08269C1.10675 5.89539 1.2215 5.73022 1.37581 5.60788C1.53011 5.48554 1.71711 5.41149 1.91333 5.395L5.62958 5.07312L7.08021 1.61312C7.15596 1.43157 7.28374 1.27649 7.44745 1.16741C7.61116 1.05833 7.80349 1.00012 8.00021 1.00012C8.19693 1.00012 8.38926 1.05833 8.55297 1.16741C8.71668 1.27649 8.84446 1.43157 8.92021 1.61312L10.3752 5.07312L14.0902 5.395C14.2864 5.41149 14.4734 5.48554 14.6277 5.60788C14.782 5.73022 14.8968 5.89539 14.9576 6.08269C15.0184 6.26999 15.0226 6.47107 14.9695 6.66071C14.9165 6.85036 14.8087 7.02014 14.6596 7.14875H14.6565Z" fill="#FFBB0B"/>
+              </svg>
+              4.9/5
+              </p>
           </div>
-
-          <div className="bg-white w-[96%] mx-[2%] min-h-[50px] rounded-md flex justify-center pb-10 pt-4">
-            <div className="p-2">
-              <div className="flex justify-center mb-2">
-                <ProgressBarRounded percentage={80} background="#0D659E" />
-              </div>
-              <p className="pt-4"> Grades Average</p>
-            </div>
-            <div className="p-2">
-              <div className="flex justify-center mb-2">
-                <ProgressBarRounded percentage={80} background="#FFC42A" />
-              </div>
-              <p className="pt-4"> Rewards Average</p>
-            </div>
-          </div>
-          <br />
         </div>
         <section className="w-[66%]">
-          <div className="border border-slate-300 w-full  mt-6 rounded-md mx-[1%] pb-10 ">
+          <div className="border border-slate-300 w-full  mt-6 rounded-md mx-[1%] pb-10">
             <div className="user-personal-details p-4 flex">
               <div className="bg-blue-100 p-2 rounded-md w-[48%]">
                 <p className="font-normal text-sm text-slate-500">First Name</p>
@@ -111,41 +96,27 @@ const Student = () => {
             <div className="user-personal-details p-4 flex">
               <div className="bg-blue-100 p-2 rounded-md w-[48%]">
                 <p className="font-normal text-sm text-slate-500">
-                  Parent Name 1
+                  Subject
                 </p>
-                <p>Guy Hawkings</p>
+                <p>Arabic</p>
               </div>
               <div className="bg-blue-100 p-2 rounded-md w-[48%] ml-[2%]">
                 <p className="font-normal text-sm text-slate-500">
-                  Parent Name 2
+                  Age
                 </p>
-                <p>Eleanor Pena</p>
+                <p>33</p>
               </div>
             </div>
             <div className="actions flex float-right pr-[4%] ">
-              <EditStudentModal text={"Edit details"} />
-              <Delete name={"student"} />
+              <EditTeacherModal text={"Edit details"}  />
+              <Delete name={"teacher"} />
             </div>
-          </div>
-
-          <div className="mx-[1%] mt-6">
-            <p className="text-gray-500">Teachers:</p>
-          </div>
-          <div className="grid grid-cols-5 mx-[1%] mt-2">
-            {[1, 2, 3, 4, 5, 6, 7, 8].map((subject) => {
-              return (
-                <div className="flex p-2 text-sm bg-blue-100 rounded-lg mr-2 mb-2">
-                  <p className="text-[#3538CD]">English: </p>
-                  <p className="ml-[3px]">Jacob Jones</p>
-                </div>
-              );
-            })}
           </div>
         </section>
       </div>
 
       <div className=" flex w-[96%] mx-[2%] border-b border-slate-500 mt-10">
-        {statsPages.map((page, index) => {
+        {pages.map((page, index) => {
           return (
             <p
               className={
@@ -164,13 +135,11 @@ const Student = () => {
         })}
       </div>
       <div className="w-[96%] mx-[2%] pb-20">
-        {currentPage == "Grades" ? (
-          <GradesStats />
-        ) : currentPage == "Rewards" ? (
-          <RewardsStats />
-        ) : currentPage == "Attendance" ? (
-          <AttendaceStats />
-        ) : (
+        {currentPage == "ClassAttribute" ? (
+          <></> 
+        ) : currentPage == "Reviews" ? (
+          <></>
+        ): (
           <></>
         )}
       </div>
@@ -178,4 +147,4 @@ const Student = () => {
   );
 };
 
-export default Student;
+export default Teacher;
