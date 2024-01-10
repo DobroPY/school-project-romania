@@ -1,6 +1,8 @@
 import React, { useContext } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
 import AuthContext from "..";
+import CreateStudentModal from "../components/modals/CreateStudent";
+import SuccesStudent from "../components/modals/SuccesStudent";
 
 const Students = () => {
   const navigate = useNavigate();
@@ -26,9 +28,7 @@ const Students = () => {
           <option value="Classroom 4">Classroom 4</option>
         </select>
 
-        <button className="border border-slate-300 rounded-md bg-purple-500 text-white outline-none p-2 mr-6">
-          + Add new student
-        </button>
+        <CreateStudentModal />
       </div>
       <div className="ml-6 mr-6 mt-10 border border-gray-400 rounded-md">
         <table className="w-full">

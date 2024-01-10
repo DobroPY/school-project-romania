@@ -1,6 +1,7 @@
 import React, { useState } from "react";
+import SuccesStudent from "./SuccesStudent";
 
-const EditStudentModal = () => {
+const CreateStudentModal = () => {
   const [show, setShow] = useState(false);
   const showModal = () => {
     setShow(!show);
@@ -9,11 +10,9 @@ const EditStudentModal = () => {
   const[lasttName, setLastName] = useState("");
   const[parentOneName, setParentOneName] = useState("");
   const[parentTwoName, setParentTwoName] = useState("");
-  const [classroom, setClassRoom] = useState("Class VI");
+  const [classroom, setClassRoom] = useState("");
 
   const submit = (event)=>{
-    event.preventDefault();
-
     const user = {
         firstName: firstName,
         lasttName:lasttName,
@@ -25,39 +24,21 @@ const EditStudentModal = () => {
     console.log(user);
 
     setShow(!show);
-
-
   }
 
 
   return (
     <section>
-      <p
-        onClick={showModal}
-        className="flex items-center text-[#446ECB] cursor-pointer"
-      >
-        <svg
-          width="18"
-          height="18"
-          className="mr-[2px]"
-          viewBox="0 0 18 18"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            d="M15.9834 5.15878L12.8412 2.01722C12.7367 1.91272 12.6127 1.82983 12.4762 1.77328C12.3397 1.71673 12.1933 1.68762 12.0456 1.68762C11.8978 1.68762 11.7515 1.71673 11.615 1.77328C11.4785 1.82983 11.3545 1.91272 11.25 2.01722L2.57977 10.6875C2.47485 10.7915 2.39167 10.9154 2.33506 11.052C2.27844 11.1885 2.24953 11.3349 2.25001 11.4827V14.625C2.25001 14.9233 2.36853 15.2095 2.57951 15.4204C2.79049 15.6314 3.07664 15.75 3.37501 15.75H15.1875C15.3367 15.75 15.4798 15.6907 15.5853 15.5852C15.6907 15.4797 15.75 15.3366 15.75 15.1875C15.75 15.0383 15.6907 14.8952 15.5853 14.7897C15.4798 14.6842 15.3367 14.625 15.1875 14.625H8.10844L15.9834 6.74995C16.0879 6.64548 16.1708 6.52145 16.2274 6.38494C16.2839 6.24844 16.313 6.10212 16.313 5.95437C16.313 5.80661 16.2839 5.6603 16.2274 5.52379C16.1708 5.38728 16.0879 5.26325 15.9834 5.15878ZM6.51727 14.625H3.37501V11.4827L9.56251 5.29519L12.7048 8.43745L6.51727 14.625ZM13.5 7.64222L10.3584 4.49995L12.0459 2.81245L15.1875 5.95472L13.5 7.64222Z"
-            fill="#446ECB"
-          />
-        </svg>
-        Edit Details
-      </p>
+      <button onClick={showModal} className="border border-slate-300 rounded-md bg-purple-500 text-white outline-none p-2 mr-6">
+          + Add new student
+        </button>
       {show ? (
         <div
           aria-hidden="true"
           className=" bg-white fixed top-0  right-0  m-auto w-[30%] max-w-[35%] h-full max-h-fit rounded-xl drop-shadow-2xl "
         >
           <div className="flex p-4 items-center justify-between">
-            <p className="text-lg">Edit Profile</p>
+            <p className="text-lg">Add New Student</p>
             <svg
             onClick={showModal} 
             className="cursor-pointer"
@@ -96,16 +77,16 @@ const EditStudentModal = () => {
           <div className="inputs mt-10">
                 <form action="">
                     <p className="mx-[5%] text-sm text-gray-700 mt-4">First Name</p>
-                    <input className="w-[90%] mx-[5%] border border-gray-400 rounded-lg p-2 mt-2 outline-none" onChange={(event)=>{ setFirstName(event.target.value)}} placeholder="Natali"></input>
+                    <input className="w-[90%] mx-[5%] border border-gray-400 rounded-lg p-2 mt-2 outline-none" onChange={(event)=>{ setFirstName(event.target.value)}} placeholder="First Name"></input>
                     <p className="mx-[5%] text-sm text-gray-700 mt-4">Last Name</p>
-                    <input className="w-[90%] mx-[5%] border border-gray-400 rounded-lg p-2 mt-2 outline-none" onChange={(event)=>{ setLastName(event.target.value)}} placeholder="Natali"></input>
+                    <input className="w-[90%] mx-[5%] border border-gray-400 rounded-lg p-2 mt-2 outline-none" onChange={(event)=>{ setLastName(event.target.value)}} placeholder="Last Name"></input>
                     <p className="mx-[5%] text-sm text-gray-700 mt-4">Parent 1 Name</p>
-                    <input className="w-[90%] mx-[5%] border border-gray-400 rounded-lg p-2 mt-2 outline-none" onChange={(event)=>{ setParentOneName(event.target.value)}} placeholder="Natali"></input>
+                    <input className="w-[90%] mx-[5%] border border-gray-400 rounded-lg p-2 mt-2 outline-none" onChange={(event)=>{ setParentOneName(event.target.value)}} placeholder="Parent Name"></input>
                     <p className="mx-[5%] text-sm text-gray-700 mt-4">Parent 2 Name</p>
-                    <input className="w-[90%] mx-[5%] border border-gray-400 rounded-lg p-2 mt-2 outline-none" onChange={(event)=>{ setParentTwoName(event.target.value)}} placeholder="Natali"></input>
+                    <input className="w-[90%] mx-[5%] border border-gray-400 rounded-lg p-2 mt-2 outline-none" onChange={(event)=>{ setParentTwoName(event.target.value)}} placeholder="Parent Name"></input>
                     <p className="mx-[5%] text-sm text-gray-700 mt-4">Select Class</p>
                     <select className="w-[90%] mx-[5%] border border-gray-400 rounded-lg p-2 mt-2 outline-none" onChange={(event)=>{ setClassRoom(event.target.value)}}>
-                        <option value="Class VI">Class VI</option>
+                        <option value="Class VI">Please select class</option>
                         <option value="Class VI">Class VI</option>
                         <option value="Class VI">Class VI</option>
                         <option value="Class VI">Class VI</option>
@@ -115,7 +96,7 @@ const EditStudentModal = () => {
 
           <div className="actions w-[90%] mx-[5%] flex justify-between mt-10 ">
             <button className="border border-gray-300 p-2 w-[49%] text-[#7E3EE5] rounded-lg" onClick={()=>{setShow(!show)}}>Close</button>
-            <button className="border border-gray-300 p-2 w-[49%] rounded-lg bg-[#7E3EE5] text-white ml-[2%]" onClick={submit}>Save</button>
+            <button className="border border-gray-300 p-2 w-[49%] rounded-lg bg-[#7E3EE5] text-white ml-[2%]" onClick={submit}>Add</button>
           </div>
         </div>
       ) : null}
@@ -123,4 +104,4 @@ const EditStudentModal = () => {
   );
 };
 
-export default EditStudentModal;
+export default CreateStudentModal;
