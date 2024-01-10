@@ -4,6 +4,7 @@ export { default as LoginPage } from "./LoginPage";
 export { default as RegisterPage } from "./RegisterPage";
 export { default as Dashboard} from "./Dashboard";
 export {default as Students} from "./Students";
+export {default as Student} from "./Student";
 export {default as Teachers} from "./Teachers";
 export {default as ClassRooms} from "./Classrooms";
 export {default as Calendars} from "./Calendars";

@@ -81,7 +81,7 @@ const Students = () => {
                 </svg>
                 Edit
               </button>
-              <button className=" rounded-lg px-4 py-1 h-[100%] ml-4 bg-green-200 text-green-700 flex items-center outline-none">
+              <button className=" rounded-lg px-4 py-1 h-[100%] ml-4 bg-green-200 text-green-700 flex items-center outline-none" onClick={()=>{ navigate("/students/13")}}>
                 <svg
                   width="20"
                   height="15"
