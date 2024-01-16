@@ -63,6 +63,8 @@ const router = createBrowserRouter(
       <Route path="rewards" element={<Rewards/>} /> 
       <Route path="teacher-review" element={<TeacherReview/>} /> 
       <Route path="psycological-test" element={<ClassRooms/>} /> 
+      <Route path="chats" element={<></>} /> 
+      <Route path="settings" element={<></>} /> 
 
     </Route>
   )

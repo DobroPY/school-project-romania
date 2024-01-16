@@ -9,6 +9,7 @@ import DeleteStudent from "../components/modals/Delete";
 import Delete from "../components/modals/Delete";
 import EditTeacherModals from "../components/modals/EditTeacherModal";
 import EditTeacherModal from "../components/modals/EditTeacherModal";
+import ReactStars from "react-rating-stars-component";
 
 const Teacher = () => {
   const [currentPage, setCurrentPage] = useState("ClassAttribute");
@@ -74,11 +75,22 @@ const Teacher = () => {
           <p className="font-normal text-sm text-slate-500">ID:123456</p>
 
           <div className="flex justify-center mt-6 mb-6">
-          <p className="flex items-center bg-white rounded-lg px-2">  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                 <path d="M14.6565 7.14875L11.8377 9.60875L12.6821 13.2712C12.7268 13.4627 12.714 13.6631 12.6454 13.8474C12.5768 14.0316 12.4555 14.1916 12.2965 14.3072C12.1375 14.4229 11.9479 14.4891 11.7515 14.4976C11.555 14.5061 11.3605 14.4565 11.1921 14.355L7.99771 12.4175L4.81021 14.355C4.64182 14.4565 4.44724 14.5061 4.25082 14.4976C4.05439 14.4891 3.86483 14.4229 3.70583 14.3072C3.54683 14.1916 3.42545 14.0316 3.35686 13.8474C3.28828 13.6631 3.27553 13.4627 3.32021 13.2712L4.16333 9.6125L1.34396 7.14875C1.19484 7.02014 1.08701 6.85036 1.03399 6.66071C0.980978 6.47107 0.985134 6.26999 1.04594 6.08269C1.10675 5.89539 1.2215 5.73022 1.37581 5.60788C1.53011 5.48554 1.71711 5.41149 1.91333 5.395L5.62958 5.07312L7.08021 1.61312C7.15596 1.43157 7.28374 1.27649 7.44745 1.16741C7.61116 1.05833 7.80349 1.00012 8.00021 1.00012C8.19693 1.00012 8.38926 1.05833 8.55297 1.16741C8.71668 1.27649 8.84446 1.43157 8.92021 1.61312L10.3752 5.07312L14.0902 5.395C14.2864 5.41149 14.4734 5.48554 14.6277 5.60788C14.782 5.73022 14.8968 5.89539 14.9576 6.08269C15.0184 6.26999 15.0226 6.47107 14.9695 6.66071C14.9165 6.85036 14.8087 7.02014 14.6596 7.14875H14.6565Z" fill="#FFBB0B"/>
+            <p className="flex items-center bg-white rounded-lg px-2">
+              {" "}
+              <svg
+                width="16"
+                height="16"
+                viewBox="0 0 16 16"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M14.6565 7.14875L11.8377 9.60875L12.6821 13.2712C12.7268 13.4627 12.714 13.6631 12.6454 13.8474C12.5768 14.0316 12.4555 14.1916 12.2965 14.3072C12.1375 14.4229 11.9479 14.4891 11.7515 14.4976C11.555 14.5061 11.3605 14.4565 11.1921 14.355L7.99771 12.4175L4.81021 14.355C4.64182 14.4565 4.44724 14.5061 4.25082 14.4976C4.05439 14.4891 3.86483 14.4229 3.70583 14.3072C3.54683 14.1916 3.42545 14.0316 3.35686 13.8474C3.28828 13.6631 3.27553 13.4627 3.32021 13.2712L4.16333 9.6125L1.34396 7.14875C1.19484 7.02014 1.08701 6.85036 1.03399 6.66071C0.980978 6.47107 0.985134 6.26999 1.04594 6.08269C1.10675 5.89539 1.2215 5.73022 1.37581 5.60788C1.53011 5.48554 1.71711 5.41149 1.91333 5.395L5.62958 5.07312L7.08021 1.61312C7.15596 1.43157 7.28374 1.27649 7.44745 1.16741C7.61116 1.05833 7.80349 1.00012 8.00021 1.00012C8.19693 1.00012 8.38926 1.05833 8.55297 1.16741C8.71668 1.27649 8.84446 1.43157 8.92021 1.61312L10.3752 5.07312L14.0902 5.395C14.2864 5.41149 14.4734 5.48554 14.6277 5.60788C14.782 5.73022 14.8968 5.89539 14.9576 6.08269C15.0184 6.26999 15.0226 6.47107 14.9695 6.66071C14.9165 6.85036 14.8087 7.02014 14.6596 7.14875H14.6565Z"
+                  fill="#FFBB0B"
+                />
               </svg>
               4.9/5
-              </p>
+            </p>
           </div>
         </div>
         <section className="w-[66%]">
@@ -95,20 +107,16 @@ const Teacher = () => {
             </div>
             <div className="user-personal-details p-4 flex">
               <div className="bg-blue-100 p-2 rounded-md w-[48%]">
-                <p className="font-normal text-sm text-slate-500">
-                  Subject
-                </p>
+                <p className="font-normal text-sm text-slate-500">Subject</p>
                 <p>Arabic</p>
               </div>
               <div className="bg-blue-100 p-2 rounded-md w-[48%] ml-[2%]">
-                <p className="font-normal text-sm text-slate-500">
-                  Age
-                </p>
+                <p className="font-normal text-sm text-slate-500">Age</p>
                 <p>33</p>
               </div>
             </div>
             <div className="actions flex float-right pr-[4%] ">
-              <EditTeacherModal text={"Edit details"}  />
+              <EditTeacherModal text={"Edit details"} />
               <Delete name={"teacher"} />
             </div>
           </div>
@@ -136,10 +144,46 @@ const Teacher = () => {
       </div>
       <div className="w-[96%] mx-[2%] pb-20">
         {currentPage == "ClassAttribute" ? (
-          <></> 
+          <div className="grid grid-cols-5 mt-6 ">
+            {[1,2,3,4,5,6].map((item) => {
+              return (
+                <div className="flex max-w-[180px] flex-col items-center mt-4 max-h-[200px] bg-indigo-50 rounded-3xl pb-2">
+                  <div className="text-white text-center text-base mt-[-12px] font-semibold whitespace-nowrap overflow-hidden justify-center items-stretch shadow-sm bg-blue-600 px-5 py-1.5 rounded-3xl">
+                    Class 21
+                  </div>
+                  <p className="text-[#446ECB] text-xl mt-2 font-semibold">
+                    33
+                  </p>
+                  <p>
+                    Students
+                  </p>
+                </div>
+              );
+            })}
+            <div className="flex max-w-[180px] flex-col items-center mt-4 max-h-[200px] bg-indigo-50 rounded-3xl pb-2">
+                  <p className="text-[#446ECB] text-[35px] mt-2 font-semibold">
+                    +
+                  </p>
+                  <p className="text-[#446ECB] text-md font-semibold">
+                   Add Attribute
+                  </p>
+                </div>
+          </div>
         ) : currentPage == "Reviews" ? (
-          <></>
-        ): (
+          <div className="grid grid-cols-3 mt-6">
+
+            {[1,2,3].map((item)=>{
+              return(
+                <div className="p-4 mx-2 h-[250px] border border-slate-300 rounded-md">
+                  <ReactStars count={5} size={30} value={4} />
+                  <p className="font-semibold mt-2 text-lg">Ronald Richards</p>
+                  <p className="mt-2">Lorem ipsum dolor sit amet consectetur adipisicing elit. Corporis vel, sit animi culpa dicta quasi optio iure blanditiis fugiat minima reiciendis nisi rerum odit libero officiis alias. Eaque, nemo obcaecati?</p>
+                  </div>
+              );
+            })}
+
+          </div>
+        ) : (
           <></>
         )}
       </div>

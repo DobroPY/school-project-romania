@@ -1,178 +1,181 @@
 import React from "react";
+import CreateClassroomModal from "../components/modals/CreateClassroom";
 
 const ClassRooms = () => {
   return (
-    <section>
-      <div className="flex items-center justify-between text-center p-4 w-full min-h-[50px] border-l border-r border-b border-gray-300  rounded-b-xl shadow-xl">
-        <a
-          className="border-r border-gray-400 px-8 font-semibold"
-          href="/dashboard"
+    <section className="w-4/5">
+      <p className="px-6 pt-6 font-semibold text-2xl">Classrooms</p>
+      <p className="px-6 font-normal text-slate-500">
+        Explore Your Classrooms Easily and Check Individual Profiles with a
+        Click
+      </p>
+      <div className="ml-6 mt-10  flex justify-between">
+        <select
+          className="border-2 border-gray-200 rounded-md p-2 w-[200px] outline-none "
+          id="classrooms"
         >
-          Dashboard
-        </a>
-        <a
-          className="border-r border-gray-400 px-8 font-semibold"
-          href="/teachers"
-        >
-          Teachers
-        </a>
-        <a
-          className="border-r border-gray-400 px-8 font-semibold"
-          href="/students"
-        >
-          Students
-        </a>
-        <a
-          className="border-r border-gray-400 px-8 font-semibold"
-          href="/classrooms"
-        >
-          Class rooms
-        </a>
-        <a
-          className="border-r border-gray-400 px-8 font-semibold"
-          href="/calendars"
-        >
-          Calendars
-        </a>
-        <a
-          className="border-r border-gray-400 px-8 font-semibold"
-          href="/grades"
-        >
-          Grades
-        </a>
-        <a
-          className="border-r border-gray-400 px-8 font-semibold"
-          href="/rewards"
-        >
-          Rewards
-        </a>
-        <a
-          className="border-r border-gray-400 px-8 font-semibold"
-          href="/teacher-review"
-        >
-          Teacher review
-        </a>
-        <a
-          className="border-r border-gray-400 px-8 font-semibold"
-          href="/student-gaps"
-        >
-          Student Gaps
-        </a>
-        <a className="px-8 font-semibold" href="/psycological-test">
-          Psycolgical test
-        </a>
+          <option value="Classroom 1">Classroom 1</option>
+          <option value="Classroom 2">Classroom 2</option>
+          <option value="Classroom 3">Classroom 3</option>
+          <option value="Classroom 4">Classroom 4</option>
+        </select>
+
+        <CreateClassroomModal />
       </div>
-      <section className="flex justify-between">
-        <div className="text-center w-1/6 border-2 mt-4 h-[calc(100vh_-_100px)]  border-gray-200 shadow-2xl rounded-xl  mb-10 ml-2">
-          <h1 className="font-bold mb-4 mt-4 text-xl">Class rooms</h1>
-          <p className="font-semibold bg-slate-100 cursor-pointer ">
-            Classroom 1
-          </p>
-          <p className="font-semibold bg-white cursor-pointer ">Classroom 2</p>
-          <p className="font-semibold bg-slate-100 cursor-pointer ">
-            Classroom 1
-          </p>
+
+      <div className="w-[96%] mx-[2%] border border-slate-300 mt-4 rounded-lg mb-10">
+        <div className="flex justify-between px-6 py-4 class-description w-[96%] mx-[2%] min-h-[50px] border mt-10 rounded-lg bg-[#F2F4F7]">
+          <div className="text-center">
+            <p className="text-[#7D7D7D]">Name of classroom</p>
+            <p className="font-semibold">Best classroom</p>
+          </div>
+          <div className="text-center">
+            <p className="text-[#7D7D7D]">Class number</p>
+            <p className="font-semibold">82</p>
+          </div>
+          <div className="text-center">
+            <p className="text-[#7D7D7D]">Class performance</p>
+            <p className="font-semibold text-[#34CB4C]">66%</p>
+          </div>
+          <div className="text-center">
+            <p className="text-[#7D7D7D]">Students</p>
+            <p className="font-semibold">32 students</p>
+          </div>
+          <div className="text-center">
+            <p className="text-[#7D7D7D]">Teachers</p>
+            <p className="font-semibold">3 teachers</p>
+          </div>
+          <div className="text-center">
+            <p className="text-[#7D7D7D]">Absence</p>
+            <p className="font-semibold text-[#FF3E13]">4 today</p>
+          </div>
         </div>
-        <div className="text-center just w-4/5 border-2 mt-4 h-[calc(100vh_-_100px)]  border-gray-200 shadow-2xl rounded-xl mr-4">
+
+        <div className="teachers flex justify-center mt-10">
+          <div className="content flex justify-between p-1 text-center w-[300px] h-[50px]  bg-gradient-to-b from-[#446ECB] to-white">
+            <div>
+              <div className="flex justify-center">
+                <svg
+                  width="20"
+                  height="20"
+                  className="mt-4"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke-width="1.5"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
+                  />
+                </svg>
+              </div>
+
+              <p className="mt-2">Teacher 1</p>
+            </div>
+            <div>
+              <div className="flex justify-center">
+                <svg
+                  width="20"
+                  height="20"
+                  className="mt-4"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke-width="1.5"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
+                  />
+                </svg>
+              </div>
+
+              <p className="mt-2">Teacher 1</p>
+            </div>
+            <div>
+              <div className="flex justify-center">
+                <svg
+                  width="20"
+                  height="20"
+                  className="mt-4"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke-width="1.5"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
+                  />
+                </svg>
+              </div>
+
+              <p className="mt-2">Teacher 1</p>
+            </div>
+          </div>
+        </div>
+
+        <div className="grid grid-cols-4 width-[96%] mx-[2%] mt-20">
+          {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16].map(
+            (item) => {
+              return (
+                <div className="min-w-[100px] min-h-[100px] p-4 border border-slate-400 rounded-lg text-center m-2 ">
+                  <div className="flex items-center border-b border-slate-300 pb-2">
+                    <div className="w-[10px] h-[10px] rounded-[50%] mr-3 bg-green-500"></div>
+                    <p>Ahmed Mohamed</p>
+                  </div>
+                  <div className="flex items-center pt-2">
+                    <div className="w-[10px] h-[10px] rounded-[50%] mr-3 bg-red-500"></div>
+                    <p>John Patrick</p>
+                  </div>
+                </div>
+              );
+            }
+          )}
+        </div>
+
+        {/* footer */}
+        <div className="footer mt-10 flex justify-center items-center pb-4">
           <svg
-            xmlns="http://www.w3.org/2000/svg"
+            width="16"
+            height="16"
+            className="mr-4"
+            viewBox="0 0 16 16"
             fill="none"
-            viewBox="0 0 24 24"
-            strokeWidth={1.5}
-            stroke="currentColor"
-            className="w-6 h-6 m-4 cursor-pointer float-right"
+            xmlns="http://www.w3.org/2000/svg"
           >
             <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M9.594 3.94c.09-.542.56-.94 1.11-.94h2.593c.55 0 1.02.398 1.11.94l.213 1.281c.063.374.313.686.645.87.074.04.147.083.22.127.325.196.72.257 1.075.124l1.217-.456a1.125 1.125 0 0 1 1.37.49l1.296 2.247a1.125 1.125 0 0 1-.26 1.431l-1.003.827c-.293.241-.438.613-.43.992a7.723 7.723 0 0 1 0 .255c-.008.378.137.75.43.991l1.004.827c.424.35.534.955.26 1.43l-1.298 2.247a1.125 1.125 0 0 1-1.369.491l-1.217-.456c-.355-.133-.75-.072-1.076.124a6.47 6.47 0 0 1-.22.128c-.331.183-.581.495-.644.869l-.213 1.281c-.09.543-.56.94-1.11.94h-2.594c-.55 0-1.019-.398-1.11-.94l-.213-1.281c-.062-.374-.312-.686-.644-.87a6.52 6.52 0 0 1-.22-.127c-.325-.196-.72-.257-1.076-.124l-1.217.456a1.125 1.125 0 0 1-1.369-.49l-1.297-2.247a1.125 1.125 0 0 1 .26-1.431l1.004-.827c.292-.24.437-.613.43-.991a6.932 6.932 0 0 1 0-.255c.007-.38-.138-.751-.43-.992l-1.004-.827a1.125 1.125 0 0 1-.26-1.43l1.297-2.247a1.125 1.125 0 0 1 1.37-.491l1.216.456c.356.133.751.072 1.076-.124.072-.044.146-.086.22-.128.332-.183.582-.495.644-.869l.214-1.28Z"
-            />
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
+              d="M9.46926 13.5306L4.46926 8.5306C4.39934 8.46092 4.34387 8.37813 4.30601 8.28696C4.26816 8.1958 4.24867 8.09806 4.24867 7.99935C4.24867 7.90064 4.26816 7.8029 4.30601 7.71173C4.34387 7.62057 4.39934 7.53778 4.46926 7.4681L9.46927 2.4681C9.61016 2.3272 9.80126 2.24805 10.0005 2.24805C10.1998 2.24805 10.3909 2.3272 10.5318 2.4681C10.6727 2.60899 10.7518 2.80009 10.7518 2.99935C10.7518 3.19861 10.6727 3.3897 10.5318 3.5306L6.06239 7.99997L10.5324 12.4693C10.6733 12.6102 10.7524 12.8013 10.7524 13.0006C10.7524 13.1999 10.6733 13.391 10.5324 13.5318C10.3915 13.6727 10.2004 13.7519 10.0011 13.7519C9.80188 13.7519 9.61079 13.6727 9.46989 13.5318L9.46926 13.5306Z"
+              fill="#667085"
             />
           </svg>
-          <section className="flex justify-center">
-            <div className=" flex justify-between items-center p-4 mt-6 border-2 rounded-2xl border-black min-w-[300px] min-h-[100px] max-w-[350px] max-h-150px] ">
-              <p className="border-r-2 p-3">Teacher 1</p>
-              <p className="border-r-2 p-3">Teacher 2</p>
-              <p>Teacher 3</p>
-            </div>
-          </section>
-          <section className="grid max-lg:grid-cols-2 max-xl:grid-cols-3 xl:grid-cols-4  p-4 place-items-center">
-            <div className="flex justify-between items-center p-4 mt-6 border-2 rounded-3xl border-black min-w-[250px] min-h-[100px] max-w-[250px] max-h-150px] ">
-              <p className="border-r-2"> Ahmed Mohamed</p>
-              <p>Ahmed Mohamed</p>
-            </div>
-            <div className="flex justify-between items-center p-4 mt-6 border-2 rounded-3xl border-black min-w-[250px] min-h-[100px] max-w-[250px] max-h-150px] ">
-              <p className="border-r-2"> Ahmed Mohamed</p>
-              <p>Ahmed Mohamed</p>
-            </div>
-            <div className="flex justify-between items-center p-4 mt-6 border-2 rounded-3xl border-black min-w-[250px] min-h-[100px] max-w-[250px] max-h-150px] ">
-              <p className="border-r-2"> Ahmed Mohamed</p>
-              <p>Ahmed Mohamed</p>
-            </div>
-            <div className="flex justify-between items-center p-4 mt-6 border-2 rounded-3xl border-black min-w-[250px] min-h-[100px] max-w-[250px] max-h-150px] ">
-              <p className="border-r-2"> Ahmed Mohamed</p>
-              <p>Ahmed Mohamed</p>
-            </div>
-            <div className="flex justify-between items-center p-4 mt-6 border-2 rounded-3xl border-black min-w-[250px] min-h-[100px] max-w-[250px] max-h-150px] ">
-              <p className="border-r-2"> Ahmed Mohamed</p>
-              <p>Ahmed Mohamed</p>
-            </div>
-            <div className="flex justify-between items-center p-4 mt-6 border-2 rounded-3xl border-black min-w-[250px] min-h-[100px] max-w-[250px] max-h-150px] ">
-              <p className="border-r-2"> Ahmed Mohamed</p>
-              <p>Ahmed Mohamed</p>
-            </div>
-            <div className="flex justify-between items-center p-4 mt-6 border-2 rounded-3xl border-black min-w-[250px] min-h-[100px] max-w-[250px] max-h-150px] ">
-              <p className="border-r-2"> Ahmed Mohamed</p>
-              <p>Ahmed Mohamed</p>
-            </div>
-            <div className="flex justify-between items-center p-4 mt-6 border-2 rounded-3xl border-black min-w-[250px] min-h-[100px] max-w-[250px] max-h-150px] ">
-              <p className="border-r-2"> Ahmed Mohamed</p>
-              <p>Ahmed Mohamed</p>
-            </div>
-          </section>
-          <br />
-          <hr className="bg-black border border-gray-300" />
-          <br />
-          <br />
-          <div className="flex px-8 ">
-            <div className="mx-10">
-              <p className="font-bold">Name of the classroom</p>
-              <p className="font-normal">Best classroom</p>
-            </div>
-            <div className="mx-10">
-              <p className="font-bold">Class number</p>
-              <p className="font-normal">34</p>
-            </div>
-            <div className="mx-10">
-              <p className="font-bold">Class number</p>
-              <p className="font-normal">34</p>
-            </div>
+          <div className="page-number flex justify-between self-center">
+            <p className="px-2 py-1 bg-purple-100 cursor-pointer">1</p>
+            <p className="px-2 py-1 cursor-pointer">2</p>
+            <p className="px-2 py-1 cursor-pointer">3</p>
           </div>
-
-          <div className="flex px-8 mt-10">
-            <div className="mx-10">
-              <p className="font-bold">Students</p>
-              <p className="font-normal">23</p>
-            </div>
-            <div className="mx-10">
-              <p className="font-bold">Performance</p>
-              <p className="font-normal">23</p>
-            </div>
-            <div className="mx-10">
-              <p className="font-bold">Teachers</p>
-              <p className="font-normal">23</p>
-            </div>
-            <div className="mx-10">
-              <p className="font-bold">Absences</p>
-              <p className="font-normal">23</p>
-            </div>
-          </div>
+          <svg
+            width="16"
+            height="16"
+            className="ml-4"
+            viewBox="0 0 16 16"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M6.53074 13.5306L11.5307 8.5306C11.6007 8.46092 11.6561 8.37813 11.694 8.28696C11.7318 8.1958 11.7513 8.09806 11.7513 7.99935C11.7513 7.90064 11.7318 7.8029 11.694 7.71173C11.6561 7.62057 11.6007 7.53778 11.5307 7.4681L6.53073 2.4681C6.38984 2.3272 6.19874 2.24805 5.99948 2.24805C5.80023 2.24805 5.60913 2.3272 5.46823 2.4681C5.32734 2.60899 5.24818 2.80009 5.24818 2.99935C5.24818 3.19861 5.32734 3.3897 5.46823 3.5306L9.93761 7.99997L5.46761 12.4693C5.32671 12.6102 5.24756 12.8013 5.24756 13.0006C5.24756 13.1999 5.32671 13.391 5.46761 13.5318C5.60851 13.6727 5.7996 13.7519 5.99886 13.7519C6.19812 13.7519 6.38921 13.6727 6.53011 13.5318L6.53074 13.5306Z"
+              fill="#667085"
+            />
+          </svg>
         </div>
-      </section>
+      </div>
     </section>
   );
 };
