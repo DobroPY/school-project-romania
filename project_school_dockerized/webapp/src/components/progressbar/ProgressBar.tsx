@@ -5,7 +5,7 @@ const ProgressBar = (props) =>{
     return (
         <div className="border rounded-xl bg-slate-300 mt-4 w-full h-[40px] max-h-[60px]">
             <div className={`border flex items-center rounded-xl w-[${percentage.toString() + "%"}] ${background} h-full`}>
-                   <p className="p-3 text-white">{text} {percentage}%</p> 
+                
             </div>
         </div>
     );
