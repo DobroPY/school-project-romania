@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import UserChats from "../components/UserChats";
 
 const Chats = ()=>{
 
@@ -63,6 +64,8 @@ const Chats = ()=>{
       const[currentUser, setCurrentUser] = useState(users[0]);
 
       const [currentPage, setCurrentPage] = useState(pages[0].name);
+
+      const[showChats, setShowChats] = useState(false);
     
       const changePage = (name)=>{
         //change index with user
@@ -83,6 +86,7 @@ const Chats = ()=>{
 
       const changeUser = (user)=>{
         setCurrentUser(user);
+        setShowChats(true)
       }
     
     
@@ -167,7 +171,7 @@ const Chats = ()=>{
                           <path d="M10 0a10 10 0 1 0 10 10A10.011 10.011 0 0 0 10 0Zm0 5a3 3 0 1 1 0 6 3 3 0 0 1 0-6Zm0 13a8.949 8.949 0 0 1-4.951-1.488A3.987 3.987 0 0 1 9 13h2a3.987 3.987 0 0 1 3.951 3.512A8.949 8.949 0 0 1 10 18Z" />
                         </svg>
                         <div className="username ml-2 text-left">
-                          <p className="font-semibold text-sm">Phonenix Baker</p>
+                          <p className="font-semibold text-sm">{item.name}</p>
                           <p className="text-sm font-light">ID: 123456</p>
                         </div>
                       </div>
@@ -181,7 +185,12 @@ const Chats = ()=>{
     
     
             <div className="w-[68%] h-screen mx-[1%] mt-4 mb-2 border border-slate-400 rounded-lg">
-             
+                { 
+                  showChats == true ?
+                  <UserChats user={currentUser} />
+                  :
+                  <></>
+                }
             </div>
           </div>
         </section>
