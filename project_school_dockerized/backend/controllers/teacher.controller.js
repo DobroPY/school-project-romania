@@ -5,7 +5,7 @@ const Op = db.Sequelize.Op;
 // Create and Save a new Teacher
 exports.create = async (req, res) => {
     // Validate request
-    // console.log(req.body);
+    
     if (!req.query.email&&!req.query.firstName&&!req.query.middleName&&!req.query.lastName) {
       res.status(400).send({
         message: "Content can not be empty!"

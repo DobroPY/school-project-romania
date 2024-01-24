@@ -8,46 +8,48 @@ const Op = db.Sequelize.Op;
 
 // Create and Save a new User
 exports.create = async (req, res) => {
-    // Validate request
-    // console.log(req.body);
-    if (!req.query.email&&!req.query.firstName&&!req.query.middleName&&!req.query.lastName&&!req.query.password) {
-      res.status(400).send({
-        message: "Content can not be empty!"
-      });
-      return;
-    }
-    
-    const duplicate = await User.findOne({
-      where: {
-          email: req.query.email 
-      },
-    });
 
-    if (duplicate) return res.sendStatus(409); //Conflict
+  function validateFields(req) {
+      const fields = ["firstName", "middleName", "lastName", "email", "password"];
+      const requestData = req.body || req.query; // Assuming priority to req.body
+      return fields.every(field => requestData[field]);
+  }
 
-    // Create a User
-    const user = {
-      firstName: req.query.firstName,
-      middleName: req.query.middleName,
-      lastName: req.query.lastName,
-      email: req.query.email,
-      password: await bcrypt.hash(req.query.password,10),
-      status: req.query.status
-    };
+  async function handleUserRequest(reqData, res) {
+      try {
+          const duplicate = await User.findOne({ where: { email: reqData.email } });
+          if (duplicate) return res.sendStatus(409); // Conflict
+
+          const hashedPassword = await bcrypt.hash(reqData.password, 10);
+
+          const user = {
+              first_name: reqData.firstName,
+              middle_name: reqData.middleName,
+              last_name: reqData.lastName,
+              email: reqData.email,
+              password: hashedPassword,
+              status: 1
+          };
+
+          const data = await User.create(user);
+          res.status(201).send(data);
+      } catch (err) {
+          res.status(500).send({ message: err.message || "Some error occurred while creating the User." });
+      }
+  }
+
+  // Assuming this is inside an async route handler
+  if (Object.keys(req.body).length > 0 || Object.keys(req.query).length > 0) {
+      if (!validateFields(req)) {
+          return res.status(400).json({ 'message': 'firstName, middleName, lastName, email, password are required' });
+      }
+      const requestData = req.body || req.query; // Assuming priority to req.body
+      await handleUserRequest(requestData, res);
+  } else {
+      return res.status(400).json({ 'message': 'Request must contain data' });
+  }
   
-    // Save User in the database
-    User.create(user)
-    //.create(User)
-      .then(data => {
-        res.send(data);
-      })
-      .catch(err => {
-        res.status(500).send({
-          message:
-            err.message || "Some error occurred while creating the User."
-        });
-      });
-  };
+}
 
   // Retrieve all Users from the database.
 exports.findAll = (req, res) => {

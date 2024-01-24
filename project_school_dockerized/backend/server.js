@@ -67,8 +67,8 @@ db.sequelize.sync({force: false,alter: false});
 
 require("./routes/register.routes")(app);
 require("./routes/auth.routes")(app);
-require("./routes/refresh.routes.js")(app);
-require("./routes/logout.routes.js")(app);
+require("./routes/refresh.routes")(app);
+require("./routes/logout.routes")(app);
 
 
 //Frontend Integration

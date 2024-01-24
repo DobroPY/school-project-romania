@@ -6,9 +6,6 @@ const Op = db.Sequelize.Op;
 exports.create = (req, res) => {
     // Validate request
     
-    console.log(req.query.month);
-    console.log(req.query.year);
-    console.log(req.queryclassroom);
     if (!req.query.month && !req.query.year&&!req.query.classroom) {
       res.status(400).send({
         message: "Content can not be empty!"
