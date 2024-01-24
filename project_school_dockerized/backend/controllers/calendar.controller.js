@@ -4,36 +4,40 @@ const Op = db.Sequelize.Op;
 
 // Create and Save a new Calendar
 exports.create = (req, res) => {
-    // Validate request
-    
-    if (!req.query.month && !req.query.year&&!req.query.classroom) {
+  let requestData = req.body || {};
+
+  // Use req.query if req.body is empty and req.query is present
+  if (!req.body || (Object.keys(req.body).length === 0 && req.query)) {
+      requestData = req.query;
+  }
+
+  // Validate request
+  if (!requestData.month && !requestData.year && !requestData.classroom) {
       res.status(400).send({
-        message: "Content can not be empty!"
+          message: "Content can not be empty!"
       });
       return;
-    }
+  }
 
-    // Create a Calendar
+  // Create a Calendar
+  const calendar = {
+      month: requestData.month,
+      year: requestData.year,
+      classrooms: requestData.classroom,
+  };
 
-    const calendar = {
-      month: req.query.month,
-      year: req.query.year,
-      classrooms: req.query.classroom,
-    };
-  
-    // Save Calendar in the database
-    Calendar.create(calendar)
-    //.create(Calendar)
+  // Save Calendar in the database
+  Calendar.create(calendar)
       .then(data => {
-        res.send(data);
+          res.status(201).send(data);
       })
       .catch(err => {
-        res.status(500).send({
-          message:
-            err.message || "Some error occurred while creating the Calendar."
-        });
+          res.status(500).send({
+              message: err.message || "Some error occurred while creating the Calendar."
+          });
       });
-  };
+};
+
 
   // Retrieve all Calendars from the database.
 exports.findAll = (req, res) => {

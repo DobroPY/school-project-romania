@@ -4,46 +4,51 @@ const Op = db.Sequelize.Op;
 
 // Create and Save a new Director
 exports.create = async (req, res) => {
-    // Validate request
-    // console.log(req.body);
-    if (!req.query.email&&!req.query.firstName&&!req.query.middleName&&!req.query.lastName) {
+  let requestData = req.body || {};
+
+  // Use req.query if req.body is empty and req.query is present
+  if (!req.body || (Object.keys(req.body).length === 0 && req.query)) {
+      requestData = req.query;
+  }
+
+  // Validate request
+  if (!requestData.email && !requestData.firstName && !requestData.middleName && !requestData.lastName) {
       res.status(400).send({
-        message: "Content can not be empty!"
+          message: "Content can not be empty!"
       });
       return;
-    }
+  }
 
-    const duplicate = await Director.findOne({
+  const duplicate = await Director.findOne({
       where: {
-          email: req.query.email 
+          email: requestData.email 
       },
-    });
+  });
 
-    if (duplicate) return res.sendStatus(409); //Conflict
-  
-    // Create a Director
-    const director = {
-      firstName: req.query.firstName,
-      middleName: req.query.middleName,
-      lastName: req.query.lastName,
-      email: req.query.email,
-      rank: req.query.rank,
-      status: req.query.status ? req.query.status : false
-    };
-  
-    // Save Director in the database
-    Director.create(director)
-    //.create(Director)
+  if (duplicate) return res.sendStatus(409); //Conflict
+
+  // Create a Director
+  const director = {
+      first_name: requestData.firstName,
+      middle_name: requestData.middleName,
+      last_name: requestData.lastName,
+      email: requestData.email,
+      rank: requestData.rank,
+      status: requestData.status !== undefined ? requestData.status : false
+  };
+
+  // Save Director in the database
+  Director.create(director)
       .then(data => {
-        res.send(data);
+          res.status(201).send(data);
       })
       .catch(err => {
-        res.status(500).send({
-          message:
-            err.message || "Some error occurred while creating the Director."
-        });
+          res.status(500).send({
+              message: err.message || "Some error occurred while creating the Director."
+          });
       });
-  };
+};
+
 
   // Retrieve all Directors from the database.
 exports.findAll = (req, res) => {
