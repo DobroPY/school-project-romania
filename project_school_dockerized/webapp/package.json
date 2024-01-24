@@ -6,8 +6,13 @@
     "@svgr/webpack": "$@svgr/webpack"
   },
   "dependencies": {
+    "@emotion/react": "^11.11.3",
+    "@emotion/styled": "^11.11.0",
     "@headlessui/react": "^1.7.15",
     "@heroicons/react": "^2.0.18",
+    "@mui/material": "^5.15.6",
+    "@mui/styled-engine-sc": "^6.0.0-alpha.13",
+    "@mui/x-date-pickers": "^6.19.0",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
@@ -20,6 +25,7 @@
     "axios": "^1.6.3",
     "bootstrap": "^5.3.2",
     "chart.js": "^4.3.0",
+    "dayjs": "^1.11.10",
     "faker": "^6.6.6",
     "google-map-react": "^2.2.1",
     "google-maps-react": "^2.0.6",
@@ -34,6 +40,7 @@
     "react-rating-stars-component": "^2.2.0",
     "react-router-dom": "^6.12.1",
     "react-scripts": "5.0.1",
+    "styled-components": "^6.1.8",
     "swiper": "^9.4.1",
     "typescript": "^5.3.3",
     "web-vitals": "^2.1.4"

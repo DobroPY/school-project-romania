@@ -1,137 +1,86 @@
 import React, { useState } from "react";
 import Calendar from "../components/calendar/Calendar";
+import DatePick from "../components/DatePick";
+import AbsencesCalendar from "../components/calendar/AbsencesCalendar";
+import ScheduleCalendar from "../components/calendar/ScheduleCalendar";
+
+
 
 const Calendars = ()=>{
 
-  const [calendarType, setCalendarType] = useState("absences");
-  const [abBgToggle, setAbBgToggle] = useState("bg-green-500");
-  const [schBgToggle, setSchBgToggle] = useState("");
+  const types = [
+    {
+      name:"Absences",
+      type:"absences"
+    },
+    {
+      name:"Schedule",
+      type:"schedule",
+    }
+  ]
+  
+  const[currentType, setCurrentType] = useState("absences");
 
   const changeCalendarType = (type) =>{
-    setCalendarType(type);
-    if(type == "absences"){
-      setAbBgToggle("bg-green-500")
-      setSchBgToggle("");
-    }
-    else{
-      setAbBgToggle("")
-      setSchBgToggle("bg-green-500");
-    }
+    setCurrentType(type);
   }
 
     return(
-        <section>
-      <div className="flex items-center justify-between p-4 w-full min-h-[50px] border-l border-r border-b border-gray-300  rounded-b-xl shadow-xl">
-        <a
-          className="border-r border-gray-400 px-8 font-semibold"
-          href="/dashboard"
+        <section className="w-4/5">
+            <div className="title pl-6">
+                <p className="font-semibold text-2xl">Calendars</p>
+                <p className="mt-2 text-gray-500">Explore Calendar and Check Absences and Schedule</p>
+            </div>
+            <div className="ml-6 mt-10  flex justify-between">
+        <select
+          className="border-2 border-gray-200 rounded-md p-2 w-[200px] outline-none "
+          id="classrooms"
         >
-          Dashboard
-        </a>
-        <a
-          className="border-r border-gray-400 px-8 font-semibold"
-          href="/teachers"
-        >
-          Teachers
-        </a>
-        <a
-          className="border-r border-gray-400 px-8 font-semibold"
-          href="/students"
-        >
-          Students
-        </a>
-        <a
-          className="border-r border-gray-400 px-8 font-semibold"
-          href="/classrooms"
-        >
-          Class rooms
-        </a>
-        <a
-          className="border-r border-gray-400 px-8 font-semibold"
-          href="/calendars"
-        >
-          Calendars
-        </a>
-        <a
-          className="border-r border-gray-400 px-8 font-semibold"
-          href="/grades"
-        >
-          Grades
-        </a>
-        <a
-          className="border-r border-gray-400 px-8 font-semibold"
-          href="/rewards"
-        >
-          Rewards
-        </a>
-        <a
-          className="border-r border-gray-400 px-8 font-semibold"
-          href="/teacher-review"
-        >
-          Teacher review
-        </a>
-        <a
-          className="border-r border-gray-400 px-8 font-semibold"
-          href="/student-gaps"
-        >
-          Student Gaps
-        </a>
-        <a className="px-8 font-semibold" href="/psycological-test">
-          Psycolgical test
-        </a>
+          <option value="Classroom 1">Classroom 1</option>
+          <option value="Classroom 2">Classroom 2</option>
+          <option value="Classroom 3">Classroom 3</option>
+          <option value="Classroom 4">Classroom 4</option>
+        </select>
+      {currentType == "schedule" ?  <button  className="border border-slate-300 rounded-md bg-purple-500 text-white outline-none p-2 mr-6">
+          + Add new schedule
+        </button> : <></> }
+       
       </div>
-      <section className="flex justify-between">
-        <div className="text-center w-1/6 border-2 mt-4 h-[calc(100vh_-_100px)]  border-gray-200 shadow-2xl rounded-xl  mb-10 ml-2">
-          <h1 className="font-bold mb-4 mt-4 text-xl">Class rooms</h1>
-          <p className="font-semibold bg-slate-100 cursor-pointer ">
-            Classroom 1
-          </p>
-          <p className="font-semibold bg-white cursor-pointer ">
-            Classroom 2
-          </p>
-          <p className="font-semibold bg-slate-100 cursor-pointer ">
-            Classroom 1
-          </p>
-        </div>
 
+      <div className="w-[96%] mx-[2%] border border-slate-400 rounded-lg mt-4 mb-2">
+          <div className="calendar-actions flex p-6 items-center justify-between">
 
-        <div className=" w-4/5 border-2 mt-4 h-full  border-gray-200 shadow-2xl rounded-xl mr-4">
-          <div className="top flex">
-          <p className="mt-4 ml-8 text-2xl">
-            <b>December</b> 2023
-          </p>
+            <p className="text-xl"><strong>January</strong> 2024</p>
 
-          <div className="pages-toggle flex justify-evenly items-center w-[200px] min-h-[40px] max-h-[50px] border rounded-3xl mt-4 ml-11 bg-gray-200">
-                <div className={`w-2/4 flex items-center justify-center h-full text-center ${abBgToggle} rounded-3xl cursor-pointer`} onClick={()=>{changeCalendarType("absences")}}>
-                    <p>Absences</p>
-                </div>
-                <div className={`w-2/4 flex items-center justify-center h-full ${schBgToggle} text-center rounded-3xl cursor-pointer`} onClick={()=>{changeCalendarType("schedule")}}>
-                    <p>Schedule</p>
-                </div>
+            <div className="flex items-center border border-gray-300 rounded-lg">
+                {types.map((item,index)=>{
+                  return(
+                    <p className={item.type == currentType ? "bg-blue-100 text-blue-500 rounded-lg p-2":"p-2 cursor-pointer"}  onClick={()=>{changeCalendarType(item.type)}}>{item.name}</p>
+                  );
+                })}
+            </div>
+              
+              <DatePick/>
+                
           </div>
 
-          <button className="mt-4 border-2 border-gray-300 rounded-xl ml-10 p-2">Add new schedule +</button>
-          
+
+          <div className="grid grid-cols-7 mt-1 text-center font-semibold">
+                <p className="border-t border-l border-r border-slate-300 p-2">Sunday</p>
+                <p className="border-t border-l border-r border-slate-300 p-2">Monday</p>
+                <p className="border-t border-l border-r border-slate-300 p-2">Tuesday</p>
+                <p className="border-t border-l border-r border-slate-300 p-2">Wednesday</p>
+                <p className="border-t border-l border-r border-slate-300 p-2">Thursday</p>
+                <p className="border-t border-l border-r border-slate-300 p-2">Friday</p>
+                <p className="border-t border-l border-r border-slate-300 p-2">Saturday</p>
           </div>
+          {currentType == "absences" ? <AbsencesCalendar/> : <ScheduleCalendar/>}
+      </div>
 
-          {/* Calendar */}
 
 
-           <div className="grid grid-cols-7 text-center mt-10 ">
-              <p className="font-normal text-2xl">Monday</p>
-              <p className="font-normal text-2xl">Tuesday</p>
-              <p className="font-normal text-2xl">Wednesday</p>
-              <p className="font-normal text-2xl">Thursday</p>
-              <p className="font-normal text-2xl">Friday</p>
-              <p className="font-normal text-2xl">Saturday</p>
-              <p className="font-normal text-2xl">Sunday</p>
-          </div>
-          <Calendar/>
-        
-        </div>
-        
+
       </section>
-    </section>
     )
     ;
 }
