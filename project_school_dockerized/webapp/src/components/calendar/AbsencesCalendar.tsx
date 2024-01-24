@@ -1,11 +1,12 @@
 import React from "react";
+import ModalAbsences from "../modals/ModalAbsences";
 
 interface Day{
     date: any,
     active: boolean
 }
 
-const Calendar = () =>{
+const AbsencesCalendar = () =>{
 
     let days: Day[] = [];
 
@@ -17,7 +18,7 @@ function compareNumbers(a, b) {
 }
 
 
-const month = "March 2024";
+const month = "January 2024";
 
 
 const initialDate = new Date(month);
@@ -63,19 +64,14 @@ function completeNextMonthDays(){
 completeNextMonthDays();
 
 
-console.log(days)
+
 
 
     return(
-        <div className="grid grid-cols-7 mt-1  pb-8">
+        <div className="grid grid-cols-7">
             {days.map((day, index)=>{
                 return(
-                    <div className="border-t border-r  border-black h-[120px]" key={index}>
-                       
-                            <p className="font-semibold text-slate-400 text-lg text-center">{day.date}</p>
-                       
-
-                    </div>
+                    <ModalAbsences day={day} index={index} />
                 );  
             })}
         
@@ -83,4 +79,4 @@ console.log(days)
     );
 }
 
-export default Calendar;
+export default AbsencesCalendar;
