@@ -15,7 +15,7 @@ const handleLogout = async (req, res) =>{
             refreshToken: refreshToken
         },
     });
-
+    
     if (!findUser){
         res.clearCookie('jwt', {httpOnly: true});
         return res.sendStatus(403); //Forbidden

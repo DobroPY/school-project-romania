@@ -8,24 +8,21 @@ require('dotenv').config();
 
 const handleLogin = async (req, res) =>{
 
-    console.log('-----------------3');
     const{email,password} = req.body;
     if (!email || !password ) return res.status(400).json({ 'message': 'Email\
     and password are required'});
 
-    console.log('-----------------4');
     const findUser = await User.findOne({
         where: {
             email: email
         },
     });
 
-    console.log('-----------------5');
     if (!findUser) return res.sendStatus(401); //Unauthorized
 
     //Password
     const match = await bcrypt.compare(password, findUser.password);
-    console.log('-----------------6');
+
     if (match){
         const roles = Object.values(findUser.roles);
 
@@ -46,7 +43,7 @@ const handleLogin = async (req, res) =>{
         })
 
         res.cookie('jwt', refreshToken, {httpOnly: true, sameSite:'None',secure:true, maxAge:24 * 60 * 60 * 1000})
-        console.log('-----------------7');
+
         res.json({ accessToken });
     }else{
         res.sendStatus(401);
