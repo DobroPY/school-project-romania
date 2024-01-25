@@ -4,45 +4,100 @@ const Op = db.Sequelize.Op;
 
 // Create and Save a new Teacher
 exports.create = async (req, res) => {
-    // Validate request
-    
-    if (!req.query.email&&!req.query.firstName&&!req.query.middleName&&!req.query.lastName) {
+
+  let requestData = req.body || req.query // Default to req.body
+  let source = 'body';
+
+  if (!req.body || (Object.keys(req.body).length === 0 && req.query)) {
+      // Fall back to req.query if req.body is empty and req.query is present
+      console.log('123123@');
+      requestData = req.query;
+      source = 'query';
+  }
+
+  if (!requestData.email && !requestData.firstName && !requestData.middleName && !requestData.lastName) {
       res.status(400).send({
-        message: "Content can not be empty!"
+          message: "Content can not be empty!"
       });
       return;
-    }
-    
-    const duplicate = await Teacher.findOne({
-        where: {
-            email: req.query.email 
-        },
-    });
+  }
 
-    if (duplicate) return res.sendStatus(409); //Conflict
+  const duplicate = await Teacher.findOne({
+      where: { email: requestData.email },
+  });
 
-    // Create a Teacher
-    const teacher = {
-      firstName: req.query.firstName,
-      middleName: req.query.middleName,
-      lastName: req.query.lastName,
-      email: req.query.email,
-      rank: req.query.rank,
-      status: req.query.status ? req.query.status : false
-    };
-  
-    // Save Teacher in the database
-    Teacher.create(teacher)
-    //.create(Teacher)
+  if (duplicate) return res.sendStatus(409); // Conflict
+
+  // Create a Teacher
+  const teacher = {
+      first_name: requestData.firstName,
+      middle_name: requestData.middleName,
+      last_name: requestData.lastName,
+      email: requestData.email,
+      rank: requestData.rank,
+      status: requestData.status !== undefined ? requestData.status : false
+  };
+
+  // Save Teacher in the database
+  Teacher.create(teacher)
       .then(data => {
-        res.send(data);
+          res.status(201).send(data);
       })
       .catch(err => {
-        res.status(500).send({
-          message:
-            err.message || "Some error occurred while creating the Teacher."
-        });
+          res.status(500).send({
+              message: err.message || "Some error occurred while creating the Teacher."
+          });
       });
+    // // Validate request
+    // if (req.body){
+    //   if (!req.body.email && !req.body.firstName && !req.body.middleName && !req.body.lastName) {
+    //     res.status(400).send({
+    //         message: "Content can not be empty!"
+    //     });
+    //     return;
+    //   }
+    // }
+    // if(req.query){
+    //   if (!req.query.email&&!req.query.firstName&&!req.query.middleName&&!req.query.lastName) {
+    //     res.status(400).send({
+    //       message: "Content can not be empty!"
+    //     });
+    //     return;
+    //   }
+    // }
+    
+    
+    
+    // const duplicate = await Teacher.findOne({
+    //     where: {
+    //         email: req.query.email 
+    //     },
+    // });
+
+    // if (duplicate) return res.sendStatus(409); //Conflict
+
+    // // Create a Teacher
+    // const teacher = {
+    //   firstName: req.query.firstName,
+    //   middleName: req.query.middleName,
+    //   lastName: req.query.lastName,
+    //   email: req.query.email,
+    //   rank: req.query.rank,
+    //   status: req.query.status ? req.query.status : false
+    // };
+  
+    // // Save Teacher in the database
+    // Teacher.create(teacher)
+    // //.create(Teacher)
+    //   .then(data => {
+    //     res.send(data);
+    //   })
+    //   .catch(err => {
+    //     res.status(500).send({
+    //       message:
+    //         err.message || "Some error occurred while creating the Teacher."
+    //     });
+    //   });
   };
 
   // Retrieve all Teachers from the database.

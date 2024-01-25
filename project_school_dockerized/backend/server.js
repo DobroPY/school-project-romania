@@ -30,7 +30,6 @@ const allowedOrigins = [process.env.CLIENT_ORIGIN,
 
 const corsOptions={
     origin: (origin,callback)=> {
-        console.log(origin);
         if (allowedOrigins.indexOf(origin) !== -1 || !origin){
             callback(null,true)
         }else{
@@ -41,8 +40,6 @@ const corsOptions={
 
 }
 
-console.log('---------------B');
-
 const PORT = process.env.NODE_DOCKER_PORT || 8080;
 app.use(function(req, res, next) {
     res.header("Access-Control-Allow-Credentials", true);
@@ -52,18 +49,15 @@ app.use(function(req, res, next) {
     next();
  });
 
- console.log('---------------C');
 app.use(cors(corsOptions));
 
 app.get('/', (req, res)=>{
     res.status(200);
-    console.log('200');
     res.send("Welcome to root URL of Server UL");
 });
-console.log('---------------D');
 const db = require("./models");
 
-db.sequelize.sync({force: false,alter: false});
+db.sequelize.sync({force: true,alter: true});
 
 require("./routes/register.routes")(app);
 require("./routes/auth.routes")(app);

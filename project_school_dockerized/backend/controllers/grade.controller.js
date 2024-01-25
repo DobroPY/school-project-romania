@@ -5,49 +5,53 @@ const Op = db.Sequelize.Op;
 
 // Create and Save a new Grade
 exports.create = async (req, res) => {
-    // Validate request
+    let requestData = req.body || {};
 
-    if (!req.query.day && !req.query.month && !req.query.year && !req.query.email && !req.query.classroom && !req.query.module && !req.query.grade) {
-      res.status(400).send({
-        message: "Content can not be empty!"
-      });
-      return;
+    // Use req.query if req.body is empty and req.query is present
+    if (!req.body || (Object.keys(req.body).length === 0 && req.query)) {
+        requestData = req.query;
     }
 
-    student_email = req.query.email;
+    // Validate request
+    if (!requestData.day && !requestData.month && !requestData.year && !requestData.email && !requestData.classroom && !requestData.module && !requestData.grade) {
+        res.status(400).send({
+            message: "Content can not be empty!"
+        });
+        return;
+    }
 
-    // Find User
+    // Find Student
     const findStudent = await Student.findOne({
         where: {
-            email: student_email
+            email: requestData.email
         },
     });
-    if (!findStudent) return res.sendStatus(409); //Conflict
-    
-    const grades = {
-      student: findStudent.id,
-      day: req.query.day,
-      month: req.query.month,
-      year: req.query.year,
-      classrooms: req.query.classroom,
-      modules: req.query.module,
-      grades: req.query.grade,
-      reward: req.query.rewar
+    if (!findStudent) return res.sendStatus(404).send({ message: "Student not found" }); // Not Found
+
+    // Create a Grade object
+    const gradeRecord = {
+        student: findStudent.id,
+        day: requestData.day,
+        month: requestData.month,
+        year: requestData.year,
+        classrooms: requestData.classroom,
+        modules: requestData.module,
+        grades: requestData.grade,
+        reward: requestData.reward // Assuming 'rewar' was a typo
     };
-  
+
     // Save Grade in the database
-    Grade.create(grades)
-    //.create(Grade)
-      .then(data => {
-        res.send(data);
-      })
-      .catch(err => {
-        res.status(500).send({
-          message:
-            err.message || "Some error occurred while creating the Grade."
+    Grade.create(gradeRecord)
+        .then(data => {
+            res.status(201).send(data);
+        })
+        .catch(err => {
+            res.status(500).send({
+                message: err.message || "Some error occurred while creating the Grade."
+            });
         });
-      });
-  };
+};
+
 
   // Retrieve all Grades from the database.
 exports.findAll = (req, res) => {

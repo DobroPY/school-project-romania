@@ -5,45 +5,52 @@ const Op = db.Sequelize.Op;
 // Create and Save a new Student
 exports.create = async (req, res) => {
     // Validate request
-    // console.log(req.body);
-    if (!req.query.email&&!req.query.firstName&&!req.query.middleName&&!req.query.lastName) {
-      res.status(400).send({
-        message: "Content can not be empty!"
-      });
-      return;
+
+    let requestData = req.body || {}; // Default to req.body
+    let source = 'body';
+
+    // Use req.query if req.body is empty and req.query is present
+    if (!req.body || (Object.keys(req.body).length === 0 && req.query)) {
+        requestData = req.query;
+        source = 'query';
     }
-    
+
+    // Check if required fields are present
+    if (!requestData.email && !requestData.firstName && !requestData.middleName && !requestData.lastName) {
+        res.status(400).send({
+            message: "Content can not be empty!"
+        });
+        return;
+    }
+
+    // Check for duplicate Student
     const duplicate = await Student.findOne({
-      where: {
-          email: req.query.email 
-      },
+        where: { email: requestData.email },
     });
 
-    if (duplicate) return res.sendStatus(409); //Conflict
+    if (duplicate) return res.sendStatus(409); // Conflict
 
     // Create a Student
     const student = {
-      firstName: req.query.firstName,
-      middleName: req.query.middleName,
-      lastName: req.query.lastName,
-      email: req.query.email,
-      class: req.query.class,
-      rank: req.query.rank,
-      status: req.query.status ? req.query.status : false
+        first_name: requestData.firstName,
+        middle_name: requestData.middleName,
+        last_name: requestData.lastName,
+        email: requestData.email,
+        class: requestData.class,
+        rank: requestData.rank,
+        status: requestData.status !== undefined ? requestData.status : false
     };
-  
+
     // Save Student in the database
     Student.create(student)
-    //.create(Student)
-      .then(data => {
-        res.send(data);
-      })
-      .catch(err => {
-        res.status(500).send({
-          message:
-            err.message || "Some error occurred while creating the Student."
+        .then(data => {
+            res.status(201).send(data);
+        })
+        .catch(err => {
+            res.status(500).send({
+                message: err.message || "Some error occurred while creating the Student."
+            });
         });
-      });
   };
 
   // Retrieve all Students from the database.

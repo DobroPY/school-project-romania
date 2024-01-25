@@ -3,6 +3,10 @@
 
 # Create Director: 
 
+## BODY 
+
+{"email": "calinjovrea@gmail.com", "firstName": "firstname_1", "middleName": "middlename_2", "lastName": "lastName_2"}
+
 ### POST
 http://localhost:6868/api/directors?firstName=Calin&middleName=Ioan&lastName=Popescu&email=calinjovrea@gmail.com&rank=1&status=1
 
@@ -21,6 +25,11 @@ http://localhost:6868/api/directors/4
 <br/><br/>
 
 # Create Teacher 
+
+## BODY 
+
+{"email": "teacher@gmail.com", "firstName": "firstname_1", "middleName": "middlename_2", "lastName": "lastName_2"}
+
 
 ### POST
 http://localhost:6868/api/teachers?firstName=Calinescu&middleName=Ionescu&lastName=Popescu&email=calinpopescu@gmail.com&rank=1&status=1
@@ -43,6 +52,10 @@ http://localhost:6868/api/teachers/4
 
 # Create Student 
 
+## BODY
+
+{"email": "student@gmail.com", "firstName": "firstname_1", "middleName": "middlename_2", "lastName": "lastName_2"}
+
 ### POST
 http://localhost:6868/api/students?firstName=Calin&middleName=Ionescu&lastName=Popescu&email=calinjovrea@gmail.com&class=1&rank=1&status=1
 
@@ -62,6 +75,13 @@ http://localhost:6868/api/students/4
 <br/><br/>
 
 # Create Classroom 
+
+## BODY
+
+{"teacher": 1,
+"name": "biology",
+"seats": 30,
+"status": 1}
 
 ### POST
 http://localhost:6868/api/classrooms?teacher=1&name=biology&seats=30&status=1
@@ -84,6 +104,10 @@ http://localhost:6868/api/classrooms/4
 
 
 # Create User
+
+## BODY
+
+{"email": "calinjovrea321@gmail.com", "password": "123123123", "firstName": "firstname_1", "middleName": "middlename_2", "lastName": "lastName_2"}
 
 ### POST
 http://localhost:6868/api/users?firstName=Calin&middleName=Ioan&lastName=Jovrea&email=calinjovrea@gmail.com&password=password1&status=1
@@ -109,6 +133,14 @@ http://localhost:6868/api/users/4
 
 # Create Calendar
 
+## BODY
+
+{
+    "month": 12,
+    "year": 2023,
+    "classrooms":"{'classrooms': '1,2,3,4,5,6,7,8'}"
+}
+
 ### POST
 http://localhost:6868/api/calendars?month=12&year=2023&classrooms="{'classrooms': '1,2,3,4,5,6,7,8'}"
 
@@ -131,6 +163,13 @@ http://localhost:6868/api/calendars/4
 
 # Create Modules
 
+## BODY
+{
+  "name": "Biology",
+  "teacher_email": "calinjovrea@gmail.com"
+}
+
+
 ### POST
 http://localhost:6868/api/modules?teacher=1&name='Biology'
 
@@ -151,6 +190,11 @@ http://localhost:6868/api/modules/4
 <br/><br/>
 
 # Create Absences
+
+## BODY 
+
+{"teacher": 1, "student": 1, "day": 1, "month": 12, "year": 2021, "classroom": 4, "module": 7, "email": "student@gmail.com","teacher_email": "teacher@gmail.com", "review": "REview"}
+
 
 ### POST
 http://localhost:6868/api/absences?day=1&month=12&year=2023&email=calinjovrea@gmail.com&classrooms="{'classrooms': '1,2,3,4,5,6,7,8'}"&modules="1,2,3,4,5,6,7"
@@ -173,6 +217,18 @@ http://localhost:6868/api/absences/4
 
 # Create Grades
 
+## BODY
+{
+  "day": 1,
+  "month": 12,
+  "year": 2023,
+  "email": "calinjovrea@gmail.com",
+  "classroom": "{classrooms: 1,2,3,4,5,6,7,8 }",
+  "module": "1,2,3,4,5,6,7",
+  "grade": "{grades: 10,2,8,7,5}",
+  "reward": 1
+}
+
 ### POST
 http://localhost:6868/api/grades?day=1&month=12&year=2023&email=calinjovrea@gmail.com&classrooms="{'classrooms': '1,2,3,4,5,6,7,8'}"&modules="1,2,3,4,5,6,7"&grades='{"grades": "10,2,8,7,5"}'&reward='{"rewards": "-1,+2,+3,-4,+1"}'
 
@@ -193,6 +249,10 @@ http://localhost:6868/api/grades/4
 
 # Create Reviews
 
+## BODY
+{"teacher": 1, "student": 1, "day": 1, "month": 12, "year": 2021, "classroom": 4, "module": 7, "email": "student@gmail.com","teacher_email": "teacher@gmail.com", "review": "REview"}
+
+
 ### POST
 http://localhost:6868/api/reviews?day=1&month=12&year=2023&email=calinjovrea@gmail.com&classrooms="{'classrooms': '1,2,3,4,5,6,7,8'}"&modules="1,2,3,4,5,6,7"&teacher_email=calinpopescu@gmail.com&review='Great Teacher !'
 
@@ -208,5 +268,6 @@ http://localhost:6868/api/reviews/2?email='calinpopescu@gmail.com'
 # Delete ( Module Where Id == 4 ):
 
 http://localhost:6868/api/reviews/4
+
 
 

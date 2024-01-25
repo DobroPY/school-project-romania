@@ -3,37 +3,41 @@ const Classroom = db.classrooms;
 const Op = db.Sequelize.Op;
 
 // Create and Save a new Classroom
-exports.create = (req, res) => {
-    // Validate request
-    
-    if (!req.query.name) {
+exports.create = async (req, res) => {
+  let requestData = req.body || {};
+
+  // Use req.query if req.body is empty and req.query is present
+  if (!req.body || (Object.keys(req.body).length === 0 && req.query)) {
+      requestData = req.query;
+  }
+
+  // Validate request
+  if (!requestData.name) {
       res.status(400).send({
-        message: "Content can not be empty!"
+          message: "Content can not be empty!"
       });
       return;
-    }
-  
-    // Create a Classroom
+  }
 
-    const classroom = {
-      teacher: req.query.teacher,
-      name: req.query.name,
-      seats: req.query.seats
-    };
-  
-    // Save Classroom in the database
-    Classroom.create(classroom)
-    //.create(Classroom)
+  // Create a Classroom
+  const classroom = {
+      teacher: requestData.teacher,
+      name: requestData.name,
+      seats: requestData.seats
+  };
+
+  // Save Classroom in the database
+  Classroom.create(classroom)
       .then(data => {
-        res.send(data);
+          res.status(201).send(data);
       })
       .catch(err => {
-        res.status(500).send({
-          message:
-            err.message || "Some error occurred while creating the Classroom."
-        });
+          res.status(500).send({
+              message: err.message || "Some error occurred while creating the Classroom."
+          });
       });
-  };
+};
+
 
   // Retrieve all Classrooms from the database.
 exports.findAll = (req, res) => {

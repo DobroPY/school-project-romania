@@ -5,47 +5,50 @@ const Op = db.Sequelize.Op;
 
 // Create and Save a new Absence
 exports.create = async (req, res) => {
-    
-    // Validate request
-    if (!req.query.day && !req.query.month && !req.query.year && !req.query.email && !req.query.classroom && !req.query.module) {
+  let requestData = req.body || {};
+
+  // Use req.query if req.body is empty and req.query is present
+  if (!req.body || (Object.keys(req.body).length === 0 && req.query)) {
+      requestData = req.query;
+  }
+
+  // Validate request
+  if (!requestData.day && !requestData.month && !requestData.year && !requestData.email && !requestData.classroom && !requestData.module) {
       res.status(400).send({
-        message: "Content can not be empty!"
+          message: "Content can not be empty!"
       });
       return;
-    }
+  }
 
-    student_email = req.query.email;
+  // Find Student
+  const findStudent = await Student.findOne({
+      where: {
+          email: requestData.email
+      },
+  });
+  if (!findStudent) return res.sendStatus(409); // Conflict
 
-    // Find User
-    const findStudent = await Student.findOne({
-        where: {
-            email: student_email
-        },
-    });
-    if (!findStudent) return res.sendStatus(409); //Conflict
-    
-    const absence = {
+  const absence = {
       student: findStudent.id,
-      day: req.query.day,
-      month: req.query.month,
-      year: req.query.year,
-      classrooms: req.query.classroom,
-      modules: req.query.module
-    };
-  
-    // Save Absence in the database
-    Absence.create(absence)
-    //.create(Absence)
+      day: requestData.day,
+      month: requestData.month,
+      year: requestData.year,
+      classrooms: requestData.classroom,
+      modules: requestData.module
+  };
+
+  // Save Absence in the database
+  Absence.create(absence)
       .then(data => {
-        res.send(data);
+          res.status(201).send(data);
       })
       .catch(err => {
-        res.status(500).send({
-          message:
-            err.message || "Some error occurred while creating the Absence."
-        });
+          res.status(500).send({
+              message: err.message || "Some error occurred while creating the Absence."
+          });
       });
-  };
+};
+
 
   // Retrieve all Absences from the database.
 exports.findAll = (req, res) => {

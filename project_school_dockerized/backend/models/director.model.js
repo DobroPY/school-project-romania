@@ -1,12 +1,12 @@
 module.exports = (sequelize, Sequelize) => {
     const Director = sequelize.define("director", {
-      firstName:{
+      first_name:{
         type: Sequelize.STRING
       },
-      middleName:{
+      middle_name:{
         type: Sequelize.STRING
       },
-      lastName:{
+      last_name:{
         type: Sequelize.STRING
       },
       email: {
