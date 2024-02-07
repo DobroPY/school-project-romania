@@ -28,6 +28,11 @@ import Student from "../pages/Student";
 import Teacher from "../pages/Teacher";
 import PsychologicalTest from "../pages/PsychologicalTest";
 import Settings from "../pages/Settings";
+import CurriculumSetup from "../pages/CurriculumSetup";
+import SchoolGrades from "../pages/SchoolGrades";
+import GradeSubjects from "../pages/GradeSubjects";
+import SubjectModules from "../pages/SubjectModules";
+import LessonConnections from "../pages/LessonConnections";
 
 
 function getCookie(cname) {
@@ -65,6 +70,11 @@ const router = createBrowserRouter(
       <Route path="grades" element={<Grades/>} /> 
       <Route path="rewards" element={<Rewards/>} /> 
       <Route path="teacher-review" element={<TeacherReview/>} /> 
+      <Route path="curriculum-setup" element={<CurriculumSetup/>} />
+      <Route path="curriculum-setup/:school/grades" element={<SchoolGrades/>} />
+      <Route path="curriculum-setup/:school/grades/:grade/subjects" element={<GradeSubjects/>} />
+      <Route path="curriculum-setup/:school/grades/:grade/subjects/:subject/modules" element={<SubjectModules/>} />
+      <Route path="curriculum-setup/:school/grades/:grade/subjects/:subject/modules/:module/lessons-connections" element={<LessonConnections/>} />
       <Route path="psycological-test" element={<PsychologicalTest/>} /> 
       <Route path="chats" element={<Chats/>} /> 
       <Route path="settings" element={<Settings/>} /> 
