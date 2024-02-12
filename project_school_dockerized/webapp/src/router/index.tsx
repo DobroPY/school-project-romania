@@ -26,6 +26,7 @@ import {
 } from "../pages";
 import Student from "../pages/Student";
 import Teacher from "../pages/Teacher";
+import PsychologicalTest from "../pages/PsychologicalTest";
 
 
 function getCookie(cname) {
@@ -63,7 +64,7 @@ const router = createBrowserRouter(
       <Route path="grades" element={<Grades/>} /> 
       <Route path="rewards" element={<Rewards/>} /> 
       <Route path="teacher-review" element={<TeacherReview/>} /> 
-      <Route path="psycological-test" element={<ClassRooms/>} /> 
+      <Route path="psycological-test" element={<PsychologicalTest/>} /> 
       <Route path="chats" element={<Chats/>} /> 
       <Route path="settings" element={<></>} /> 
 
