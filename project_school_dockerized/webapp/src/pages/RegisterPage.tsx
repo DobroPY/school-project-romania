@@ -15,7 +15,7 @@ const RegisterPage = () => {
   const [password, setPassword] = useState("");
   const [first_name, setfirst_name] = useState("");
   const [middle_name, setmiddle_name] = useState("");
-  const [middle_name, setmiddle_name] = useState("");
+  const [last_name, setlast_name] = useState("");
 
   const onChangeEmail = (event) => {
     setEmail(event.target.value);
@@ -26,7 +26,7 @@ const RegisterPage = () => {
   const onChangemiddle_name = (event) => {
     setmiddle_name(event.target.value);
   };
-  const onChangemiddle_name = (event) => {
+  const onChangelast_name = (event) => {
     setmiddle_name(event.target.value);
   };
   const onChangePassword = (event) => {
@@ -41,7 +41,7 @@ const RegisterPage = () => {
     const user = {
       first_name: first_name,
       middle_name: middle_name,
-      middle_name: middle_name,
+      last_name: last_name,
       email: email,
       password: password,
       status:1,
@@ -88,7 +88,7 @@ const RegisterPage = () => {
           ></input>
           <p className="font-medium mt-8">Last Name</p>
           <input
-            onChange={onChangemiddle_name}
+            onChange={onChangelast_name}
             className=" mt-4 w-full h-12 border-2 border-gray-300 rounded p-2 outline-none"
             placeholder="Enter your last name"
             type="text"
