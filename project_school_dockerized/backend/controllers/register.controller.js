@@ -10,7 +10,7 @@ const handleNewUser = async (req,res) => {
 
     try {
         // Check if all required fields are present
-        const fields = ['email', 'password', 'firstName', 'middleName', 'lastName'];
+        const fields = ['email', 'password', 'first_name', 'middle_name', 'middle_name'];
         const requestData = req.body || req.query; // Assuming priority to req.body
         const missingFields = fields.filter(field => !requestData[field]);
 
@@ -34,9 +34,9 @@ const handleNewUser = async (req,res) => {
 
         // Create and save the user
         const user = {
-            first_name: requestData.firstName,
-            middle_name: requestData.middleName,
-            last_name: requestData.lastName,
+            first_name: requestData.first_name,
+            middle_name: requestData.middle_name,
+            last_name: requestData.middle_name,
             email: requestData.email,
             password: hashedPassword,
             status: 1,

@@ -57,7 +57,7 @@ app.get('/', (req, res)=>{
 });
 const db = require("./models");
 
-db.sequelize.sync({force: true,alter: true});
+db.sequelize.sync({force: false, alter: false});
 
 require("./routes/register.routes")(app);
 require("./routes/auth.routes")(app);

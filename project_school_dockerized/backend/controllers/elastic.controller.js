@@ -20,9 +20,9 @@ const createIndexTeacher = async(req,res) => {
                 "mappings": {
                     "properties": {
                         "id": { "type": "integer" },  
-                        "firstName": { "type": "text"  }, 
-                        "middleName": { "type": "text"  },
-                        "lastName": { "type": "text"  },
+                        "first_name": { "type": "text"  }, 
+                        "middle_name": { "type": "text"  },
+                        "middle_name": { "type": "text"  },
                         "email": { "type": "text"  },
                         "rank": { "type": "integer"  },
                         "status": { "type": "boolean"  }, 
@@ -75,9 +75,9 @@ const createIndexStudent = async(req,res) => {
                 "mappings": {
                     "properties": {
                         "id": { "type": "integer" },  
-                        "firstName": { "type": "text"  }, 
-                        "middleName": { "type": "text"  },
-                        "lastName": { "type": "text"  },
+                        "first_name": { "type": "text"  }, 
+                        "middle_name": { "type": "text"  },
+                        "middle_name": { "type": "text"  },
                         "email": { "type": "text"  },
                         "class": { "type": "integer"  },
                         "rank": { "type": "integer"  },
@@ -190,9 +190,9 @@ const createIndexDirector = async(req,res) => {
                 "mappings": {
                     "properties": {
                         "id": { "type": "integer" },  
-                        "firstName": { "type": "text"  }, 
-                        "middleName": { "type": "text"  },
-                        "lastName": { "type": "text"  },
+                        "first_name": { "type": "text"  }, 
+                        "middle_name": { "type": "text"  },
+                        "middle_name": { "type": "text"  },
                         "email": { "type": "text"  },
                         "rank": { "type": "text"  },
                         "status": { "type": "boolean"  }, 
