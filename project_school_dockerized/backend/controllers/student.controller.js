@@ -16,7 +16,7 @@ exports.create = async (req, res) => {
     }
 
     // Check if required fields are present
-    if (!requestData.email && !requestData.firstName && !requestData.middleName && !requestData.lastName) {
+    if (!requestData.email && !requestData.first_name && !requestData.middle_name && !requestData.middle_name) {
         res.status(400).send({
             message: "Content can not be empty!"
         });
@@ -32,9 +32,9 @@ exports.create = async (req, res) => {
 
     // Create a Student
     const student = {
-        first_name: requestData.firstName,
-        middle_name: requestData.middleName,
-        last_name: requestData.lastName,
+        first_name: requestData.first_name,
+        middle_name: requestData.middle_name,
+        last_name: requestData.middle_name,
         email: requestData.email,
         class: requestData.class,
         rank: requestData.rank,

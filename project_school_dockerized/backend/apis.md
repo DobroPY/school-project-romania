@@ -5,10 +5,10 @@
 
 ## BODY 
 
-{"email": "calinjovrea@gmail.com", "firstName": "firstname_1", "middleName": "middlename_2", "lastName": "lastName_2"}
+{"email": "calinjovrea@gmail.com", "first_name": "first_name_1", "middle_name": "middle_name_2", "middle_name": "middle_name_2"}
 
 ### POST
-http://localhost:6868/api/directors?firstName=Calin&middleName=Ioan&lastName=Popescu&email=calinjovrea@gmail.com&rank=1&status=1
+http://localhost:6868/api/directors?first_name=Calin&middle_name=Ioan&middle_name=Popescu&email=calinjovrea@gmail.com&rank=1&status=1
 
 ### GET
 # Read (Director Where Id == 1 ):
@@ -28,11 +28,11 @@ http://localhost:6868/api/directors/4
 
 ## BODY 
 
-{"email": "teacher@gmail.com", "firstName": "firstname_1", "middleName": "middlename_2", "lastName": "lastName_2"}
+{"email": "teacher@gmail.com", "first_name": "first_name_1", "middle_name": "middle_name_2", "middle_name": "middle_name_2"}
 
 
 ### POST
-http://localhost:6868/api/teachers?firstName=Calinescu&middleName=Ionescu&lastName=Popescu&email=calinpopescu@gmail.com&rank=1&status=1
+http://localhost:6868/api/teachers?first_name=Calinescu&middle_name=Ionescu&middle_name=Popescu&email=calinpopescu@gmail.com&rank=1&status=1
 
 ### GET
 # Read (Teacher Where Id == 1 ):
@@ -54,10 +54,10 @@ http://localhost:6868/api/teachers/4
 
 ## BODY
 
-{"email": "student@gmail.com", "firstName": "firstname_1", "middleName": "middlename_2", "lastName": "lastName_2"}
+{"email": "student@gmail.com", "first_name": "first_name_1", "middle_name": "middle_name_2", "middle_name": "middle_name_2"}
 
 ### POST
-http://localhost:6868/api/students?firstName=Calin&middleName=Ionescu&lastName=Popescu&email=calinjovrea@gmail.com&class=1&rank=1&status=1
+http://localhost:6868/api/students?first_name=Calin&middle_name=Ionescu&middle_name=Popescu&email=calinjovrea@gmail.com&class=1&rank=1&status=1
 
 ### GET
 # Read (Student Where Id == 1 ):
@@ -107,12 +107,12 @@ http://localhost:6868/api/classrooms/4
 
 ## BODY
 
-{"email": "calinjovrea321@gmail.com", "password": "123123123", "firstName": "firstname_1", "middleName": "middlename_2", "lastName": "lastName_2"}
+{"email": "calinjovrea321@gmail.com", "password": "123123123", "first_name": "first_name_1", "middle_name": "middle_name_2", "middle_name": "middle_name_2"}
 
 ### POST
-http://localhost:6868/api/users?firstName=Calin&middleName=Ioan&lastName=Jovrea&email=calinjovrea@gmail.com&password=password1&status=1
+http://localhost:6868/api/users?first_name=Calin&middle_name=Ioan&middle_name=Jovrea&email=calinjovrea@gmail.com&password=password1&status=1
 
-http://localhost:6868/api/users?firstName=Calinescu&middleName=Ionescu&lastName=Jovrescu&email=calinjovrea12354@gmail.com&password=password1&status=1
+http://localhost:6868/api/users?first_name=Calinescu&middle_name=Ionescu&middle_name=Jovrescu&email=calinjovrea12354@gmail.com&password=password1&status=1
 
 ### GET
 # Read (User Where Id == 1 ):

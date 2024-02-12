@@ -10,7 +10,7 @@ const Op = db.Sequelize.Op;
 exports.create = async (req, res) => {
 
   function validateFields(req) {
-      const fields = ["firstName", "middleName", "lastName", "email", "password"];
+      const fields = ["first_name", "middle_name", "middle_name", "email", "password"];
       const requestData = req.body || req.query; // Assuming priority to req.body
       return fields.every(field => requestData[field]);
   }
@@ -23,9 +23,9 @@ exports.create = async (req, res) => {
           const hashedPassword = await bcrypt.hash(reqData.password, 10);
 
           const user = {
-              first_name: reqData.firstName,
-              middle_name: reqData.middleName,
-              last_name: reqData.lastName,
+              first_name: reqData.first_name,
+              middle_name: reqData.middle_name,
+              last_name: reqData.middle_name,
               email: reqData.email,
               password: hashedPassword,
               status: 1
@@ -41,7 +41,7 @@ exports.create = async (req, res) => {
   // Assuming this is inside an async route handler
   if (Object.keys(req.body).length > 0 || Object.keys(req.query).length > 0) {
       if (!validateFields(req)) {
-          return res.status(400).json({ 'message': 'firstName, middleName, lastName, email, password are required' });
+          return res.status(400).json({ 'message': 'first_name, middle_name, middle_name, email, password are required' });
       }
       const requestData = req.body || req.query; // Assuming priority to req.body
       await handleUserRequest(requestData, res);

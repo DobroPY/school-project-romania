@@ -12,7 +12,7 @@ exports.create = async (req, res) => {
   }
 
   // Validate request
-  if (!requestData.email && !requestData.firstName && !requestData.middleName && !requestData.lastName) {
+  if (!requestData.email && !requestData.first_name && !requestData.middle_name && !requestData.middle_name) {
       res.status(400).send({
           message: "Content can not be empty!"
       });
@@ -29,9 +29,9 @@ exports.create = async (req, res) => {
 
   // Create a Director
   const director = {
-      first_name: requestData.firstName,
-      middle_name: requestData.middleName,
-      last_name: requestData.lastName,
+      first_name: requestData.first_name,
+      middle_name: requestData.middle_name,
+      last_name: requestData.middle_name,
       email: requestData.email,
       rank: requestData.rank,
       status: requestData.status !== undefined ? requestData.status : false

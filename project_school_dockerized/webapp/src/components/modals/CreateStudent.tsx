@@ -6,15 +6,15 @@ const CreateStudentModal = () => {
   const showModal = () => {
     setShow(!show);
   };
-  const[firstName, setFirstName] = useState("");
-  const[lasttName, setLastName] = useState("");
+  const[first_name, setfirst_name] = useState("");
+  const[lasttName, setmiddle_name] = useState("");
   const[parentOneName, setParentOneName] = useState("");
   const[parentTwoName, setParentTwoName] = useState("");
   const [classroom, setClassRoom] = useState("");
 
   const submit = (event)=>{
     const user = {
-        firstName: firstName,
+        first_name: first_name,
         lasttName:lasttName,
         parentOneName:parentOneName,
         parentTwoName:parentTwoName,
@@ -77,9 +77,9 @@ const CreateStudentModal = () => {
           <div className="inputs mt-10">
                 <form action="">
                     <p className="mx-[5%] text-sm text-gray-700 mt-4">First Name</p>
-                    <input className="w-[90%] mx-[5%] border border-gray-400 rounded-lg p-2 mt-2 outline-none" onChange={(event)=>{ setFirstName(event.target.value)}} placeholder="First Name"></input>
+                    <input className="w-[90%] mx-[5%] border border-gray-400 rounded-lg p-2 mt-2 outline-none" onChange={(event)=>{ setfirst_name(event.target.value)}} placeholder="First Name"></input>
                     <p className="mx-[5%] text-sm text-gray-700 mt-4">Last Name</p>
-                    <input className="w-[90%] mx-[5%] border border-gray-400 rounded-lg p-2 mt-2 outline-none" onChange={(event)=>{ setLastName(event.target.value)}} placeholder="Last Name"></input>
+                    <input className="w-[90%] mx-[5%] border border-gray-400 rounded-lg p-2 mt-2 outline-none" onChange={(event)=>{ setmiddle_name(event.target.value)}} placeholder="Last Name"></input>
                     <p className="mx-[5%] text-sm text-gray-700 mt-4">Parent 1 Name</p>
                     <input className="w-[90%] mx-[5%] border border-gray-400 rounded-lg p-2 mt-2 outline-none" onChange={(event)=>{ setParentOneName(event.target.value)}} placeholder="Parent Name"></input>
                     <p className="mx-[5%] text-sm text-gray-700 mt-4">Parent 2 Name</p>

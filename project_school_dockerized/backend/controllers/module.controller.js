@@ -7,7 +7,6 @@ const Op = db.Sequelize.Op;
 exports.create = async (req, res) => {
     let requestData = req.body || {};
 
-    console.log(requestData);
     // Use req.query if req.body is empty and req.query is present
     if (!req.body || (Object.keys(req.body).length === 0 && req.query)) {
         requestData = req.query;
@@ -21,21 +20,18 @@ exports.create = async (req, res) => {
         return;
     }
      // Find Teacher
-    console.log(requestData.teacher_email);
     const findTeacher = await Teacher.findOne({
         where: {
             email: requestData.teacher_email
         },
     }); 
     if (!findTeacher) return res.status(404).send({ message: "Teacher not found" }); // Not found
-    console.log(findTeacher);
     // Create a Module
     const module = {
         teacher: findTeacher.id,
         name: requestData.name,
     };
 
-    console.log(module);
     // Save Module in the database
     Module.create(module)
         .then(data => {

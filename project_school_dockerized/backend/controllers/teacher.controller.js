@@ -10,12 +10,11 @@ exports.create = async (req, res) => {
 
   if (!req.body || (Object.keys(req.body).length === 0 && req.query)) {
       // Fall back to req.query if req.body is empty and req.query is present
-      console.log('123123@');
       requestData = req.query;
       source = 'query';
   }
 
-  if (!requestData.email && !requestData.firstName && !requestData.middleName && !requestData.lastName) {
+  if (!requestData.email && !requestData.first_name && !requestData.middle_name && !requestData.middle_name) {
       res.status(400).send({
           message: "Content can not be empty!"
       });
@@ -30,9 +29,9 @@ exports.create = async (req, res) => {
 
   // Create a Teacher
   const teacher = {
-      first_name: requestData.firstName,
-      middle_name: requestData.middleName,
-      last_name: requestData.lastName,
+      first_name: requestData.first_name,
+      middle_name: requestData.middle_name,
+      last_name: requestData.middle_name,
       email: requestData.email,
       rank: requestData.rank,
       status: requestData.status !== undefined ? requestData.status : false
@@ -50,7 +49,7 @@ exports.create = async (req, res) => {
       });
     // // Validate request
     // if (req.body){
-    //   if (!req.body.email && !req.body.firstName && !req.body.middleName && !req.body.lastName) {
+    //   if (!req.body.email && !req.body.first_name && !req.body.middle_name && !req.body.middle_name) {
     //     res.status(400).send({
     //         message: "Content can not be empty!"
     //     });
@@ -58,7 +57,7 @@ exports.create = async (req, res) => {
     //   }
     // }
     // if(req.query){
-    //   if (!req.query.email&&!req.query.firstName&&!req.query.middleName&&!req.query.lastName) {
+    //   if (!req.query.email&&!req.query.first_name&&!req.query.middle_name&&!req.query.middle_name) {
     //     res.status(400).send({
     //       message: "Content can not be empty!"
     //     });
@@ -78,9 +77,9 @@ exports.create = async (req, res) => {
 
     // // Create a Teacher
     // const teacher = {
-    //   firstName: req.query.firstName,
-    //   middleName: req.query.middleName,
-    //   lastName: req.query.lastName,
+    //   first_name: req.query.first_name,
+    //   middle_name: req.query.middle_name,
+    //   middle_name: req.query.middle_name,
     //   email: req.query.email,
     //   rank: req.query.rank,
     //   status: req.query.status ? req.query.status : false
