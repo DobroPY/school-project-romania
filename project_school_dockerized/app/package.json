@@ -12,9 +12,9 @@
     "@elastic/elasticsearch": "7.4",
     "@emotion/react": "^11.11.3",
     "@emotion/styled": "^11.11.0",
-    "@mui/material": "^5.15.6",
-    "@mui/styled-engine-sc": "^6.0.0-alpha.13",
-    "@mui/x-date-pickers": "^6.19.2",
+    "@mui/material": "^5.15.9",
+    "@mui/styled-engine-sc": "^6.0.0-alpha.16",
+    "@mui/x-date-pickers": "^6.19.4",
     "axios": "^1.6.2",
     "expo": "~48.0.18",
     "expo-dev-client": "^2.2.1",
@@ -27,7 +27,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
-    "tailwind-scrollbar": "^3.0.5"
+    "tailwind-scrollbar": "^3.1.0"
   },
   "private": true
 }
