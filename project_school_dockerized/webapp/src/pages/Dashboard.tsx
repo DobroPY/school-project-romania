@@ -7,13 +7,19 @@ import UserNum from "../components/UserNum";
 import TeacherCell from "../components/users-cells/TeacherCell";
 import StudentCell from "../components/users-cells/StudentCell";
 import StudentTopTable from "../components/users-cells/StudentTopTable";
+import {getTeachers} from "../apis/get";
 
 const DashBoard = () => {
   const navigate = useNavigate();
   const auth = useContext(AuthContext);
+
   if (auth == false) {
     window.location.replace("/login");
   }
+
+  useEffect(()=>{
+      getTeachers();
+  })
 
   const teachers = [{},{},{},{},{}]
   const students = [{},{},{},{},{}]
