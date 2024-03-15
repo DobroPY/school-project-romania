@@ -6,9 +6,9 @@ const token = getCookie("jwt");
   
 //teachers
 
-export async function deleteTeacher(teacher){
+export async function deleteTeacher(id){
     
-    await axios.delete(`http://localhost:6868/api/teachers/${teacher.id}`,
+    await axios.delete(`http://localhost:6868/api/teachers/${id}`,
         {
             headers:{
                 Authorization: `Bearer ${token}`,
@@ -31,9 +31,9 @@ export async function deleteTeacher(teacher){
 
 // students
 
-export async function deleteStudent(student){
+export async function deleteStudent(id){
     
-    await axios.delete(`http://localhost:6868/api/students/${student.id}`,
+    await axios.delete(`http://localhost:6868/api/students/${id}`,
         {
             headers:{
                 Authorization: `Bearer ${token}`,
@@ -56,9 +56,9 @@ export async function deleteStudent(student){
 
 // classrooms
 
-export async function deleteClassroom(classroom){
+export async function deleteClassroom(id){
     
-    await axios.delete(`http://localhost:6868/api/classrooms/${classroom.id}`,
+    await axios.delete(`http://localhost:6868/api/classrooms/${id}`,
         {
             headers:{
                 Authorization: `Bearer ${token}`,
@@ -156,9 +156,9 @@ export async function deleteAbsence(absence){
 
 // grades
 
-export async function deleteGrade(grade){
+export async function deleteGrade(id){
     
-    await axios.delete(`http://localhost:6868/api/grades/${grade.id}`,
+    await axios.delete(`http://localhost:6868/api/grades/${id}`,
         {
             headers:{
                 Authorization: `Bearer ${token}`,

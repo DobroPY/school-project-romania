@@ -1,24 +1,120 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ProgressBar from "../components/progressbar/ProgressBar";
 import StudentGrades from "../components/StudentGrades";
 import StudentRewards from "../components/StudentRewards";
+import axios from "axios";
+import getCookie from "../apis/getCookies";
 
 const Rewards = () =>{
-  const [students,setStudents] = useState ([
-    {
-      name:"Name 1",
-      id:"123456"
-    },{
-      name:"Name 2",
-      id:"234567"
-    },
-    {
-      name:"Name 3",
-      id:"345678"
-    }, 
-  ]);
+  const [students,setStudents] : any = useState ([]);
+  const [classrooms, setClassrooms] : any = useState([]);
+  const[currentUser, setCurrentUser]: any = useState([]);
+  const token = getCookie("jwt");
 
-  const[currentUser, setCurrentUser] = useState(students[0]);
+  const getAllData = async ()=>{
+    const resClassrooms = await axios.get("http://localhost:6868/api/classrooms",{
+      headers:{
+          'Authorization': `Bearer ${token}`,
+          'Content-Type' : 'application/json',
+          'Access-Control-Allow-Credentials': true,
+          'Access-Control-Allow-Origin' : '*',
+          'Access-Control-Allow-Methods':'GET,PUT,POST,DELETE,PATCH,OPTIONS',   
+      }});
+  
+
+
+      const students = await getStudents();
+      const classroomsData = resClassrooms.data;
+
+      
+    for(let i=0; i < classroomsData.length; i++){
+      let classStudents : any = [];
+      for(let j=0; j< students.length; j++){
+        if(classroomsData[i].name == students[j].class){
+          classStudents.push(students[j]);
+        }
+        classroomsData[i].students = classStudents;
+        classroomsData[i].numOfStudents = classStudents.length;
+    }
+  }
+
+  setStudents(students);
+  setClassrooms(classroomsData);
+  } 
+
+  const getStudents = async ()=>{
+    const resStudents = await axios.get("http://localhost:6868/api/students", {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Credentials": true,
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
+      },
+    });
+    const resGrades = await axios.get("http://localhost:6868/api/grades",{
+      headers:{
+          'Authorization': `Bearer ${token}`,
+          'Content-Type' : 'application/json',
+          'Access-Control-Allow-Credentials': true,
+          'Access-Control-Allow-Origin' : '*',
+          'Access-Control-Allow-Methods':'GET,PUT,POST,DELETE,PATCH,OPTIONS',   
+      }});
+
+    const gradesData = resGrades.data;
+    const students = resStudents.data;
+
+    for( let i=0; i < students.length; i++){
+      let sum = 0;
+      let count = 0;
+      students[i]["grades"] = [];
+      for(let j=0; j < gradesData.length; j++){
+        if( students[i].id == gradesData[j].student){
+          students[i]["grades"].push(gradesData[j]);
+          sum += gradesData[j].grade;
+          count++;
+        }
+        if( count > 0 ){
+        students[i].gradesAverage = sum / count
+        }
+        else{
+          students[i].gradesAverage = 0;
+        }
+      }
+    }
+
+    return students
+
+  }
+
+  useEffect(()=>{
+    getAllData();
+  },[]);
+
+  const selectClassroom = (event)=>{
+    const value = event.target.value;
+    const selectedClass = classrooms.find((item)=> item.name == value);
+    
+    setStudents(selectedClass.students);
+    
+    if(selectedClass.students.length > 0){
+    setCurrentUser(selectedClass.students[0])
+    }
+  }
+
+  const search = async (event)=>{
+
+    
+    const allStudents = await getStudents();
+
+    const input = event.target.value;
+    setTimeout(async ()=>{
+      
+      const newStudents = allStudents.filter((item)=> item.last_name.includes(input));
+      setStudents(newStudents);
+    },1000)
+  }
+
 
   const changeUser = (user)=>{
     //change index with user
@@ -26,19 +122,23 @@ const Rewards = () =>{
   }
     return(
       <section className="w-4/5">
-      <p className="px-6 pt-6 font-semibold text-2xl">Grades</p>
+      <p className="px-6 pt-6 font-semibold text-2xl">Rewards</p>
       <p className="px-6 font-normal text-slate-500">
-        Select Classrom and Check Individual grade of each student
+        Select Classrom and Check Individual reward of each student
       </p>
       <div className="ml-6 mt-10  flex">
-        <select
+      <select
           className="border-2 border-gray-200 rounded-md p-2 w-[200px] outline-none "
           id="classrooms"
+          onChange={selectClassroom}
         >
-          <option value="Classroom 1">Classroom 1</option>
-          <option value="Classroom 2">Classroom 2</option>
-          <option value="Classroom 3">Classroom 3</option>
-          <option value="Classroom 4">Classroom 4</option>
+          <option value="">Select Classroom</option>
+          {classrooms && classrooms.map((item)=>{
+            return(
+              <option value={item.name}>{item.name}</option>
+            );
+          })}
+        
         </select>
       </div>
 
@@ -46,7 +146,7 @@ const Rewards = () =>{
         <div className="student-list-details w-[30%]">
           <div className="title flex items-center">
             <p className="font-semibold text-xl pl-4 pr-1 py-4">Students</p>
-            <p className="font-ligth text-lg text-slate-400">(32)</p>
+            <p className="font-ligth text-lg text-slate-400">({students.length})</p>
           </div>
 
           <div className="input px-4 mt-2 ">
@@ -75,6 +175,7 @@ const Rewards = () =>{
                 type="text"
                 name="search"
                 placeholder="Student ID or name"
+                onChange={search}
                 className="form-input w-full outline-none pr-2 pl-8 py-2 border border-slate-400 rounded-lg"
               />
             </label>
@@ -85,7 +186,7 @@ const Rewards = () =>{
           </p>
 
           <div className="student-list px-4 mt-2 max-h-[calc(100vh_-_100px)] overflow-auto scrollbar-thumb-slate-300 scrollbar-thin scrollbar-h-[15px]">
-            {students.map((item, index) => {
+            {students && students.map((item, index) => {
               return (
                 <div className={ currentUser.id == item.id ? "flex justify-between items-center py-1 bg-purple-100 text-purple-600 rounded-lg p-2 cursor-pointer" :"flex justify-between items-center py-1 p-2 cursor-pointer"} onClick={()=>{changeUser(item)}}>
                   <div className="flex">
@@ -101,11 +202,11 @@ const Rewards = () =>{
                       <path d="M10 0a10 10 0 1 0 10 10A10.011 10.011 0 0 0 10 0Zm0 5a3 3 0 1 1 0 6 3 3 0 0 1 0-6Zm0 13a8.949 8.949 0 0 1-4.951-1.488A3.987 3.987 0 0 1 9 13h2a3.987 3.987 0 0 1 3.951 3.512A8.949 8.949 0 0 1 10 18Z" />
                     </svg>
                     <div className="username ml-2 text-left">
-                      <p className="font-semibold text-sm">Phonenix Baker</p>
-                      <p className="text-sm font-light">ID: 123456</p>
+                      <p className="font-semibold text-sm">{item.first_name} {item.last_name}</p>
+                      <p className="text-sm font-light">ID: {item.id}</p>
                     </div>
                   </div>
-                  <p>8.2</p>
+                  <p>{item.gradesAverage}  </p>
                 </div>
               );
             })}

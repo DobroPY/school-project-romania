@@ -1,8 +1,10 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Calendar from "../components/calendar/Calendar";
 import DatePick from "../components/DatePick";
 import AbsencesCalendar from "../components/calendar/AbsencesCalendar";
 import ScheduleCalendar from "../components/calendar/ScheduleCalendar";
+import axios from "axios";
+import getCookie from "../apis/getCookies";
 
 
 
@@ -19,11 +21,63 @@ const Calendars = ()=>{
     }
   ]
   
-  const[currentType, setCurrentType] = useState("absences");
+  const[currentType, setCurrentType] : any = useState("absences");
+  const [date, setDate] : any = useState("");
 
   const changeCalendarType = (type) =>{
     setCurrentType(type);
   }
+  const token = getCookie("jwt");
+  const[classrooms, setClassrooms] : any = useState([]);
+  const [classroom, setClassroom] : any = useState({});
+
+  const getAllData = async ()=>{
+    const resClassrooms = await axios.get("http://localhost:6868/api/classrooms",{
+      headers:{
+          'Authorization': `Bearer ${token}`,
+          'Content-Type' : 'application/json',
+          'Access-Control-Allow-Credentials': true,
+          'Access-Control-Allow-Origin' : '*',
+          'Access-Control-Allow-Methods':'GET,PUT,POST,DELETE,PATCH,OPTIONS',   
+      }});
+      const resAbsences = await axios.get("http://localhost:6868/api/absences",{
+      headers:{
+          'Authorization': `Bearer ${token}`,
+          'Content-Type' : 'application/json',
+          'Access-Control-Allow-Credentials': true,
+          'Access-Control-Allow-Origin' : '*',
+          'Access-Control-Allow-Methods':'GET,PUT,POST,DELETE,PATCH,OPTIONS',   
+      }});
+
+
+
+      const classroomsData = resClassrooms.data;
+      const absencesData = resAbsences.data;
+
+      for(let i=0; i< classroomsData.length; i++){
+        classroomsData[i]["absences"] = [];
+        for(let j=0; j< absencesData.length; j++){
+          if(classroomsData[i].name == absencesData[j].classroom){
+            classroomsData[i]["absences"].push(absencesData[j]);
+          }
+        }        
+      }
+      
+      setClassrooms(classroomsData);
+  }
+
+ const selectClassroom = (event)=>{
+    setClassroom(event.target.value);
+ }
+
+ const changeDate = (value)=>{
+      setDate(value);
+      console.log(value)
+ }
+
+  useEffect(()=>{
+      getAllData();
+  },[]);
 
     return(
         <section className="w-4/5">
@@ -32,14 +86,18 @@ const Calendars = ()=>{
                 <p className="mt-2 text-gray-500">Explore Calendar and Check Absences and Schedule</p>
             </div>
             <div className="ml-6 mt-10  flex justify-between">
-        <select
+            <select
           className="border-2 border-gray-200 rounded-md p-2 w-[200px] outline-none "
           id="classrooms"
+          onChange={selectClassroom}
         >
-          <option value="Classroom 1">Classroom 1</option>
-          <option value="Classroom 2">Classroom 2</option>
-          <option value="Classroom 3">Classroom 3</option>
-          <option value="Classroom 4">Classroom 4</option>
+          <option value="">Select Classroom</option>
+          {classrooms && classrooms.map((item)=>{
+            return(
+              <option value={item}>{item.name}</option>
+            );
+          })}
+        
         </select>
       {currentType == "schedule" ?  <button  className="border border-slate-300 rounded-md bg-purple-500 text-white outline-none p-2 mr-6">
           + Add new schedule
@@ -60,7 +118,7 @@ const Calendars = ()=>{
                 })}
             </div>
               
-              <DatePick/>
+              <DatePick changeDate={changeDate}/>
                 
           </div>
 
@@ -74,7 +132,7 @@ const Calendars = ()=>{
                 <p className="border-t border-l border-r border-slate-300 p-2">Friday</p>
                 <p className="border-t border-l border-r border-slate-300 p-2">Saturday</p>
           </div>
-          {currentType == "absences" ? <AbsencesCalendar/> : <ScheduleCalendar/>}
+          {currentType == "absences" ? <AbsencesCalendar date={date} data={classroom} /> : <ScheduleCalendar date={date} />}
       </div>
 
 

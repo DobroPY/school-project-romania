@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import ModalAbsences from "../modals/ModalAbsences";
 
 interface Day{
@@ -6,9 +6,10 @@ interface Day{
     active: boolean
 }
 
-const AbsencesCalendar = () =>{
+const AbsencesCalendar = (props) =>{
 
     let days: Day[] = [];
+    const [absences, setAbsences] = useState([]);
 
 function getDaysInMonth(year, month) {
   return new Date(year, month, 0).getDate();
@@ -18,7 +19,8 @@ function compareNumbers(a, b) {
 }
 
 
-const month = "January 2024";
+const month = props.date;
+const data = props.data;
 
 
 const initialDate = new Date(month);
@@ -64,6 +66,18 @@ function completeNextMonthDays(){
 completeNextMonthDays();
 
 
+// const completeActiveDays = ()=>{
+//     for(let i=0; i<absences.length; i++ ){
+//         for(let j=0; j< days.length; j++){
+//             days[j]["absences"] = [];
+//             if(days[j].active == true && absences[i].day + 1 == days[j].date && absences[i].month == currentMonth && absences[i].year == currentYear){
+//                 days[j]["absences"].push(absences[i]);
+//             }
+//         }
+//     }
+// }
+
+//completeActiveDays();
 
 
 

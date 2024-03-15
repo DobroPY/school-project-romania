@@ -38,9 +38,10 @@ const LoginPage = () => {
                 'Access-Control-Allow-Origin' : '*',
                 'Access-Control-Allow-Methods':'GET,PUT,POST,DELETE,PATCH,OPTIONS',   
          }
-        }).then((res)=>{
-              const token = res.data.accessToken;
+        }).then(async (res)=>{
+              const token = res.data.accessToken;                
               document.cookie = `jwt=${token}`;
+              document.cookie = `email=${email}`;
               document.location.reload();
 
               

@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { useNavigate, redirect } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { useNavigate, redirect, useParams } from "react-router-dom";
 import ProgressBarRounded from "../components/progressbar/ProgressBarRounded";
 import GradesStats from "../components/stats-pages/GradesStats";
 import RewardsStats from "../components/stats-pages/RewardsStats";
@@ -7,9 +7,14 @@ import AttendaceStats from "../components/stats-pages/AttendanceStats";
 import EditStudentModal from "../components/modals/EditStudentModal";
 import DeleteStudent from "../components/modals/Delete";
 import Delete from "../components/modals/Delete";
+import { getStudent } from "../apis/get";
+import axios, { all } from "axios";
+import getCookie from "../apis/getCookies";
 
 const Student = () => {
   const [currentPage, setCurrentPage] = useState("Grades");
+  const [student, setStudent]: any = useState([]);
+  const [studentTeachers, setStudentTeachers]: any = useState([]);
 
   const statsPages = [
     {
@@ -22,6 +27,108 @@ const Student = () => {
       name: "Attendance",
     },
   ];
+
+  const params = useParams();
+
+  const id = params.id;
+  const token = getCookie("jwt");
+
+  const transformIdToName = (id, teachers) => {};
+
+  const getAllData = async () => {
+    const resClassrooms = await axios.get(
+      `http://localhost:6868/api/classrooms`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Credentials": true,
+          "Access-Control-Allow-Origin": "*",
+          "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
+        },
+      }
+    );
+    const resTeachers = await axios.get(`http://localhost:6868/api/teachers`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Credentials": true,
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
+      },
+    });
+
+    const studentData = await getStudent();
+    const allTeachers = resTeachers.data;
+    const classrooms = resClassrooms.data.filter(
+      (item) => item.name == studentData.class
+    );
+    const teachers: any = [];
+
+    for (let i = 0; i < allTeachers.length; i++) {
+      for (let j = 0; j < classrooms.length; j++) {
+        if (allTeachers[i].id == classrooms[j].teacher) {
+          teachers.push(allTeachers[i]);
+        }
+      }
+    }
+
+    //console.log(classrooms);
+    setStudentTeachers(teachers);
+    setStudent(studentData);
+  };
+
+  const getStudent = async () => {
+    const resStudent = await axios.get(
+      `http://localhost:6868/api/students/${id}`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Credentials": true,
+          "Access-Control-Allow-Origin": "*",
+          "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
+        },
+      }
+    );
+
+    const resGrades = await axios.get(`http://localhost:6868/api/grades`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Credentials": true,
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
+      },
+    });
+
+    const studentData = resStudent.data;
+
+    const grades = resGrades.data;
+
+    for (let i = 0; i < grades.length; i++) {
+      let gradesSum = 0;
+      let rewardsSum = 0;
+      let count = 0;
+      if (studentData.id == grades[i].student) {
+        gradesSum += grades[i].grade;
+        rewardsSum += grades[i].reward;
+        count += 1;
+      }
+      if (count > 0) {
+        studentData.gradesAverage = gradesSum / count;
+        studentData.rewardsAverage = rewardsSum / count;
+      } else {
+        studentData.gradesAverage = 0;
+        studentData.rewardsAverage = 0;
+      }
+    }
+    return studentData;
+  };
+
+  useEffect(() => {
+    getAllData();
+  }, []);
 
   const changePage = (name) => {
     setCurrentPage(name);
@@ -71,8 +178,10 @@ const Student = () => {
             </svg>
           </div>
 
-          <p className="mt-6 font-semibold mb-1">Natali Craig</p>
-          <p className="font-normal text-sm text-slate-500">ID:123456</p>
+          <p className="mt-6 font-semibold mb-1">
+            {student.first_name} {student.last_name}
+          </p>
+          <p className="font-normal text-sm text-slate-500">ID:{id}</p>
 
           <div className="flex justify-center mt-6 pb-4">
             <p className="bg-blue-200 px-3 py-1 border border-gray-200 rounded-xl text-blue-600">
@@ -83,13 +192,19 @@ const Student = () => {
           <div className="bg-white w-[96%] mx-[2%] min-h-[50px] rounded-md flex justify-center pb-10 pt-4">
             <div className="p-2">
               <div className="flex justify-center mb-2">
-                <ProgressBarRounded percentage={80} background="#0D659E" />
+                <ProgressBarRounded
+                  percentage={student.gradesAverage * 10}
+                  background="#0D659E"
+                />
               </div>
               <p className="pt-4"> Grades Average</p>
             </div>
             <div className="p-2">
               <div className="flex justify-center mb-2">
-                <ProgressBarRounded percentage={80} background="#FFC42A" />
+                <ProgressBarRounded
+                  percentage={student.rewardsAverage * 10}
+                  background="#FFC42A"
+                />
               </div>
               <p className="pt-4"> Rewards Average</p>
             </div>
@@ -101,11 +216,11 @@ const Student = () => {
             <div className="user-personal-details p-4 flex">
               <div className="bg-blue-100 p-2 rounded-md w-[48%]">
                 <p className="font-normal text-sm text-slate-500">First Name</p>
-                <p>Natali</p>
+                <p>{student.first_name}</p>
               </div>
               <div className="bg-blue-100 p-2 rounded-md w-[48%] ml-[2%]">
                 <p className="font-normal text-sm text-slate-500">Last Name</p>
-                <p>Craig</p>
+                <p>{student.last_name}</p>
               </div>
             </div>
             <div className="user-personal-details p-4 flex">
@@ -124,19 +239,21 @@ const Student = () => {
             </div>
             <div className="actions flex float-right pr-[4%] ">
               <EditStudentModal text={"Edit details"} />
-              <Delete name={"student"} />
+              <Delete user={"student"} id={id} />
             </div>
           </div>
 
           <div className="mx-[1%] mt-6">
             <p className="text-gray-500">Teachers:</p>
           </div>
-          <div className="grid grid-cols-5 mx-[1%] mt-2">
-            {[1, 2, 3, 4, 5, 6, 7, 8].map((subject) => {
+          <div className="grid grid-cols-4 mx-[1%] mt-2">
+            {studentTeachers.map((item, index) => {
               return (
                 <div className="flex p-2 text-sm bg-blue-100 rounded-lg mr-2 mb-2">
-                  <p className="text-[#3538CD]">English: </p>
-                  <p className="ml-[3px]">Jacob Jones</p>
+                  <p className="text-[#3538CD]">Class Teacher: </p>
+                  <p className="ml-[3px]">
+                    {item.first_name} {item.last_name}
+                  </p>
                 </div>
               );
             })}

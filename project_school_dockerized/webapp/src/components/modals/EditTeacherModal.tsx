@@ -1,24 +1,38 @@
 import React, { useState } from "react";
+import { updateTeacher } from "../../apis/update";
 
 const EditTeacherModal = (props) => {
   const [show, setShow] = useState(false);
   const showModal = () => {
     setShow(!show);
   };
-  const[first_name, setfirst_name] = useState("");
-  const[lasttName, setmiddle_name] = useState("");
+  const[firstName, setFirstName] = useState("");
+  const[lastName, setLastName] = useState("");
   const[age, setAge] = useState("");
+  const[middleName, setMiddleName] = useState("");
+  const [subject, setSubject] = useState("");
+  const[rank, setRank] = useState("");
+  const [email, setEmail] = useState("");
+
+  const teacher  = props.teacher;
+  
+  
 
   const submit = (event)=>{
     event.preventDefault();
 
     const user = {
-        first_name: first_name,
-        lasttName:lasttName,
-        age:age
-    }
+      first_name: firstName,
+        last_name:lastName,
+        middle_name:middleName,
+        email:email,
+        status:1,
+  }
+   
 
     console.log(user);
+    updateTeacher(user,  teacher.id);
+    console.log("ok");
 
     setShow(!show);
 
@@ -91,13 +105,16 @@ const EditTeacherModal = (props) => {
 
           <div className="inputs mt-10">
                 <form action="">
-                    <p className="mx-[5%] text-sm text-gray-700 mt-4">First Name</p>
-                    <input className="w-[90%] mx-[5%] border border-gray-400 rounded-lg p-2 mt-2 outline-none" onChange={(event)=>{ setfirst_name(event.target.value)}} placeholder="Natali"></input>
+                <p className="mx-[5%] text-sm text-gray-700 mt-4">First Name</p>
+                    <input className="w-[90%] mx-[5%] border border-gray-400 rounded-lg p-2 mt-2 outline-none" onChange={(event)=>{ setFirstName(event.target.value)}} placeholder="First Name"></input>
                     <p className="mx-[5%] text-sm text-gray-700 mt-4">Last Name</p>
-                    <input className="w-[90%] mx-[5%] border border-gray-400 rounded-lg p-2 mt-2 outline-none" onChange={(event)=>{ setmiddle_name(event.target.value)}} placeholder="Craig"></input>
-                    <p className="mx-[5%] text-sm text-gray-700 mt-4">Age</p>
-                    <input className="w-[90%] mx-[5%] border border-gray-400 rounded-lg p-2 mt-2 outline-none" onChange={(event)=>{ setAge(event.target.value)}} placeholder="33"></input>
-                </form>
+                    <input className="w-[90%] mx-[5%] border border-gray-400 rounded-lg p-2 mt-2 outline-none" onChange={(event)=>{ setLastName(event.target.value)}} placeholder="Last Name"></input>
+                    <p className="mx-[5%] text-sm text-gray-700 mt-4">Middle Name Name</p>
+                    <input className="w-[90%] mx-[5%] border border-gray-400 rounded-lg p-2 mt-2 outline-none" onChange={(event)=>{ setMiddleName(event.target.value)}} placeholder="Middle Name"></input>      
+                    <p className="mx-[5%] text-sm text-gray-700 mt-4">Email</p>
+                    <input className="w-[90%] mx-[5%] border border-gray-400 rounded-lg p-2 mt-2 outline-none" onChange={(event)=>{ setEmail(event.target.value)}} placeholder="Email"></input>      
+                    
+                    </form>
           </div>
 
           <div className="actions w-[90%] mx-[5%] flex justify-between mt-10 ">

@@ -6,7 +6,7 @@ interface Day{
     active: boolean
 }
 
-const ScheduleCalendar = () =>{
+const ScheduleCalendar = (props) =>{
 
     let days: Day[] = [];
 
@@ -18,7 +18,7 @@ function compareNumbers(a, b) {
 }
 
 
-const month = "January 2024";
+const month = props.date;
 
 
 const initialDate = new Date(month);

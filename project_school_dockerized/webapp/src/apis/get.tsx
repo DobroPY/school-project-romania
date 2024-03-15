@@ -8,7 +8,7 @@ const token = getCookie("jwt");
 
 // teachers
 
-export async function getTeachers(){
+export async function getTeachers(setTeachers){
     
     await axios.get('http://localhost:6868/api/teachers',
         {
@@ -22,8 +22,10 @@ export async function getTeachers(){
         }).then((res)=>{
              
             const data =  res.data;
-            console.log(data);
-
+            setTeachers(data);
+            //console.log("teachers: " ,data);
+            
+            
               
         }).catch((error)=>{
           console.log(error);
@@ -32,7 +34,7 @@ export async function getTeachers(){
 }
 
 
-export async function getTeacher(id){
+export async function getTeacher(id, setTeacher){
     
     await axios.get(`http://localhost:6868/api/teachers/${id}`,
         {
@@ -46,7 +48,7 @@ export async function getTeacher(id){
         }).then((res)=>{
              
             const data =  res.data;
-            console.log(data);
+            setTeacher(data);
 
               
         }).catch((error)=>{
@@ -57,7 +59,7 @@ export async function getTeacher(id){
 
 // students
 
-export async function getStudents(){
+export async function getStudents(setStudents){
     
     await axios.get('http://localhost:6868/api/students',
         {
@@ -71,7 +73,8 @@ export async function getStudents(){
         }).then((res)=>{
              
             const data =  res.data;
-            console.log(data);
+            setStudents(data);
+            
 
               
         }).catch((error)=>{
@@ -80,7 +83,7 @@ export async function getStudents(){
         })
 }
 
-export async function getStudent(id){
+export async function getStudent(id, setStudent){
     
     await axios.get(`http://localhost:6868/api/students/${id}`,
         {
@@ -94,7 +97,7 @@ export async function getStudent(id){
         }).then((res)=>{
              
             const data =  res.data;
-            console.log(data);
+            setStudent(data);
 
               
         }).catch((error)=>{
@@ -105,7 +108,7 @@ export async function getStudent(id){
 
 // classrooms
 
-export async function getClassrooms(){
+export async function getClassrooms(setClassrooms){
     
     await axios.get('http://localhost:6868/api/classrooms',
         {
@@ -119,7 +122,9 @@ export async function getClassrooms(){
         }).then((res)=>{
              
             const data =  res.data;
-            console.log(data);
+            setClassrooms(data);
+           // console.log("Classrooms: ", data);
+            
 
               
         }).catch((error)=>{
@@ -128,7 +133,7 @@ export async function getClassrooms(){
         })
 }
 
-export async function getClassroom(id){
+export async function getClassroom(setClassroom,id){
     
     await axios.get(`http://localhost:6868/api/classrooms/${id}`,
         {
@@ -142,6 +147,7 @@ export async function getClassroom(id){
         }).then((res)=>{
              
             const data =  res.data;
+            setClassroom(data);
             console.log(data);
 
               
@@ -296,7 +302,7 @@ export async function getAbsences(id){
 
 // grades
 
-export async function getGrades(){
+export async function getGrades(setGrades){
     
     await axios.get('http://localhost:6868/api/grades',
         {
@@ -310,6 +316,7 @@ export async function getGrades(){
         }).then((res)=>{
              
             const data =  res.data;
+            setGrades(data);
             console.log(data);
 
               
@@ -319,7 +326,7 @@ export async function getGrades(){
         })
 }
 
-export async function getGrade(id){
+export async function getGrade(setGrade, id){
     
     await axios.get(`http://localhost:6868/api/grades/${id}`,
         {
@@ -333,6 +340,7 @@ export async function getGrade(id){
         }).then((res)=>{
              
             const data =  res.data;
+            setGrade(data);
             console.log(data);
 
               
@@ -344,7 +352,7 @@ export async function getGrade(id){
 
 // reviews
 
-export async function getReviews(){
+export async function getReviews(setReviews){
     
     await axios.get('http://localhost:6868/api/reviews',
         {
@@ -358,7 +366,8 @@ export async function getReviews(){
         }).then((res)=>{
              
             const data =  res.data;
-            console.log(data);
+            setReviews(data);
+            //console.log("REVIEWS:",data);
 
               
         }).catch((error)=>{

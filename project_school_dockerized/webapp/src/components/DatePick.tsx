@@ -4,13 +4,18 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 
-export default function DatePick() {
+export default function DatePick(props) {
 
     const [value, setValue] = React.useState(null);
 
-    const changeValue = (value)=>{
-        setValue(value);
-        
+    const changeValue = (value)=>{ 
+      let months= ["January","February","March","April","May","June","July",
+            "August","September","October","November","December"]; 
+      const month = months[value["$M"]];
+      const year = value['$y'];
+      const date = month + " " + year;
+      props.changeDate(date);
+         
     }
 
   return (

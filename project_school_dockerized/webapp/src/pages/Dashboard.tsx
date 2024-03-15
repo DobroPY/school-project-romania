@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import AuthContext from "..";
@@ -8,21 +8,56 @@ import TeacherCell from "../components/users-cells/TeacherCell";
 import StudentCell from "../components/users-cells/StudentCell";
 import StudentTopTable from "../components/users-cells/StudentTopTable";
 import {getTeachers} from "../apis/get";
+import getCookie from "../apis/getCookies";
 
 const DashBoard = () => {
   const navigate = useNavigate();
   const auth = useContext(AuthContext);
 
+  const [students, setStudents] : any = useState([]);
+  const [teachers, setTeachers] : any = useState([]);
+
   if (auth == false) {
     window.location.replace("/login");
   }
 
-  useEffect(()=>{
-      getTeachers();
-  })
+  const token = getCookie("jwt");
 
-  const teachers = [{},{},{},{},{}]
-  const students = [{},{},{},{},{}]
+  const getAllData = async ()=>{
+    const resTeachers = await axios.get("http://localhost:6868/api/teachers",{
+      headers:{
+          'Authorization': `Bearer ${token}`,
+          'Content-Type' : 'application/json',
+          'Access-Control-Allow-Credentials': true,
+          'Access-Control-Allow-Origin' : '*',
+          'Access-Control-Allow-Methods':'GET,PUT,POST,DELETE,PATCH,OPTIONS',   
+      }});
+      const resStudents = await axios.get("http://localhost:6868/api/students", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Credentials": true,
+          "Access-Control-Allow-Origin": "*",
+          "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
+        },
+      });
+
+      const studentData = resStudents.data;
+      const teachersData = resTeachers.data;
+
+      console.log(studentData);
+      
+
+      setStudents(studentData);
+      setTeachers(teachersData);
+  }
+
+  useEffect(()=>{
+      getAllData();
+  },[])
+
+  const teachersTop = [{},{},{},{},{}]
+  const studentsTop = [{},{},{},{},{}]
 
   return (
     <section className="w-4/5">
@@ -33,9 +68,9 @@ const DashBoard = () => {
         {/* Middle Stats */}
         <div className="middle w-[60%]">
           <div className="user-stats flex justify-between">
-            <UserNum type={"Students"} number={3350} />
-            <UserNum type={"Teachers"} number={150} />
-            <UserNum type={"Parents"} number={1450} />
+            <UserNum type={"Students"} number={students.length} />
+            <UserNum type={"Teachers"} number={teachers.length} />
+            <UserNum type={"Parents"} number={students.length * 2} />
           </div>
           <div className="border-2 border-slate-400 rounded-md min-h-[280px] max-h-[280px] w-[98%]  mt-4  mx-[2%]">
                 
@@ -47,7 +82,7 @@ const DashBoard = () => {
                 <p className="font-semibold text-lg">Top rated teachers</p>
                 <p className="text-gray-500 text-sm">See all</p>
             </div>
-            {teachers.map((teacher,index)=>{
+            {teachersTop.map((teacher,index)=>{
                 return(
                     <TeacherCell />
                 );
@@ -61,7 +96,7 @@ const DashBoard = () => {
             <p className="font-semibold text-lg pl-6 pt-6">Top 5 Students</p>
             <div className="content m-6 border-2 border-gray-300 rounded-md">
             <StudentTopTable/>
-            {students.map((teacher,index)=>{
+            {studentsTop.map((teacher,index)=>{
                 return(
                     <StudentCell />
                 );

@@ -1,26 +1,40 @@
 import React, { useState } from "react";
+import { updateStudent } from "../../apis/update";
 
 const EditStudentModal = (props) => {
   const [show, setShow] = useState(false);
   const showModal = () => {
     setShow(!show);
   };
-  const[first_name, setfirst_name] = useState("");
-  const[lasttName, setmiddle_name] = useState("");
+  const student = props.student;
+  const modules = props.modules;
+
+  
+  const[firstName, setFirstName] = useState("");
+  const[lastName, setLastName] = useState("");
   const[parentOneName, setParentOneName] = useState("");
   const[parentTwoName, setParentTwoName] = useState("");
-  const [classroom, setClassRoom] = useState("Class VI");
+  const[middleName, setMiddleName] = useState("");
+  const [email, setEmail] = useState("");
+  const [classroom, setClassRoom] = useState(""); // create and get a select of classrooms
 
   const submit = (event)=>{
     event.preventDefault();
 
     const user = {
-        first_name: first_name,
-        lasttName:lasttName,
-        parentOneName:parentOneName,
-        parentTwoName:parentTwoName,
-        classroom:classroom
+      fisrt_name: firstName,
+      last_name:lastName,
+      middle_name:middleName,
+      email:email,
+      class:classroom,
+      parentOneName:parentOneName,
+      parentTwoName:parentTwoName,
+      status:1,
     }
+
+    console.log(student.id)
+
+    updateStudent(user, student.id)
 
     console.log(user);
 
@@ -54,7 +68,7 @@ const EditStudentModal = (props) => {
       {show ? (
         <div
           aria-hidden="true"
-          className=" bg-white fixed top-0  right-0  m-auto w-[30%] max-w-[35%] h-full max-h-fit rounded-xl drop-shadow-2xl "
+          className=" bg-white fixed top-0  right-0  m-auto w-[30%] max-w-[35%] h-screen overflow-scroll scrollbar-thumb-slate-300 scrollbar-thin scrollbar-h-[15px]  rounded-xl drop-shadow-2xl "
         >
           <div className="flex p-4 items-center justify-between">
             <p className="text-lg">Edit Profile</p>
@@ -96,19 +110,26 @@ const EditStudentModal = (props) => {
           <div className="inputs mt-10">
                 <form action="">
                     <p className="mx-[5%] text-sm text-gray-700 mt-4">First Name</p>
-                    <input className="w-[90%] mx-[5%] border border-gray-400 rounded-lg p-2 mt-2 outline-none" onChange={(event)=>{ setfirst_name(event.target.value)}} placeholder="Natali"></input>
+                    <input className="w-[90%] mx-[5%] border border-gray-400 rounded-lg p-2 mt-2 outline-none" onChange={(event)=>{ setFirstName(event.target.value)}} placeholder={student.first_name}></input>
                     <p className="mx-[5%] text-sm text-gray-700 mt-4">Last Name</p>
-                    <input className="w-[90%] mx-[5%] border border-gray-400 rounded-lg p-2 mt-2 outline-none" onChange={(event)=>{ setmiddle_name(event.target.value)}} placeholder="Natali"></input>
+                    <input className="w-[90%] mx-[5%] border border-gray-400 rounded-lg p-2 mt-2 outline-none" onChange={(event)=>{ setLastName(event.target.value)}} placeholder={student.last_name}></input>
+                    <p className="mx-[5%] text-sm text-gray-700 mt-4">Middle Name</p>
+                    <input className="w-[90%] mx-[5%] border border-gray-400 rounded-lg p-2 mt-2 outline-none" onChange={(event)=>{ setMiddleName(event.target.value)}} placeholder={student.middle_name}></input>
+                    <p className="mx-[5%] text-sm text-gray-700 mt-4">Email</p>
+                    <input className="w-[90%] mx-[5%] border border-gray-400 rounded-lg p-2 mt-2 outline-none" onChange={(event)=>{ setEmail(event.target.value)}} placeholder={student.email}></input>
+                    
                     <p className="mx-[5%] text-sm text-gray-700 mt-4">Parent 1 Name</p>
-                    <input className="w-[90%] mx-[5%] border border-gray-400 rounded-lg p-2 mt-2 outline-none" onChange={(event)=>{ setParentOneName(event.target.value)}} placeholder="Natali"></input>
+                    <input className="w-[90%] mx-[5%] border border-gray-400 rounded-lg p-2 mt-2 outline-none" onChange={(event)=>{ setParentOneName(event.target.value)}} placeholder={""}></input>
                     <p className="mx-[5%] text-sm text-gray-700 mt-4">Parent 2 Name</p>
-                    <input className="w-[90%] mx-[5%] border border-gray-400 rounded-lg p-2 mt-2 outline-none" onChange={(event)=>{ setParentTwoName(event.target.value)}} placeholder="Natali"></input>
+                    <input className="w-[90%] mx-[5%] border border-gray-400 rounded-lg p-2 mt-2 outline-none" onChange={(event)=>{ setParentTwoName(event.target.value)}} placeholder={""}></input>
                     <p className="mx-[5%] text-sm text-gray-700 mt-4">Select Class</p>
                     <select className="w-[90%] mx-[5%] border border-gray-400 rounded-lg p-2 mt-2 outline-none" onChange={(event)=>{ setClassRoom(event.target.value)}}>
-                        <option value="Class VI">Class VI</option>
-                        <option value="Class VI">Class VI</option>
-                        <option value="Class VI">Class VI</option>
-                        <option value="Class VI">Class VI</option>
+                        <option value="">Please Select a Class</option>
+                       {modules && modules.map((item, index)=>{
+                        return(
+                          <option key={index} value={item.id}>{item.name}</option>
+                        );
+                       })}
                     </select>    
                 </form>
           </div>

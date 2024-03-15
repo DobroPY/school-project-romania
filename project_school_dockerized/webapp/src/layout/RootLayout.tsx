@@ -1,7 +1,9 @@
 import axios from "axios";
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Outlet } from "react-router-dom";
 import { useNavigate, useLocation } from "react-router-dom";
+import deleteCookie from "../apis/deleteCookies";
+import getCookie from "../apis/getCookies";
 
 const RootLayout = () => {
   const navigate = useNavigate();
@@ -10,12 +12,40 @@ const RootLayout = () => {
 
   const routePath = location.pathname;
   console.log(routePath);
+  const token = getCookie("jwt");
+  const [user, setUser] : any = useState({});
+
 
   async function logout() {
-    await axios.get("http://localhost:8080/logout").then((res) => {
-      console.log(res);
-    });
+    
+    document.cookie = "jwt= ; expires = Thu, 01 Jan 1970 00:00:00 GMT"
+    document.cookie = "email= ; expires = Thu, 01 Jan 1970 00:00:00 GMT"
+      window.location.reload();
+   
   }
+  const email = getCookie("email"); 
+
+  const getData = async ()=>{
+    const resData = await axios.get("http://localhost:6868/api/users",{
+      headers:{
+          'Authorization': `Bearer ${token}`,
+          'Content-Type' : 'application/json',
+          'Access-Control-Allow-Credentials': true,
+          'Access-Control-Allow-Origin' : '*',
+          'Access-Control-Allow-Methods':'GET,PUT,POST,DELETE,PATCH,OPTIONS',   
+      }});
+    
+      const data = resData.data;
+      const user = data.filter((item)=> item.email == email);
+      console.log(user);
+      
+
+      return user;
+  }
+  useEffect(()=>{
+    //setUser(getData)
+   
+  },[])
 
   const menuItems = [
     {
@@ -193,7 +223,7 @@ const RootLayout = () => {
         >
           <path
             d="M18.5625 3.4375H3.4375C3.07283 3.4375 2.72309 3.58237 2.46523 3.84023C2.20737 4.09809 2.0625 4.44783 2.0625 4.8125V17.1875C2.0625 17.5522 2.20737 17.9019 2.46523 18.1598C2.72309 18.4176 3.07283 18.5625 3.4375 18.5625H18.5625C18.9272 18.5625 19.2769 18.4176 19.5348 18.1598C19.7926 17.9019 19.9375 17.5522 19.9375 17.1875V4.8125C19.9375 4.44783 19.7926 4.09809 19.5348 3.84023C19.2769 3.58237 18.9272 3.4375 18.5625 3.4375ZM3.4375 4.8125H18.5625V8.25H3.4375V4.8125ZM18.5625 17.1875H9.625V9.625H18.5625V17.1875Z"
-            fill={routePath == "/classrooms" ? "#7E3EE5" : "#7D7D7D"}
+            fill={routePath == "/curriculum-setup" ? "#7E3EE5" : "#7D7D7D"}
           />
         </svg>
       ),
@@ -349,12 +379,13 @@ const RootLayout = () => {
                 Jane Cooper
               </div>
               <div className="text-gray-500 text-xs leading-6 whitespace-nowrap">
-                janecooper@gmail.com
+                {email}
               </div>
             </div>
             <svg
               onClick={logout}
               width="22"
+              className="cursor-pointer"
               height="22"
               viewBox="0 0 22 22"
               fill="none"

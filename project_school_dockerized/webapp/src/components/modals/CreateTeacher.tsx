@@ -1,25 +1,39 @@
 import React, { useState } from "react";
 import SuccesStudent from "./SuccesStudent";
+import { addTeacher } from "../../apis/add";
 
-const CreateTeacherModal = () => {
+const CreateTeacherModal = (props) => {
   const [show, setShow] = useState(false);
   const showModal = () => {
     setShow(!show);
   };
-  const[first_name, setfirst_name] = useState("");
-  const[lasttName, setmiddle_name] = useState("");
+
+  const { modules } = props;
+
+
+  const[firstName, setFirstName] = useState("");
+  const[lastName, setLastName] = useState("");
+  const[middleName, setMiddleName] = useState("");
   const[age, setAge] = useState("");
+  const[rank, setRank] = useState("");
+  const [email, setEmail] = useState("");
   const [subject, setSubject] = useState("");
+
 
   const submit = (event)=>{
     const user = {
-        first_name: first_name,
-        lasttName:lasttName,
-        age:age,
-        subject:subject,
+        first_name: firstName,
+        last_name:lastName,
+        middle_name:middleName,
+        email:email,
+        status:1,
+       subject:subject
     }
 
+    addTeacher(user);
+
     console.log(user);
+    alert("USER CREATED SUCCESFULLY!");
 
     setShow(!show);
   }
@@ -75,17 +89,21 @@ const CreateTeacherModal = () => {
           <div className="inputs mt-10">
                 <form action="">
                     <p className="mx-[5%] text-sm text-gray-700 mt-4">First Name</p>
-                    <input className="w-[90%] mx-[5%] border border-gray-400 rounded-lg p-2 mt-2 outline-none" onChange={(event)=>{ setfirst_name(event.target.value)}} placeholder="First Name"></input>
+                    <input className="w-[90%] mx-[5%] border border-gray-400 rounded-lg p-2 mt-2 outline-none" onChange={(event)=>{ setFirstName(event.target.value)}} placeholder="First Name"></input>
                     <p className="mx-[5%] text-sm text-gray-700 mt-4">Last Name</p>
-                    <input className="w-[90%] mx-[5%] border border-gray-400 rounded-lg p-2 mt-2 outline-none" onChange={(event)=>{ setmiddle_name(event.target.value)}} placeholder="Last Name"></input>
-                    <p className="mx-[5%] text-sm text-gray-700 mt-4">Age</p>
-                    <input className="w-[90%] mx-[5%] border border-gray-400 rounded-lg p-2 mt-2 outline-none" onChange={(event)=>{ setAge(event.target.value)}} placeholder="Age"></input>
-                    <p className="mx-[5%] text-sm text-gray-700 mt-4">Select Subject</p>
+                    <input className="w-[90%] mx-[5%] border border-gray-400 rounded-lg p-2 mt-2 outline-none" onChange={(event)=>{ setLastName(event.target.value)}} placeholder="Last Name"></input>
+                    <p className="mx-[5%] text-sm text-gray-700 mt-4">Middle Name Name</p>
+                    <input className="w-[90%] mx-[5%] border border-gray-400 rounded-lg p-2 mt-2 outline-none" onChange={(event)=>{ setMiddleName(event.target.value)}} placeholder="Middle Name"></input>      
+                    <p className="mx-[5%] text-sm text-gray-700 mt-4">Email</p>
+                    <input className="w-[90%] mx-[5%] border border-gray-400 rounded-lg p-2 mt-2 outline-none" onChange={(event)=>{ setEmail(event.target.value)}} placeholder="Email"></input>      
+                     <p className="mx-[5%] text-sm text-gray-700 mt-4">Select Subject</p>
                     <select className="w-[90%] mx-[5%] border border-gray-400 rounded-lg p-2 mt-2 outline-none" onChange={(event)=>{ setSubject(event.target.value)}}>
                         <option value="Class VI">Please select subject</option>
-                        <option value="Class VI">Arabic</option>
-                        <option value="Class VI">English</option>
-                        <option value="Class VI">Mathematics</option>
+                        {modules && modules.map((item, index)=>{
+                          return(
+                            <option value={item.id}>{item.name}</option>
+                          );
+                        })}
                     </select>    
                 </form>
           </div>

@@ -1,0 +1,25 @@
+Teachers:
+- get all classes number with for each teacher;
+- get reviews score average for each teacher;
+
+Teacher:
+- get number of classes;
+- get all classes and number of students per class;
+- get all reviews;
+
+Students:
+- get all classrooms;
+- get grades average for each student;
+- get rewards average for each student;
+- get abences for each student;
+
+Student:
+- get all teachers and their subject;
+- get rewards and grades average and make percentages;
+- get all grades  and make average;
+- get all rewards and expose implication and preparation in percentage;
+
+Classrooms:
+
+
+Grades:

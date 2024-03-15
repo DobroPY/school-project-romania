@@ -6,9 +6,9 @@ const token = getCookie("jwt");
   
 //teachers
 
-export async function updateTeacher(teacher){
+export async function updateTeacher(newTeacher, id){
     
-    await axios.put(`http://localhost:6868/api/teachers/${teacher.id}/status=0`,JSON.stringify(teacher),
+    await axios.put(`http://localhost:6868/api/teachers/${id}/status=0`,JSON.stringify(newTeacher),
         {
             headers:{
                 Authorization: `Bearer ${token}`,
@@ -32,9 +32,9 @@ export async function updateTeacher(teacher){
 // students
 
 
-export async function updateStudent(student){
+export async function updateStudent(newStudent, id){
     
-    await axios.put(`http://localhost:6868/api/students/${student.id}/status=0`,JSON.stringify(student),
+    await axios.put(`http://localhost:6868/api/students/${id}/status=0`,JSON.stringify(newStudent),
         {
             headers:{
                 Authorization: `Bearer ${token}`,
@@ -58,9 +58,9 @@ export async function updateStudent(student){
 // classrooms
 
 
-export async function updateClassroom(classroom){
+export async function updateClassroom(newClassroom, id){
     
-    await axios.put(`http://localhost:6868/api/classrooms/${classroom.id}/status=0`,JSON.stringify(classroom),
+    await axios.put(`http://localhost:6868/api/classrooms/${id}/status=0`,JSON.stringify(newClassroom),
         {
             headers:{
                 Authorization: `Bearer ${token}`,
@@ -159,9 +159,9 @@ export async function updateAbsence(absence){
 
 // grades
 
-export async function updateGrades(grade){
+export async function updateGrades(newGrade, id, email){
     
-    await axios.put(`http://localhost:6868/api/grades/${grade.id}/year=2024`,JSON.stringify(grade),
+    await axios.put(`http://localhost:6868/api/grades/${id}/email=${email}`,JSON.stringify(newGrade),
         {
             headers:{
                 Authorization: `Bearer ${token}`,

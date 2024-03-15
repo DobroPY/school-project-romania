@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate, redirect } from "react-router-dom";
 import ProgressBarRounded from "../components/progressbar/ProgressBarRounded";
 import GradesStats from "../components/stats-pages/GradesStats";
@@ -10,9 +10,110 @@ import Delete from "../components/modals/Delete";
 import EditTeacherModals from "../components/modals/EditTeacherModal";
 import EditTeacherModal from "../components/modals/EditTeacherModal";
 import ReactStars from "react-rating-stars-component";
+import { useParams } from "react-router-dom";
+import { getTeacher } from "../apis/get";
+import getCookie from "../apis/getCookies";
+import axios from "axios";
 
 const Teacher = () => {
   const [currentPage, setCurrentPage] = useState("ClassAttribute");
+  const [teacher, setTeacher]: any = useState([]);
+  const [classrooms, setClassrooms]: any = useState([]);
+  const [reviews, setReviews]: any = useState([]);
+
+  const params = useParams();
+  const id = params.id;
+
+  const token = getCookie("jwt");
+
+  const getAllData = async () => {
+    const resReviews = await axios.get("http://localhost:6868/api/reviews", {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Credentials": true,
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
+      },
+    });
+
+    const resClassrooms = await axios.get(
+      "http://localhost:6868/api/classrooms",
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Credentials": true,
+          "Access-Control-Allow-Origin": "*",
+          "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
+        },
+      }
+    );
+
+    const teacherData = await getTeacher();
+    const reviewsData = resReviews.data;
+    const classRoomsData = resClassrooms.data;
+
+    const filteredClassrooms = classRoomsData.filter(
+      (item) => item.teacher == teacherData.id
+    );
+    const filteredReviews = reviewsData.filter(
+      (item) => item.teacher == teacherData.id
+    );
+
+    setTeacher(teacherData);
+    setClassrooms(filteredClassrooms);
+    setReviews(filteredReviews);
+  };
+
+  const getTeacher = async () => {
+    const resTeacher = await axios.get(
+      `http://localhost:6868/api/teachers/${id}`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Credentials": true,
+          "Access-Control-Allow-Origin": "*",
+          "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
+        },
+      }
+    );
+
+    const resReviews = await axios.get("http://localhost:6868/api/reviews", {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Credentials": true,
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
+      },
+    });
+
+    const teacherData = resTeacher.data;
+    const reviewsData = resReviews.data;
+
+    for (let i = 0; i < reviewsData.length; i++) {
+      let sum = 0;
+      let count = 0;
+      if (reviewsData[i].teacher == teacherData.id) {
+        sum += 5; // change that
+        count++;
+      }
+      if (count > 0) {
+        teacherData.reviewsAverage = sum / count;
+        reviewsData[i].score = 5; // change that
+      } else {
+        teacherData.reviewsAverage = 0;
+      }
+    }
+
+    return teacherData;
+  };
+
+  useEffect(() => {
+    getAllData();
+  }, []);
 
   const pages = [
     {
@@ -22,6 +123,10 @@ const Teacher = () => {
       name: "Reviews",
     },
   ];
+
+  // get teacher
+  // delete teacher func
+  // edit teacher func
 
   const changePage = (name) => {
     setCurrentPage(name);
@@ -71,8 +176,10 @@ const Teacher = () => {
             </svg>
           </div>
 
-          <p className="mt-6 font-semibold mb-1">Natali Craig</p>
-          <p className="font-normal text-sm text-slate-500">ID:123456</p>
+          <p className="mt-6 font-semibold mb-1">
+            {teacher.first_name} {teacher.last_name}
+          </p>
+          <p className="font-normal text-sm text-slate-500">ID:{teacher.id}</p>
 
           <div className="flex justify-center mt-6 mb-6">
             <p className="flex items-center bg-white rounded-lg px-2">
@@ -89,7 +196,7 @@ const Teacher = () => {
                   fill="#FFBB0B"
                 />
               </svg>
-              4.9/5
+              {teacher.reviewsAverage}/5
             </p>
           </div>
         </div>
@@ -98,26 +205,22 @@ const Teacher = () => {
             <div className="user-personal-details p-4 flex">
               <div className="bg-blue-100 p-2 rounded-md w-[48%]">
                 <p className="font-normal text-sm text-slate-500">First Name</p>
-                <p>Natali</p>
+                <p>{teacher.first_name}</p>
               </div>
               <div className="bg-blue-100 p-2 rounded-md w-[48%] ml-[2%]">
                 <p className="font-normal text-sm text-slate-500">Last Name</p>
-                <p>Craig</p>
+                <p>{teacher.last_name}</p>
               </div>
             </div>
             <div className="user-personal-details p-4 flex">
               <div className="bg-blue-100 p-2 rounded-md w-[48%]">
                 <p className="font-normal text-sm text-slate-500">Subject</p>
-                <p>Arabic</p>
-              </div>
-              <div className="bg-blue-100 p-2 rounded-md w-[48%] ml-[2%]">
-                <p className="font-normal text-sm text-slate-500">Age</p>
-                <p>33</p>
+                <p>{teacher.subject}</p>
               </div>
             </div>
             <div className="actions flex float-right pr-[4%] ">
               <EditTeacherModal text={"Edit details"} />
-              <Delete name={"teacher"} />
+              <Delete user={"teacher"} id={id} />
             </div>
           </div>
         </section>
@@ -145,43 +248,31 @@ const Teacher = () => {
       <div className="w-[96%] mx-[2%] pb-20">
         {currentPage == "ClassAttribute" ? (
           <div className="grid grid-cols-5 mt-6 ">
-            {[1,2,3,4,5,6].map((item) => {
+            {classrooms.map((item) => {
               return (
                 <div className="flex max-w-[180px] flex-col items-center mt-4 max-h-[200px] bg-indigo-50 rounded-3xl pb-2">
                   <div className="text-white text-center text-base mt-[-12px] font-semibold whitespace-nowrap overflow-hidden justify-center items-stretch shadow-sm bg-blue-600 px-5 py-1.5 rounded-3xl">
-                    Class 21
+                    {item.name}
                   </div>
                   <p className="text-[#446ECB] text-xl mt-2 font-semibold">
-                    33
+                    {item.seats}
                   </p>
-                  <p>
-                    Students
-                  </p>
+                  <p>Students</p>
                 </div>
               );
             })}
-            <div className="flex max-w-[180px] flex-col items-center mt-4 max-h-[200px] bg-indigo-50 rounded-3xl pb-2">
-                  <p className="text-[#446ECB] text-[35px] mt-2 font-semibold">
-                    +
-                  </p>
-                  <p className="text-[#446ECB] text-md font-semibold">
-                   Add Attribute
-                  </p>
-                </div>
           </div>
         ) : currentPage == "Reviews" ? (
           <div className="grid grid-cols-3 mt-6">
-
-            {[1,2,3].map((item)=>{
-              return(
+            {reviews.map((item) => {
+              return (
                 <div className="p-4 mx-2 h-[250px] border border-slate-300 rounded-md">
-                  <ReactStars count={5} size={30} value={4} />
-                  <p className="font-semibold mt-2 text-lg">Ronald Richards</p>
-                  <p className="mt-2">Lorem ipsum dolor sit amet consectetur adipisicing elit. Corporis vel, sit animi culpa dicta quasi optio iure blanditiis fugiat minima reiciendis nisi rerum odit libero officiis alias. Eaque, nemo obcaecati?</p>
-                  </div>
+                  <ReactStars count={5} size={30} value={item.score} />
+                  <p className="font-semibold mt-2 text-lg">{item.student}</p>
+                  <p className="mt-2">{item.review}</p>
+                </div>
               );
             })}
-
           </div>
         ) : (
           <></>

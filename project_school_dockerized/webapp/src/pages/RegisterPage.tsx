@@ -37,9 +37,9 @@ const RegisterPage = () => {
     event.preventDefault();
 
     const user = {
-      firstName: firstName,
-      middleName: middleName,
-      lastName: lastName,
+      first_name: firstName,
+      middle_name: middleName,
+      last_name: lastName,
       email: email,
       password: password,
       status:1,

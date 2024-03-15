@@ -1,14 +1,36 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { deleteStudent, deleteTeacher } from "../../apis/delete";
 
 const Delete = (props) => {
   const navigate = useNavigate();
-  console.log(props.succes);
+  
 
   const [show, setShow] = useState(false);
   const showModal = () => {
     setShow(!show);
   };
+
+  const deleteUser = ()=>{
+    const id = props.id;
+    const user =props.user;
+
+    console.log(user)
+    console.log(id)
+
+    if(user == "teacher"){
+      deleteTeacher(id);
+      console.log("ok");
+      
+    }
+    else if (user == "student"){
+      deleteStudent(id);
+      console.log(id);
+    }
+
+
+    showModal();
+  }
   return (
     <section>
          <p onClick={showModal} className="flex items-center ml-2 text-[#FF3E13] cursor-pointer">
@@ -71,7 +93,7 @@ const Delete = (props) => {
             </button>
             <button
               className="p-2 mb-4 w-[48%] ml-[2%] bg-[#FF3E13] text-white font-bold border border-slate-300 rounded-xl"
-              onClick={showModal}
+              onClick={deleteUser}
             >
               Delete
             </button>
